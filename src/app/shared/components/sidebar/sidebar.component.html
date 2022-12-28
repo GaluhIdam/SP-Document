@@ -1,0 +1,20 @@
+<aside class="w-auto justify-center bg-white h-screen" aria-label="Sidebar">
+    <img src="/assets/gmf-logo.webp" class="w-36 p-5" alt="icon-gmf">
+    <p class="text-sm text-center font-semibold text-regal-blue">SP Document</p>
+    <div class="overflow-y-auto py-4 px-10 bg-white rounded">
+        <ul class="space-y-4">
+            <li class="flex justify-center">
+                <a routerLink="dashboard" routerLinkActive="active"
+                    class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue active:bg-regal-blue">
+                    <fa-icon [icon]="faHouse"></fa-icon>
+                </a>
+            </li>
+            <li class="flex justify-center">
+                <a routerLink="document-list" routerLinkActive="active"
+                    class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue">
+                    <fa-icon [icon]="faTicketSimple"></fa-icon>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
