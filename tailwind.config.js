@@ -12,7 +12,9 @@ module.exports = {
         'success': '#5E932F',
         'medium-purple': '#D0D3F1',
         'soft-purple': '#E8E9F8',
-        'soft-blue': '#BAD5F9'
+        'soft-blue': '#BAD5F9',
+        'soft-success': '#958B2D',
+        'tosca': '#2D958F'
       }
     },
   },
