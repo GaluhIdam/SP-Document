@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faAngleRight, faBell, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faBell, faChevronDown, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -10,4 +10,10 @@ export class HeaderComponent {
   faAngleRight = faAngleRight;
   faBell = faBell;
   faChevronDown = faChevronDown;
+  faLongArrowAltLeft = faLongArrowAltLeft;
+
+  Show: boolean = false
+  toggle() {
+    this.Show = !this.Show;
+  }
 }

@@ -11,7 +11,8 @@ module.exports = {
         'danger': '#952D2D',
         'success': '#5E932F',
         'medium-purple': '#D0D3F1',
-        'soft-purple': '#E8E9F8'
+        'soft-purple': '#E8E9F8',
+        'soft-blue': '#BAD5F9'
       }
     },
   },
