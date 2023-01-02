@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faBell, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +8,6 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent {
   faAngleRight = faAngleRight;
+  faBell = faBell;
+  faChevronDown = faChevronDown;
 }

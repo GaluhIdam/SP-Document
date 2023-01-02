@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faHouse, faTicketSimple, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faTicketSimple } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
