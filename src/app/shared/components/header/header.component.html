@@ -1,20 +1,32 @@
-<div class="column-3 p-5 text-xl font-semibold flex">
-    <div class="column-2 flex">
-        <h1>Dashboard</h1>
-        <fa-icon [icon]="faAngleRight" class="mx-3 text-gray-500"></fa-icon>
-    </div>
-    <div class="column-2 flex">
-        <div class="py-1 border border-regal-blue rounded-lg">
-            <fa-icon [icon]="faBell" class="mx-3 text-regal-blue"></fa-icon>
+<div class="p-5 text-xl font-semibold">
+    <div class="grid grid-cols-2 gap-4">
+        <div class="col-start-1 flex">
+            <h1>Dashboard</h1>
+            <fa-icon [icon]="faAngleRight" class="mx-3 text-gray-500"></fa-icon>
         </div>
-    </div>
-    <div class="column-2 flex border border-regal-blue rounded-lg">
-        <div class="column-1">
-            <fa-icon [icon]="faChevronDown" class="mx-3 text-regal-blue text-sm"></fa-icon>
-        </div>
-        <div class="column-1 mr-4">
-            <p class="text-sm">Faisal Iqbal</p>
-            <p class="text-xs text-gray-500">TDI-2</p>
+        <div class="col-end-7 flex">
+            <div class="py-1 mr-3 border border-regal-blue rounded-lg">
+                <fa-icon [icon]="faBell" class="mx-3 text-regal-blue"></fa-icon>
+            </div>
+            <button (click)="toggle()" class="relative column-3 flex border border-regal-blue rounded-r-full">
+                <div class="column-1">
+                    <fa-icon [icon]="faChevronDown" class="mx-3 text-regal-blue text-sm"></fa-icon>
+                </div>
+                <div class="column-1 mr-4">
+                    <p class="text-sm">Faisal Iqbal</p>
+                    <p class="text-xs text-gray-500">TDI-2</p>
+                </div>
+                <div class="columns-1">
+                    <img src="https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
+                        class="w-10 h-10 rounded-full" alt="">
+                </div>
+            </button>
+            <div *ngIf="Show" class="absolute h-fit border border-regal-blue ml-14 bg-white shadow-lg rounded-lg mt-11">
+                <div class="py-2 px-4 w-fit text-sm text-regal-blue rounded-lg hover:bg-regal-blue hover:text-white">
+                    |<fa-icon [icon]="faLongArrowAltLeft" class="mr-2 text-sm"></fa-icon>
+                    Logout
+                </div>
+            </div>
         </div>
     </div>
 </div>

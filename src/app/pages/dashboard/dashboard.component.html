@@ -1,53 +1,48 @@
 <div class="px-0 bg-white mx-5 my-5 rounded-lg drop-shadow-md" style="width: 90vw;">
-    <div class="flex flex-row p-4">
-        <div class="column-1 flex">
+    <div class="grid grid-cols-2 gap-4 p-4">
+        <div class="col-start-1 flex">
             <input type="text" placeholder="Search here..."
-                class="block w-full px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                class="px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             <button
                 class="bg-regal-blue text-white rounded-r-lg p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border">Search</button>
-        </div>
-        <div class="column-1 w-4/6 mr-10">
-            <div class="column-1 flex">
-                <div class="column-1">
-                    <button (click)="toggle()"
-                        class="text-regal-blue p-2 ml-4 rounded-lg border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
-                        <fa-icon [icon]="faSliders" class="mr-1"></fa-icon> Sort By
-                    </button>
-                </div>
-                <div class="column-1">
-                    <div *ngIf="Show" class="absolute border border-regal-blue top-0 ml-4 bg-white shadow-lg rounded-lg mt-3r">
-                        <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                            Sort By Date
-                        </div>
-                        <div class="px-3">
-                            <hr>
-                        </div>
-                        <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                            Sort By Status
-                        </div>
-                        <div class="px-3">
-                            <hr>
-                        </div>
-                        <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                            Sort By Shipping Number
-                        </div>
-                        <div class="px-3">
-                            <hr>
-                        </div>
-                        <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                            Sort By Sending
-                        </div>
-                        <div class="px-3">
-                            <hr>
-                        </div>
-                        <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                            Sort By Receiving
-                        </div>
+                <button (click)="toggle()"
+                    class="text-regal-blue p-2 ml-4 rounded-lg border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
+                    <fa-icon [icon]="faSliders" class="mr-1"></fa-icon> Sort By
+                </button>
+            <div class="column-1">
+                <div *ngIf="Show"
+                    class="absolute border border-regal-blue top-0 ml-4 bg-white shadow-lg rounded-lg mt-3r">
+                    <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
+                        Sort By Date
+                    </div>
+                    <div class="px-3">
+                        <hr>
+                    </div>
+                    <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
+                        Sort By Status
+                    </div>
+                    <div class="px-3">
+                        <hr>
+                    </div>
+                    <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
+                        Sort By Shipping Number
+                    </div>
+                    <div class="px-3">
+                        <hr>
+                    </div>
+                    <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
+                        Sort By Sending
+                    </div>
+                    <div class="px-3">
+                        <hr>
+                    </div>
+                    <div class="py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
+                        Sort By Receiving
                     </div>
                 </div>
             </div>
         </div>
-        <div class="column-1 ml-16">
+        <div class="col-end-7">
             <button
                 class="p-2 ml-4 rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue">
                 <fa-icon [icon]="faBookOpen" class="mr-1"></fa-icon> Create SP Document
@@ -55,7 +50,7 @@
         </div>
     </div>
     <div class="flex columns-3 mt-2">
-        <a routerLink="dashboard" routerLinkActive="active"
+        <a routerLink="" routerLinkActive="active"
             class="flex column-2 w-1/3 p-2 hover:bg-gray-100 active:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-purple rounded-lg">
             <fa-icon [icon]="faListSquares"
                 class="mr-1 text-3xl bg-medium-purple px-3 py-2 rounded-lg text-purple"></fa-icon>
@@ -229,8 +224,7 @@
                 </div>
                 <div class="relative">
                     <div class="absolute flex py-1 right-0">
-                        <button disabled
-                            class="bg-gray-400 p-3 rounded-lg text-white">Receive</button>
+                        <button disabled class="bg-gray-400 p-3 rounded-lg text-white">Receive</button>
                     </div>
                 </div>
             </div>

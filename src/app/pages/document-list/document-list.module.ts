@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DocumentListRoutingModule } from './document-list-routing.module';
 import { DocumentListComponent } from './document-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { DocumentListComponent } from './document-list.component';
   ],
   imports: [
     CommonModule,
-    DocumentListRoutingModule
+    DocumentListRoutingModule,
+    FontAwesomeModule
   ]
 })
 export class DocumentListModule { }
