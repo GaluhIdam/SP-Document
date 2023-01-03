@@ -1,9 +1,79 @@
 <div class="grid-rows-1 grid-flow-col gap-1">
-    <div class="flex w-screen">
+    <div class="flex w-full">
         <app-sidebar></app-sidebar>
         <div class="grid-rows-1 grid-flow-col gap-1">
             <app-header></app-header>
             <router-outlet></router-outlet>
+            <!-- Modal Edit Create SP Document -->
+            <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box relative bg-white">
+                    <h3 class="text-lg font-bold text-gray-900 text-center mb-3">Edit Description Document</h3>
+                    <div class="w-full">
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text text-gray-900">Description</span>
+                            </label>
+                            <input type="text"
+                                class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text text-gray-900">Remark</span>
+                            </label>
+                            <input type="text"
+                                class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        </div>
+                    </div>
+                    <div class="columns-2 mt-10 mb-0 w-full items-stretch">
+                        <div class="flex">
+                            <label for="my-modal-3"
+                                class="btn-wide border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue text-center">Cancel</label>
+                        </div>
+                        <div class="flex">
+                            <label
+                                class="btn-wide bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Save</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Receiving SP Document -->
+            <input type="checkbox" id="my-modal" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box relative bg-white">
+                    <h3 class="text-lg font-bold text-gray-900 text-center mb-3">Receive SP Document</h3>
+                    <div class="w-full">
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text text-gray-900">ID Number</span>
+                            </label>
+                            <input type="text"
+                                class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text text-gray-900">Password</span>
+                            </label>
+                            <input type="text"
+                                class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        </div>
+                    </div>
+                    <div class="columns-2 mt-10 mb-0 w-full items-stretch">
+                        <div class="flex">
+                            <label for="my-modal"
+                                class="btn-wide border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue text-center">Cancel</label>
+                        </div>
+                        <div class="flex">
+                            <label
+                                class="btn-wide bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Confirm</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

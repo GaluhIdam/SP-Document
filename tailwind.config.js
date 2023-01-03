@@ -14,9 +14,15 @@ module.exports = {
         'soft-purple': '#E8E9F8',
         'soft-blue': '#BAD5F9',
         'soft-success': '#958B2D',
-        'tosca': '#2D958F'
+        'tosca': '#2D958F',
+        'soft-silver': '#ECE8DD',
+        'soft-success-ax': '#DFF0D0',
+        'soft-success-outline': '#ABD883',
+        'soft-danger': '#F1D0D0'
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require("daisyui")
+  ],
 }

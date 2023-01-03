@@ -1,4 +1,4 @@
-<div class="px-0 bg-white mx-5 my-5 rounded-lg drop-shadow-md" style="width: 90vw;">
+<div class="px-0 bg-white ml-5 rounded-lg drop-shadow-md" style="width: 90vw;">
     <div class="grid grid-cols-2 gap-4 p-4">
         <div class="col-start-1">
             <button
@@ -7,218 +7,226 @@
                 Search & Filter
             </button>
         </div>
-        <div class="col-end-7">
-            <button
-                class="p-2 ml-4 rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue">
+        <div class="col-end-7 mt-2">
+            <a class="p-2 ml-4 rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue"
+                routerLink="/create-spdocument">
                 <fa-icon [icon]="faBookOpen" class="mr-1"></fa-icon> Create SP Document
-            </button>
+            </a>
         </div>
     </div>
-    <div class="px-4">
-        <!-- Table -->
-        <div class="flex flex-col">
-            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="overflow-hidden">
-                        <table class="min-w-full text-center">
-                            <thead class="border-b bg-soft-blue">
-                                <tr>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        No.
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Shipping No
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Sender Nopeg
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Sender Name
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Sender Date
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Receiver Nopeg
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Receiver Name
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Receiver Date
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Status
-                                    </th>
-                                    <th scope="col" class="border text-sm font-medium px-6 py-4">
-                                        Action
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col" class="text-sm font-medium px-2 py-3 border">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="text"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="text"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="text"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="date"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="text"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="text"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="date"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
-                                        <input type="text"
-                                            class="px-2 py-1 rounded-lg w-32 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-                                            placeholder="Search...">
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium px-2 py-3 border">
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        01
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        802345091213
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        582127
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        Ade Amala
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        24 August 2022
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        802345091213
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        Ade Amala
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        24 August 2022
-                                    </td>
-                                    <td
-                                        class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap flex justify-center">
-                                        <div class="badge bg-success rounded-lg px-2 py-1 text-white w-fit">Delivered
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap justify-center">
-                                        <button (click)="toggle()"
-                                            class="badge border border-regal-blue text-regal-blue rounded-lg w-fit px-2 py-1 hover:bg-regal-blue hover:text-white"><fa-icon
-                                                [icon]="faEllipsisVertical" class="mx-1"></fa-icon></button>
-                                        <div *ngIf="Show"
-                                            class="absolute bottom-0 h-fit right-0 border border-regal-blue top-0 ml-4 bg-white shadow-lg rounded-lg mt-10 text-left">
-                                            <div
-                                                class="text-tosca py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                                                <fa-icon [icon]="faEye" class="mr-1"></fa-icon> View
-                                            </div>
-                                            <div class="px-3">
-                                                <hr>
-                                            </div>
-                                            <div
-                                                class="text-soft-success py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                                                <fa-icon [icon]="faPencilSquare" class="mr-1"></fa-icon> Edit
-                                            </div>
-                                            <div class="px-3">
-                                                <hr>
-                                            </div>
-                                            <div
-                                                class="text-regal-blue py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                                                <fa-icon [icon]="faFileInvoice" class="mr-1"></fa-icon> Letter
-                                            </div>
-                                            <div class="px-3">
-                                                <hr>
-                                            </div>
-                                            <div
-                                                class="text-success py-2 px-4 w-full rounded-lg hover:bg-regal-blue hover:text-white">
-                                                <fa-icon [icon]="faCircleCheck" class="mr-1"></fa-icon> Received
-                                            </div>
-                                            <div class="px-3">
-                                                <hr>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        01
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        802345091213
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        582127
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        Ade Amala
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        24 August 2022
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        802345091213
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        Ade Amala
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                        24 August 2022
-                                    </td>
-                                    <td
-                                        class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap flex justify-center">
-                                        <div class="badge bg-danger rounded-lg px-2 py-1 text-white w-fit">Open</div>
-                                    </td>
-                                    <td
-                                        class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap justify-center">
-                                        <button
-                                            class="badge border border-regal-blue text-regal-blue rounded-lg w-fit px-2 py-1 hover:bg-regal-blue hover:text-white"><fa-icon
-                                                [icon]="faEllipsisVertical" class="mx-1"></fa-icon></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="px-4 py-1">
+        <table class="static w-full text-center">
+            <thead class="border-b bg-soft-blue">
+                <tr class="text-gray-900">
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        No.
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Shipping No
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Sender Nopeg
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Sender Name
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Sender Date
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Receiver Nopeg
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Receiver Name
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Receiver Date
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Status
+                    </th>
+                    <th scope="col" class="border text-sm font-medium px-6 py-4">
+                        Action
+                    </th>
+                </tr>
+                <tr class="text-gray-900">
+                    <th scope="col" class="text-sm font-medium px-2 py-3 border">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="text"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="text"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="text"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="date"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="text"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="text"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="date"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-1 py-3 border">
+                        <input type="text"
+                            class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                            placeholder="Search...">
+                    </th>
+                    <th scope="col" class="text-sm font-medium px-2 py-3 border">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        01
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        802345091213
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        582127
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        Ade Amala
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        24 August 2022
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        802345091213
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        Ade Amala
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        24 August 2022
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        <div class="badge rounded-lg bg-soft-danger border border-danger text-danger px-4 py-3">Open</div>
+                    </td>
+                    <td class="text-sm font-sm border px-6 py-4 whitespace-nowrap justify-center">
+                        <div class="dropdown dropdown-bottom dropdown-end">
+                            <button tabindex="0"
+                                class="border border-regal-blue rounded-lg text-regal-blue bg-white hover:text-white hover:bg-regal-blue py-1 px-3">
+                                <fa-icon [icon]="faEllipsisVertical" class="mx-0"></fa-icon>
+                            </button>
+                            <ul tabindex="0"
+                                class="absolute dropdown-content menu p-2 shadow bg-white rounded-box w-52">
+                                <li><a class="text-tosca active:bg-gray-200"><fa-icon [icon]="faEye"
+                                            class="mr-1"></fa-icon> View</a></li>
+                                <div class="px-2">
+                                    <hr>
+                                </div>
+                                <li><a class="text-soft-success active:bg-gray-200"><fa-icon [icon]="faPencilSquare"
+                                            class="mr-1"></fa-icon> Edit</a>
+                                </li>
+                                <div class="px-2">
+                                    <hr>
+                                </div>
+                                <li><a class="text-regal-blue active:bg-gray-200"><fa-icon [icon]="faFileInvoice"
+                                            class="mr-1"></fa-icon>
+                                        Letter</a></li>
+                                <div class="px-2">
+                                    <hr>
+                                </div>
+                                <li><a class="text-success active:bg-gray-200"><fa-icon [icon]="faCircleCheck"
+                                            class="mr-1"></fa-icon>
+                                        Received</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        02
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        802345091213
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        582127
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        Ade Amala
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        24 August 2022
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        802345091213
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        Ade Amala
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        24 August 2022
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                        <div class="badge rounded-lg bg-soft-success-ax border border-soft-success-outline text-success px-4 py-3">Delivered</div>
+                    </td>
+                    <td class="text-sm font-sm border px-6 py-4 whitespace-nowrap justify-center">
+                        <div class="dropdown dropdown-bottom dropdown-end">
+                            <button tabindex="0"
+                                class="border border-regal-blue rounded-lg text-regal-blue bg-white hover:text-white hover:bg-regal-blue py-1 px-3">
+                                <fa-icon [icon]="faEllipsisVertical" class="mx-0"></fa-icon>
+                            </button>
+                            <ul tabindex="0"
+                                class="absolute dropdown-content menu p-2 shadow bg-white rounded-box w-52">
+                                <li><a class="text-tosca active:bg-gray-200"><fa-icon [icon]="faEye"
+                                            class="mr-1"></fa-icon> View</a></li>
+                                <div class="px-2">
+                                    <hr>
+                                </div>
+                                <li><a class="text-soft-success active:bg-gray-200"><fa-icon [icon]="faPencilSquare"
+                                            class="mr-1"></fa-icon> Edit</a>
+                                </li>
+                                <div class="px-2">
+                                    <hr>
+                                </div>
+                                <li><a class="text-regal-blue active:bg-gray-200"><fa-icon [icon]="faFileInvoice"
+                                            class="mr-1"></fa-icon>
+                                        Letter</a></li>
+                                <div class="px-2">
+                                    <hr>
+                                </div>
+                                <li><a class="text-success active:bg-gray-200"><fa-icon [icon]="faCircleCheck"
+                                            class="mr-1"></fa-icon>
+                                        Received</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <!-- Pagination -->
-        <div class="py-5 flex">
+        <div class="mt-10 mb-10 px-2 flex">
             <div class="columns-1 mr-3">
-                <h1 class="text-gray-400">Row per page</h1>
+                <h1 class="text-gray-900">Row per page</h1>
             </div>
             <div class="columns-1">
-                <input type="number" class="bg-gray-100 rounded-md px-2 py-1 w-14" value="1">
+                <input type="number" class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-14"
+                    value="10">
             </div>
         </div>
     </div>
