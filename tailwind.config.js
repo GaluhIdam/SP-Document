@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
+    './node_modules/tw-elements/dist/js/**/*.js'
   ],
   theme: {
     extend: {
@@ -23,6 +24,6 @@ module.exports = {
     },
   },
   plugins: [
-    require("daisyui")
+    require('tw-elements/dist/plugin')
   ],
 }

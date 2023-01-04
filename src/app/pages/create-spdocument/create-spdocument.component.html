@@ -1,4 +1,5 @@
 <div class="px-0 ml-5 rounded-lg drop-shadow-md" style="width: 90vw;">
+
     <div class="static bg-white rounded-lg p-5">
         <div class="grid grid-cols-3 gap-4 p-4">
             <div class="flex">
@@ -46,21 +47,19 @@
             </div>
         </div>
         <div class="px-4 mt-10">
-            <div class="collapse">
-                <input type="checkbox" checked />
-                <div class="collapse-title p-0">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="col-start-1 text-gray-900 font-semibold text-lg">
-                            <h1>Document</h1>
-                        </div>
-                        <div class="col-end-7">
-                            <button
-                                class="text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
-                                <fa-icon [icon]="faChevronDown" class="mr-1"></fa-icon> Hide / Show</button>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-2 gap-4 mb-2">
+                <div class="col-start-1 text-gray-900 font-semibold text-lg">
+                    <h1>Document</h1>
                 </div>
-                <div class="collapse-content p-0">
+                <div class="col-end-7">
+                    <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample"
+                        class="text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
+                        <fa-icon [icon]="faChevronDown" class="mr-1"></fa-icon> Hide / Show</button>
+                </div>
+            </div>
+            <div class="collapse show" id="collapseExample">
+                <div class="block">
                     <div class="row mb-5 text-gray-900">
                         <hr>
                     </div>
@@ -98,7 +97,7 @@
                                     <span class="label-text text-gray-900">Action</span>
                                 </label>
                                 <button
-                                    class="w-fit border border-regal-blue text-white py-2 px-3 rounded-lg bg-regal-blue hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue">
+                                    class="w-fit mt-1 border border-regal-blue text-white py-2 px-3 rounded-lg bg-regal-blue hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue">
                                     Submit</button>
                             </div>
                         </div>
@@ -121,14 +120,15 @@
                                     <td class="py-2 text-center">Job Card</td>
                                     <td class="py-2 text-center">Doc Only</td>
                                     <td class="py-2 text-center">
-                                        <label for="my-modal-3"
-                                            class="btn py-0 px-5 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
+                                        <button for="my-modal-3" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop"
+                                            class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
                                             <fa-icon [icon]="faPenSquare"></fa-icon>
-                                        </label>
-                                        <label
-                                            class="btn py-0 px-5 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
+                                        </button>
+                                        <button
+                                            class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
                                             <fa-icon [icon]="faTrash"></fa-icon>
-                                        </label>
+                                        </button>
                                     </td>
                                 </tr>
                                 <tr class="bg-white text-gray-900">
@@ -137,25 +137,64 @@
                                     <td class="py-2 text-center">Job Card</td>
                                     <td class="py-2 text-center">Doc Only</td>
                                     <td class="py-2 text-center">
-                                        <label for="my-modal-3"
-                                            class="btn py-0 px-5 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
+                                        <button for="my-modal-3" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop"
+                                            class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
                                             <fa-icon [icon]="faPenSquare"></fa-icon>
-                                        </label>
-                                        <label
-                                            class="btn py-0 px-5 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
+                                        </button>
+                                        <button
+                                            class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
                                             <fa-icon [icon]="faTrash"></fa-icon>
-                                        </label>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="columns-2 mt-10 mb-0 w-full flex justify-center">
-                            <button
-                                class="mx-2 btn-wide border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Reset</button>
-                            <button
-                                class="mx-2 btn-wide bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
-                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="columns-2 mt-10 mb-0 w-full flex justify-center">
+                <button type="button"
+                    class="mb-2 mx-2 w-48 inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Reset</button>
+                <button type="button"
+                    class="mb-2 mx-2 w-48 inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+    id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+        <div
+            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+            <div class="modal-header flex flex-shrink-0 items-center justify-center p-4 rounded-t-md">
+                <h5 class="text-xl text-center font-medium leading-normal text-gray-800" id="exampleModalLabel">
+                    Edit Description Document
+                </h5>
+            </div>
+            <div class="modal-body relative p-4">
+                <div class="form-control w-full px-4 py-1 mb-3">
+                    <label class="label mb-4">
+                        <span class="label-text text-gray-900 text-sm">Description Document</span>
+                    </label>
+                    <input type="text"
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                </div>
+                <div class="form-control w-full px-4 py-1 mb-3">
+                    <label class="label mb-4">
+                        <span class="label-text text-gray-900 text-sm">Remark Document</span>
+                    </label>
+                    <input type="text"
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                </div>
+            </div>
+            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md">
+                <div class="columns-2 mt-5 mb-5 w-full flex justify-center">
+                    <button type="button" data-bs-dismiss="modal"
+                        class="mb-2 mx-2 w-48 inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Cancel</button>
+                    <button type="button"
+                        class="mb-2 mx-2 w-48 inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
                 </div>
             </div>
         </div>

@@ -9,7 +9,8 @@
                 <fa-icon [icon]="faBell" class="mx-3 text-regal-blue"></fa-icon>
             </div>
             <div class="dropdown">
-                <button tabindex="0" class="relative column-3 flex border border-regal-blue rounded-r-full">
+                <button class="dropdown-toggle relative column-3 flex border border-regal-blue rounded-r-full"
+                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="column-1">
                         <fa-icon [icon]="faChevronDown" class="mx-3 text-regal-blue text-sm"></fa-icon>
                     </div>
@@ -19,11 +20,18 @@
                     </div>
                     <div class="columns-1">
                         <img src="https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
-                            class="w-10 h-10 rounded-full" alt="">
+                            class="w-10 h-10 rounded-full" alt="avatar">
                     </div>
                 </button>
-                <ul tabindex="0" class="dropdown-content text-sm text-gray-900 menu p-2 mt-2 shadow bg-white rounded-lg w-max">
-                    <li><a><fa-icon [icon]="faRightFromBracket" class="mx-1 text-danger text-sm"></fa-icon> <p class="text-danger">Logout</p></a></li>
+                <ul class="mt-1 dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                    aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <button
+                            class="flex dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"><fa-icon
+                                [icon]="faRightFromBracket" class="mx-1 text-danger text-sm"></fa-icon>
+                            <p class="text-danger">Logout</p>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>

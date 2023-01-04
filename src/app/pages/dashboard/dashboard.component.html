@@ -6,27 +6,43 @@
                     class="px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                 <button
                     class="bg-regal-blue text-white rounded-r-lg p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border">Search</button>
-
-                <div class="dropdown">
-                    <button tabindex="0"
-                        class="text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"><fa-icon
-                            [icon]="faSliders" class="mr-1"></fa-icon> Sort By</button>
-                    <ul tabindex="0"
-                        class="dropdown-content menu p-2 shadow bg-white rounded-lg text-gray-900 w-max ml-4">
-                        <li><a class="active:bg-gray-200">Sort By Date</a></li>
-                        <hr>
-                        <li><a class="active:bg-gray-200">Sort By Status</a></li>
-                        <hr>
-                        <li><a class="active:bg-gray-200">Sort By Shipping Number</a></li>
-                        <hr>
-                        <li><a class="active:bg-gray-200">Sort By Sending</a></li>
-                        <hr>
-                        <li><a class="active:bg-gray-200">Sort By Receiving</a></li>
+                <div class="flex justify-center">
+                    <button
+                        class="dropdown-toggle text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <fa-icon [icon]="faSliders" class="mr-1"></fa-icon> Sort By
+                    </button>
+                    <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                        aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
+                                href="#">Sort By Date</a>
+                            <div class="px-4">
+                                <hr>
+                            </div>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
+                                href="#">Sort By Status</a>
+                            <div class="px-4">
+                                <hr>
+                            </div>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
+                                href="#">Sort By Shipping Number</a>
+                            <div class="px-4">
+                                <hr>
+                            </div>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
+                                href="#">Sort By Sending</a>
+                            <div class="px-4">
+                                <hr>
+                            </div>
+                            <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
+                                href="#">Sort By Receiving</a>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="col-end-7 mt-2">
-                <a class="p-2 ml-4 rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue"
+                <a class="p-3 ml-4 rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue"
                     routerLink="/create-spdocument">
                     <fa-icon [icon]="faBookOpen" class="mr-1"></fa-icon> Create SP Document
                 </a>
