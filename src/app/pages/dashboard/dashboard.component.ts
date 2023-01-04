@@ -13,8 +13,4 @@ export class DashboardComponent {
   faCheck = faCheck;
   faUser = faUser;
   faArrowRightArrowLeft = faArrowRightArrowLeft;
-  Show: boolean = false
-  toggle() {
-    this.Show = !this.Show;
-  }
 }
