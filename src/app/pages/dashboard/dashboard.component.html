@@ -55,7 +55,7 @@
                     class="mr-1 text-3xl bg-medium-purple px-3 py-2 rounded-lg text-purple"></fa-icon>
                 <div class="grid-rows-2 ml-3">
                     <h6 class="text-gray-400 mb-0">All</h6>
-                    <h1 class="text-3xl font-bold text-purple hover:text-purple">10</h1>
+                    <h1 class="text-3xl font-bold text-purple hover:text-purple">3</h1>
                 </div>
             </a>
             <div
@@ -64,7 +64,7 @@
                     class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-danger"></fa-icon>
                 <div class="grid-rows-2 ml-3">
                     <h6 class="text-gray-400 mb-0">Open</h6>
-                    <h1 class="text-3xl font-bold text-danger">10</h1>
+                    <h1 class="text-3xl font-bold text-danger">3</h1>
                 </div>
             </div>
             <div
@@ -72,7 +72,7 @@
                 <fa-icon [icon]="faCheck" class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-success"></fa-icon>
                 <div class="grid-rows-2 ml-3">
                     <h6 class="text-gray-400 mb-0">Delivered</h6>
-                    <h1 class="text-3xl font-bold text-success">10</h1>
+                    <h1 class="text-3xl font-bold text-success">0</h1>
                 </div>
             </div>
         </div>
@@ -145,94 +145,17 @@
                     <div class="columns-2 mt-10 mb-0 w-full items-stretch">
                         <div class="flex">
                             <button
-                                class="btn-wide border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
+                                class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
                                 Letter</button>
                         </div>
                         <div class="relative">
-                            <div class="absolute flex py-1 right-0">
-                                <label for="my-modal"
-                                    class="btn-wide bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</label>
-                            </div>
+                            <button for="my-modal" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
                         </div>
                     </div>
                 </div>
                 <!-- Card -->
-                <div class="w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg">
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="w-1/2">
-                            <h1 class="text-2xl py-2 font-semibold">802345091213</h1>
-                        </div>
-                        <div class="w-1/2 relative">
-                            <div class="absolute inset-y-0 py-1 right-0">
-                                <div class="px-4 py-2 bg-success rounded-lg text-white">
-                                    <h1 class="text-sm text-center font-semibold">Delivered</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-1 w-full text-center items-stretch">
-                        <fa-icon [icon]="faArrowRightArrowLeft"
-                            class="py-2 text-2xl rounded-lg text-regal-blue"></fa-icon>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 mt-10 mb-0 w-full items-stretch">
-                        <div class="flex">
-                            <button
-                                class="btn-wide border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
-                                Letter</button>
-                        </div>
-                        <div class="relative">
-                            <div class="absolute flex py-1 right-0">
-                                <button disabled class="btn-wide bg-gray-400 p-3 rounded-lg text-white">Receive</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card -->
-                <div class="w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg">
+                <div class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg">
                     <div class="columns-2 w-full flex items-stretch">
                         <div class="w-1/2">
                             <h1 class="text-2xl py-2 font-semibold">802345091213</h1>
@@ -296,16 +219,126 @@
                     <div class="columns-2 mt-10 mb-0 w-full items-stretch">
                         <div class="flex">
                             <button
-                                class="btn-wide border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
+                                class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
                                 Letter</button>
                         </div>
                         <div class="relative">
-                            <div class="absolute flex py-1 right-0">
-                                <button
-                                    class="btn-wide bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Receive</button>
+                            <button for="my-modal" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card -->
+                <div class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg">
+                    <div class="columns-2 w-full flex items-stretch">
+                        <div class="w-1/2">
+                            <h1 class="text-2xl py-2 font-semibold">802345091213</h1>
+                        </div>
+                        <div class="w-1/2 relative">
+                            <div class="absolute inset-y-0 py-1 right-0">
+                                <div class="px-4 py-2 bg-danger rounded-lg text-white">
+                                    <h1 class="text-sm text-center font-semibold">Open</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="columns-2 w-full flex items-stretch">
+                        <div class="flex w-1/2">
+                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
+                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
+                        </div>
+                        <div class="relative w-1/2">
+                            <div class="absolute flex inset-y-0 py-1 right-0">
+                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
+                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns-2 w-full flex items-stretch">
+                        <div class="flex w-1/2">
+                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
+                        </div>
+                        <div class="relative w-1/2">
+                            <div class="absolute flex inset-y-0 py-1 right-0">
+                                <h1 class="text-base font-semibold">-</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns-1 w-full text-center items-stretch">
+                        <fa-icon [icon]="faArrowRightArrowLeft"
+                            class="py-2 text-2xl rounded-lg text-regal-blue"></fa-icon>
+                    </div>
+                    <div class="columns-2 w-full flex items-stretch">
+                        <div class="flex w-1/2">
+                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
+                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
+                        </div>
+                        <div class="relative w-1/2">
+                            <div class="absolute flex inset-y-0 py-1 right-0">
+                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
+                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns-2 w-full flex items-stretch">
+                        <div class="flex w-1/2">
+                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
+                        </div>
+                        <div class="relative w-1/2">
+                            <div class="absolute flex inset-y-0 py-1 right-0">
+                                <h1 class="text-base font-semibold">-</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns-2 mt-10 mb-0 w-full items-stretch">
+                        <div class="flex">
+                            <button
+                                class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
+                                Letter</button>
+                        </div>
+                        <div class="relative">
+                            <button for="my-modal" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+    id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+        <div
+            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+            <div class="modal-header flex flex-shrink-0 items-center justify-center p-4 rounded-t-md">
+                <h5 class="text-xl text-center font-medium leading-normal text-gray-800" id="exampleModalLabel">
+                    Receive
+                </h5>
+            </div>
+            <div class="modal-body relative p-4">
+                <div class="form-control w-full px-4 py-1 mb-3">
+                    <label class="label mb-4">
+                        <span class="label-text text-gray-900 text-sm">Description Document</span>
+                    </label>
+                    <input type="text"
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                </div>
+                <div class="form-control w-full px-4 py-1 mb-3">
+                    <label class="label mb-4">
+                        <span class="label-text text-gray-900 text-sm">Remark Document</span>
+                    </label>
+                    <input type="text"
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                </div>
+            </div>
+            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md">
+                <div class="columns-2 mt-5 mb-5 w-full flex justify-center">
+                    <button type="button" data-bs-dismiss="modal"
+                        class="mb-2 mx-2 w-48 inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Cancel</button>
+                    <button type="button"
+                        class="mb-2 mx-2 w-48 inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
                 </div>
             </div>
         </div>

@@ -11,9 +11,4 @@ export class HeaderComponent {
   faBell = faBell;
   faChevronDown = faChevronDown;
   faRightFromBracket = faRightFromBracket;
-
-  Show: boolean = false
-  toggle() {
-    this.Show = !this.Show;
-  }
 }
