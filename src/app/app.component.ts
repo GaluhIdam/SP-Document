@@ -10,10 +10,12 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   title: any;
+  login: boolean;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title) {
+      this.login = true;
   }
 
   ngOnInit() {

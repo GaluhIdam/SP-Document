@@ -8,6 +8,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { HeaderComponent } from './shared/components/header/header.component';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginComponent } from './pages/login/login.component';
 import 'tw-elements';
 
 @NgModule({
@@ -21,7 +22,8 @@ import 'tw-elements';
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
