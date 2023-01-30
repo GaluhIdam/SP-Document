@@ -23,7 +23,7 @@ import 'tw-elements';
     AppRoutingModule,
     DashboardModule,
     FontAwesomeModule,
-    LoginComponent
+    LoginComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

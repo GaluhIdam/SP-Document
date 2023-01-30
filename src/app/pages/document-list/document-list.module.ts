@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DocumentListRoutingModule } from './document-list-routing.module';
 import { DocumentListComponent } from './document-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     DocumentListRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
   ]
 })
 export class DocumentListModule { }

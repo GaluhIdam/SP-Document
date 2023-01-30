@@ -49,47 +49,54 @@
             </div>
         </div>
         <div class="flex columns-3 mt-2">
-            <a routerLink="" routerLinkActive="active"
-                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 active:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-purple rounded-lg">
+            <button (click)="getDataCard('%%')"
+                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 focus:bg-gray-100 py-5 px-5 hover:border-b-4 focus:border-b-4 hover:border-purple focus:border-purple rounded-lg">
                 <fa-icon [icon]="faListSquares"
                     class="mr-1 text-3xl bg-medium-purple px-3 py-2 rounded-lg text-purple"></fa-icon>
                 <div class="grid-rows-2 ml-3">
                     <h6 class="text-gray-400 mb-0">All</h6>
-                    <h1 class="text-3xl font-bold text-purple hover:text-purple">3</h1>
+                    <h1 class="text-3xl font-bold text-purple hover:text-purple">{{ countAll }}</h1>
                 </div>
-            </a>
-            <div
-                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-danger rounded-lg">
+            </button>
+            <button (click)="getDataCard('Open')"
+                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 focus:bg-gray-100 py-5 px-5 hover:border-b-4 focus:border-b-4 hover:border-danger focus:border-danger rounded-lg">
                 <fa-icon [icon]="faHourglassStart"
                     class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-danger"></fa-icon>
                 <div class="grid-rows-2 ml-3">
                     <h6 class="text-gray-400 mb-0">Open</h6>
-                    <h1 class="text-3xl font-bold text-danger">3</h1>
+                    <h1 class="text-3xl font-bold text-danger">{{ countOpen }}</h1>
                 </div>
-            </div>
-            <div
-                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-success rounded-lg">
+            </button>
+            <button (click)="getDataCard('Delivered')"
+                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 focus:bg-gray-100 py-5 px-5 hover:border-b-4 focus:border-b-4 hover:border-success focus:border-success rounded-lg">
                 <fa-icon [icon]="faCheck" class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-success"></fa-icon>
                 <div class="grid-rows-2 ml-3">
                     <h6 class="text-gray-400 mb-0">Delivered</h6>
-                    <h1 class="text-3xl font-bold text-success">0</h1>
+                    <h1 class="text-3xl font-bold text-success">{{ countDelivered }}</h1>
                 </div>
-            </div>
+            </button>
         </div>
     </div>
     <div class="static">
         <div class="px-0 mt-5">
             <div class="grid gap-4 grid-cols-3 static">
                 <!-- Card -->
-                <div class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg">
+                <div class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg" *ngFor="let row of data;">
                     <div class="columns-2 w-full flex items-stretch">
                         <div class="w-1/2">
-                            <h1 class="text-2xl py-2 font-semibold">802345091213</h1>
+                            <h1 class="text-2xl py-2 font-semibold">{{row.shipping_no}}</h1>
                         </div>
                         <div class="w-1/2 relative">
                             <div class="absolute inset-y-0 py-1 right-0">
-                                <div class="px-4 py-2 bg-danger rounded-lg text-white">
-                                    <h1 class="text-sm text-center font-semibold">Open</h1>
+                                <div *ngIf="row.status == 'Open'">
+                                    <div class="px-4 py-2 bg-danger rounded-lg text-white">
+                                        <h1 class="text-sm text-center font-semibold">{{row.status}}</h1>
+                                    </div>
+                                </div>
+                                <div *ngIf="row.status == 'Delivered'">
+                                    <div class="px-4 py-2 bg-success rounded-lg text-white">
+                                        <h1 class="text-sm text-center font-semibold">{{row.status}}</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -108,11 +115,11 @@
                     </div>
                     <div class="columns-2 w-full flex items-stretch">
                         <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
+                            <h1 class="text-base font-semibold">{{ row.sender_personal_name == null ?  '-' : row.sender_personal_name  }} / {{ row.sender_personal_number == null ? '-' : row.sender_personal_number}}</h1>
                         </div>
                         <div class="relative w-1/2">
                             <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
+                                <h1 class="text-base font-semibold">{{ row.receiver_personal_name == null ?  '-' : row.receiver_personal_name  }} / {{ row.receiver_personal_number == null ? '-' : row.receiver_personal_number}}</h1>
                             </div>
                         </div>
                     </div>
@@ -122,23 +129,23 @@
                     </div>
                     <div class="columns-2 w-full flex items-stretch">
                         <div class="flex w-1/2">
-                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
+                            <fa-icon [icon]="faCalendar" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
+                            <h1 class="text-sm py-2 text-gray-400">Sending Date</h1>
                         </div>
                         <div class="relative w-1/2">
                             <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
+                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receive Date</h1>
+                                <fa-icon [icon]="faCalendar" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
                             </div>
                         </div>
                     </div>
                     <div class="columns-2 w-full flex items-stretch">
                         <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
+                            <h1 class="text-base font-semibold">{{ row.sender_date == null ? '-' : row.sender_date | date: 'fullDate' }}</h1>
                         </div>
                         <div class="relative w-1/2">
                             <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
+                                <h1 class="text-base font-semibold">{{ row.receiver_date == null ?  '-' : row.receiver_date | date: 'fullDate'  }}</h1>
                             </div>
                         </div>
                     </div>
@@ -155,153 +162,6 @@
                     </div>
                 </div>
                 <!-- Card -->
-                <div class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg">
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="w-1/2">
-                            <h1 class="text-2xl py-2 font-semibold">802345091213</h1>
-                        </div>
-                        <div class="w-1/2 relative">
-                            <div class="absolute inset-y-0 py-1 right-0">
-                                <div class="px-4 py-2 bg-danger rounded-lg text-white">
-                                    <h1 class="text-sm text-center font-semibold">Open</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-1 w-full text-center items-stretch">
-                        <fa-icon [icon]="faArrowRightArrowLeft"
-                            class="py-2 text-2xl rounded-lg text-regal-blue"></fa-icon>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 mt-10 mb-0 w-full items-stretch">
-                        <div class="flex">
-                            <button
-                                class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
-                                Letter</button>
-                        </div>
-                        <div class="relative">
-                            <button for="my-modal" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card -->
-                <div class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg">
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="w-1/2">
-                            <h1 class="text-2xl py-2 font-semibold">802345091213</h1>
-                        </div>
-                        <div class="w-1/2 relative">
-                            <div class="absolute inset-y-0 py-1 right-0">
-                                <div class="px-4 py-2 bg-danger rounded-lg text-white">
-                                    <h1 class="text-sm text-center font-semibold">Open</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-1 w-full text-center items-stretch">
-                        <fa-icon [icon]="faArrowRightArrowLeft"
-                            class="py-2 text-2xl rounded-lg text-regal-blue"></fa-icon>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            <h1 class="text-sm py-2 text-gray-400">Sending</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 w-full flex items-stretch">
-                        <div class="flex w-1/2">
-                            <h1 class="text-base font-semibold">Faisal Iqbal / 582127</h1>
-                        </div>
-                        <div class="relative w-1/2">
-                            <div class="absolute flex inset-y-0 py-1 right-0">
-                                <h1 class="text-base font-semibold">-</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns-2 mt-10 mb-0 w-full items-stretch">
-                        <div class="flex">
-                            <button
-                                class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
-                                Letter</button>
-                        </div>
-                        <div class="relative">
-                            <button for="my-modal" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

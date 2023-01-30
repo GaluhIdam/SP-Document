@@ -1,5 +1,6 @@
 export interface CardSpDocument {
-    no_sp_document: number;
+    spdoc_data: any;
+    id_sp_data: number;
     sending: Text;
     sending_date: Date;
     receiver: Text;

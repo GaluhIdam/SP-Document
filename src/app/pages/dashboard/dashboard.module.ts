@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -16,8 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     DashboardRoutingModule,
     FontAwesomeModule,
-    BrowserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
    exports: []
 })
