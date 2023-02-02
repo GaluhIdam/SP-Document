@@ -12,6 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-spdocument.component.css']
 })
 export class CreateSpdocumentComponent {
+  
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router
+  ) { }
+  
   faArrowLeft = faArrowLeft;
   faChevronDown = faChevronDown;
   faPenSquare = faPenSquare;
@@ -32,6 +38,7 @@ export class CreateSpdocumentComponent {
 
   myDate = new Date()
   id_spdoc!: any;
+  id_document!: number;
 
   mform: FormGroup = new FormGroup({
     sender_personal_number: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
@@ -46,10 +53,11 @@ export class CreateSpdocumentComponent {
     description: new FormControl('', [Validators.required]),
   })
 
-  constructor(
-    private dashboardService: DashboardService,
-    private router: Router
-  ) { }
+  edit_document: FormGroup = new FormGroup({
+    quantity: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    remark: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+  })
 
   public submitDocument() {
     if (this.mform.valid) {
@@ -103,7 +111,7 @@ export class CreateSpdocumentComponent {
       shipping_no,
       data,
     ).subscribe(
-      (data) => {
+      () => {
         Swal.fire({
           title: 'Success!',
           text: 'Document has created!',
@@ -114,17 +122,21 @@ export class CreateSpdocumentComponent {
             this.router.navigate(['/document-list']);
           }
         });
-        console.log(data)
-      },
-      () => {
-        Swal.fire({
-          title: 'Failed!',
-          text: 'Document has failed to create!',
-          icon: 'error',
-          confirmButtonText: 'OK'
-        })
       }
     )
+  }
+
+  public editDocument(i: number) {
+    this.id_document = i;
+    this.edit_document.get('quantity')?.setValue(this.data[i].quantity)
+    this.edit_document.get('description')?.setValue(this.data[i].description)
+    this.edit_document.get('remark')?.setValue(this.data[i].remark)
+  }
+
+  public saveEditDocument(i: number = this.id_document) {
+    this.data[i].quantity = this.edit_document.get('quantity')?.value;
+    this.data[i].description = this.edit_document.get('description')?.value;
+    this.data[i].remark = this.edit_document.get('remark')?.value;
   }
 
   public addValue() {
@@ -135,6 +147,8 @@ export class CreateSpdocumentComponent {
         remark: this.document.get('remark')?.value,
       });
       this.clearSubDocument();
+    } else {
+      this.document.markAllAsTouched()
     }
   }
 
@@ -156,11 +170,5 @@ export class CreateSpdocumentComponent {
     this.document.controls['quantity'].reset();
     this.document.controls['description'].reset();
     this.document.controls['remark'].reset();
-  }
-
-  public onSubmit() {
-    if (this.mform.valid) {
-      console.log(this.mform)
-    }
   }
 }

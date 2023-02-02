@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faBookOpen, faEye, faEllipsisVertical, faPencilSquare, faFileInvoice, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime, Subscription } from 'rxjs';
 import { DashboardService } from 'src/app/core/services/rest.service';
@@ -42,7 +43,10 @@ export class DocumentListComponent {
     limitx: new FormControl(),
   });
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router
+    ) { }
 
 
   ngOnInit() {
@@ -87,8 +91,8 @@ export class DocumentListComponent {
                 data.receiver_date
               )
             }
-          }  
-          else if(data.sender_date && data.receiver_date) {
+          }
+          else if (data.sender_date && data.receiver_date) {
             this.getByReceiverSenderDate(
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
@@ -101,7 +105,7 @@ export class DocumentListComponent {
               data.receiver_date,
               data.sender_date,
             )
-          }  
+          }
           else {
             this.filterSearch(
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
@@ -242,6 +246,14 @@ export class DocumentListComponent {
         this.data = response.spdoc_data
       }
     )
+  }
+
+  public showDocument(id_sp_data: number) {
+    this.router.navigate(['/view-spdocument/' + id_sp_data]);
+  }
+
+  public editDocument(id_sp_data: number) {
+    this.router.navigate(['/edit-spdocument/' + id_sp_data]);
   }
 
   ngOnDestroy() {

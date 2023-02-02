@@ -13,56 +13,56 @@
                 <label class="label">
                     <span class="label-text text-gray-900">Sender Nopeg</span>
                 </label>
-                <input type="text"
+                <input type="text" [value]="data.sender_personal_number == '' || data.sender_personal_number == null ? '-' : data.sender_personal_number" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Sender Name</span>
                 </label>
-                <input type="text"
+                <input type="text" [value]="data.sender_personal_name == '' || data.sender_personal_name == null ? '-' : data.sender_personal_name" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Sender Unit</span>
                 </label>
-                <input type="text"
+                <input type="text" [value]="data.sender_unit == '' || data.sender_unit == null ? '-' : data.sender_unit" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Sender Date</span>
                 </label>
-                <input type="date"
+                <input type="date" [value]="data.sender_date == '' || data.sender_date == null ? null : data.sender_date" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Receiver Nopeg</span>
                 </label>
-                <input type="text"
+                <input type="text" [value]="data.receiver_personal_number == '' || data.receiver_personal_number == null ? '-' : data.receiver_personal_number" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Receiver Name</span>
                 </label>
-                <input type="text"
+                <input type="text" [value]="data.receiver_personal_name == '' || data.receiver_personal_name == null ? '-' : data.receiver_personal_name" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Receiver Unit</span>
                 </label>
-                <input type="text"
+                <input type="text" [value]="data.receiver_unit == '' || data.receiver_unit == null ? '-' : data.receiver_unit" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Receiver Date</span>
                 </label>
-                <input type="text"
+                <input type="date" [value]="data.receiver_date == '' || data.receiver_date == null ? null : data.receiver_date" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
         </div>
@@ -78,17 +78,11 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        <tr class="bg-white text-gray-900">
-                            <td class="py-2 text-center">01</td>
-                            <td class="py-2 text-center">1</td>
-                            <td class="py-2 text-center">Job Card</td>
-                            <td class="py-2 text-center">Doc Only</td>
-                        </tr>
-                        <tr class="bg-white text-gray-900">
-                            <td class="py-2 text-center">01</td>
-                            <td class="py-2 text-center">1</td>
-                            <td class="py-2 text-center">Job Card</td>
-                            <td class="py-2 text-center">Doc Only</td>
+                        <tr class="bg-white text-gray-900" *ngFor="let row of data.spdoc_description_remarks; let i = index">
+                            <td class="py-2 text-center">{{ i + 1 }}</td>
+                            <td class="py-2 text-center">{{ row.quantity }}</td>
+                            <td class="py-2 text-center">{{ row.description }}</td>
+                            <td class="py-2 text-center">{{ row.remark }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -148,29 +148,31 @@
                             <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
                                 aria-labelledby="dropdownMenuButton4">
                                 <li>
-                                    <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-tosca active:bg-gray-200 hover:bg-gray-100"
-                                        routerLink="/view-spdocument"><fa-icon [icon]="faEye" class="mr-1"></fa-icon>
-                                        View</a>
+                                    <button (click)="showDocument(row.id_sp_data)"
+                                        class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-tosca active:bg-gray-200 hover:bg-gray-100"><fa-icon
+                                            [icon]="faEye" class="mr-1"></fa-icon>
+                                        View</button>
                                     <div class="px-4">
                                         <hr>
                                     </div>
-                                    <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-soft-success active:bg-gray-200 hover:bg-gray-100"
-                                        routerLink="/edit-spdocument"><fa-icon [icon]="faPencilSquare"
-                                            class="mr-1"></fa-icon> Edit</a>
+                                    <button (click)="editDocument(row.id_sp_data)"
+                                        class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-soft-success active:bg-gray-200 hover:bg-gray-100"
+                                        ><fa-icon [icon]="faPencilSquare"
+                                            class="mr-1"></fa-icon> Edit</button>
                                     <div class="px-4">
                                         <hr>
                                     </div>
-                                    <a
+                                    <button
                                         class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-regal-blue active:bg-gray-200 hover:bg-gray-100"><fa-icon
                                             [icon]="faFileInvoice" class="mr-1"></fa-icon>
-                                        Letter</a>
+                                        Letter</button>
                                     <div class="px-4">
                                         <hr>
                                     </div>
-                                    <a
+                                    <button
                                         class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-success active:bg-gray-200 hover:bg-gray-100"><fa-icon
                                             [icon]="faCircleCheck" class="mr-1"></fa-icon>
-                                        Received</a>
+                                        Received</button>
                                 </li>
                             </ul>
                         </td>

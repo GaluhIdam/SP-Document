@@ -27,6 +27,10 @@ export class DashboardService {
   urlLastDocument: any = this.base_url + 'last-sp-document';
   urlLastRecSen: any = this.base_url + 'sender-receiver-spdoc';
   urlShowDocument: any = this.base_url + 'show-sp-document';
+  urlUpdateDocument: any = this.base_url + 'update-sp-document';
+  urlUpdateDescRemark: any = this.base_url + 'update-desc-remark';
+  urlDeleteDescRemark: any = this.base_url + 'delete-desc-remark';
+  urlAddDescRemark: any = this.base_url + 'add-desc-remark';
 
 
   //Credentials
@@ -264,17 +268,104 @@ export class DashboardService {
 
   //Get Show Document by ID
   getShowData(id_sp_data: any): Observable<any> {
-
-    const params = new HttpParams()
-      .set('id_sp_data', id_sp_data);
-
-    return this.http.get<any>(this.urlShowDocument, { 'params': params, 'headers': this.headers })
+    return this.http.get<any>(this.urlShowDocument + '/' + id_sp_data, { 'headers': this.headers })
       .pipe(
         map((response) => {
           return response;
         }),
         catchError((error) => {
           console.log(error);
+          throw error;
+        })
+      )
+  }
+
+  //Update SP Document
+  updateDocument(
+    id_sp_data: number,
+    sender_date: Date,
+    receiver_unit: String
+  ): Observable<any> {
+    const body = {
+      "id_sp_data": id_sp_data,
+      "sender_date": sender_date,
+      "receiver_unit": receiver_unit,
+    }
+
+    return this.http.put<any>(this.urlUpdateDocument, body, { 'headers': this.headers })
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          throw error;
+        })
+      )
+  }
+
+  //Update Description & Remark
+  updateDescRemark(
+    id_description_remark: number | null,
+    quantity: number,
+    description: String,
+    remark: String
+  ): Observable<any> {
+    const body = {
+      'id_description_remark': id_description_remark,
+      'quantity': quantity,
+      'description': description,
+      'remark': remark,
+    }
+
+    return this.http.put<any>(this.urlUpdateDescRemark, body, { 'headers': this.headers })
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          throw error;
+        })
+      )
+  }
+
+  deleteDescRemark(
+    id_description_remark: number
+  ): Observable<any> {
+
+    const params = new HttpParams()
+      .set('id_description_remark', id_description_remark);
+
+    return this.http.delete<any>(this.urlDeleteDescRemark, { 'params': params, 'headers': this.headers })
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          throw error;
+        })
+      )
+  }
+
+  addDescMark(
+    spdata_id: number,
+    quantity: number,
+    description: String,
+    remark: String
+  ): Observable<any> {
+
+    const body = {
+      'spdata_id': spdata_id,
+      'quantity': quantity,
+      'description': description,
+      'remark': remark,
+    }
+
+    return this.http.post<any>(this.urlAddDescRemark, body, { 'headers': this.headers })
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
           throw error;
         })
       )

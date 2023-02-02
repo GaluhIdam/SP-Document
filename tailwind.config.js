@@ -19,7 +19,8 @@ module.exports = {
         'soft-silver': '#ECE8DD',
         'soft-success-ax': '#DFF0D0',
         'soft-success-outline': '#ABD883',
-        'soft-danger': '#F1D0D0'
+        'soft-danger': '#F1D0D0',
+        'disabled-form': '#C0C0C0'
       }
     },
   },

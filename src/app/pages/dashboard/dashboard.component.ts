@@ -16,7 +16,7 @@ export class DashboardComponent {
   faUser = faUser;
   faArrowRightArrowLeft = faArrowRightArrowLeft;
   faCalendar = faCalendar;
-  
+
 
   data!: any;
   countAll!: Number;
@@ -30,7 +30,7 @@ export class DashboardComponent {
   constructor(
     private dashboardService: DashboardService,
     private router: Router
-    ) {}
+  ) { }
 
   ngOnInit() {
     this.getDataCard('%%');
@@ -40,41 +40,35 @@ export class DashboardComponent {
 
   public getDataCard(status: String) {
     this.dashboardService.getDashboard(status == null ? '%%' : status)
-    .subscribe(
-      (response) => {
-        this.data = response.spdoc_data
-        this.countAll = response.spdoc_data_aggregate.aggregate.count
-      }
-    )
+      .subscribe(
+        (response) => {
+          this.data = response.spdoc_data
+          this.countAll = response.spdoc_data_aggregate.aggregate.count
+        }
+      )
   }
 
   public getCountOpen(cat_status: String = "Open") {
     this.dashboardService.getCountCard(cat_status)
-    .subscribe(
-      (response) => {
-        this.countOpen = response.spdoc_data_aggregate.aggregate.count
-      }
-    )
+      .subscribe(
+        (response) => {
+          this.countOpen = response.spdoc_data_aggregate.aggregate.count
+        }
+      )
   }
 
   public getCountDelivered(cat_status: String = "Delivered") {
     this.dashboardService.getCountCard(cat_status)
-    .subscribe(
-      (response) => {
-        this.countDelivered = response.spdoc_data_aggregate.aggregate.count
-      }
-    )
-  }
-
-  public showDocument(id_sp_data: number) {
-    this.dashboardService.getShowData(id_sp_data)
       .subscribe(
         (response) => {
-          this.dataShow = response.spdoc_data_by_pk
-          this.router.navigate(['/edit-spdocument'], { state: this.dataShow });
+          this.countDelivered = response.spdoc_data_aggregate.aggregate.count
         }
       )
   }
-  
-  
+
+  public showDocument(id_sp_data: number) {
+    this.router.navigate(['/view-spdocument/' + id_sp_data]);
+  }
+
+
 }
