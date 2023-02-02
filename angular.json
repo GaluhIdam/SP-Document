@@ -71,7 +71,10 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sp_document_angular:build"
+            "browserTarget": "sp_document_angular:build",
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ]
           }
         },
         "test": {

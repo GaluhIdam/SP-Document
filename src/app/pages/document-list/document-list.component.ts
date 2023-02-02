@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { faBookOpen, faEye, faEllipsisVertical, faPencilSquare, faFileInvoice, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime, Subscription } from 'rxjs';
-import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { DashboardService } from 'src/app/core/services/rest.service';
 
 @Component({
   selector: 'app-document-list',
@@ -46,7 +46,6 @@ export class DocumentListComponent {
 
 
   ngOnInit() {
-    this.getDataCard('%%')
     this.obs = this.mform.valueChanges
       .pipe(debounceTime(500)).subscribe(
         (data) => {
@@ -55,8 +54,8 @@ export class DocumentListComponent {
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
               data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
-              data.receiver_personal_number == null ? '%%' : data.receiver_personal_number + "%",
-              data.receiver_personal_name == null ? '%%' : data.receiver_personal_name + "%",
+              data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
+              data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
               data.status == null ? '%%' : "%" + data.status + "%",
               data.limitx == null ? this.limit : data.limitx,
               this.page
@@ -67,28 +66,53 @@ export class DocumentListComponent {
                 data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
                 data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
                 data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
-                data.receiver_personal_number == null ? '%%' : data.receiver_personal_number + "%",
-                data.receiver_personal_name == null ? '%%' : data.receiver_personal_name + "%",
+                data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
+                data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
                 data.status == null ? '%%' : "%" + data.status + "%",
                 data.limitx == null ? this.limit : data.limitx,
                 this.page,
                 data.sender_date
-                )
-              } 
-              if (data.receiver_date) {
-                this.getByReceiverDate(
+              )
+            }
+            if (data.receiver_date) {
+              this.getByReceiverDate(
                 data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
                 data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
                 data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
-                data.receiver_personal_number == null ? '%%' : data.receiver_personal_number + "%",
-                data.receiver_personal_name == null ? '%%' : data.receiver_personal_name + "%",
+                data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
+                data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
                 data.status == null ? '%%' : "%" + data.status + "%",
                 data.limitx == null ? this.limit : data.limitx,
                 this.page,
                 data.receiver_date
-                )
-                console.log(data)
+              )
             }
+          }  
+          else if(data.sender_date && data.receiver_date) {
+            this.getByReceiverSenderDate(
+              data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
+              data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
+              data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+              data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
+              data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+              data.status == null ? '%%' : "%" + data.status + "%",
+              data.limitx == null ? this.limit : data.limitx,
+              this.page,
+              data.receiver_date,
+              data.sender_date,
+            )
+          }  
+          else {
+            this.filterSearch(
+              data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
+              data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
+              data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+              data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
+              data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+              data.status == null ? '%%' : "%" + data.status + "%",
+              data.limitx == null ? this.limit : data.limitx,
+              this.page
+            )
           }
         }
       )
@@ -108,15 +132,15 @@ export class DocumentListComponent {
   }
 
   public filterSearch(
-    shipping_no: string, 
-    sender_personal_number: string, 
-    sender_personal_name: string, 
-    receiver_personal_number: string, 
-    receiver_personal_name: string, 
-    status: String, 
-    limit: Number, 
+    shipping_no: string,
+    sender_personal_number: string,
+    sender_personal_name: string,
+    receiver_personal_number: string,
+    receiver_personal_name: string,
+    status: String,
+    limit: Number,
     page: Number
-    ) {
+  ) {
     this.dashboardService.getFilterSearch(
       shipping_no,
       sender_personal_number,
@@ -128,20 +152,20 @@ export class DocumentListComponent {
       page,
 
     ).subscribe(
-        (response) => {
-          this.data = response.spdoc_data
-        }
-      )
+      (response) => {
+        this.data = response.spdoc_data
+      }
+    )
   }
 
   public getBySenderDate(
-    shipping_no: string, 
-    sender_personal_number: string, 
-    sender_personal_name: string, 
-    receiver_personal_number: string, 
-    receiver_personal_name: string, 
-    status: String, 
-    limit: Number, 
+    shipping_no: string,
+    sender_personal_number: string,
+    sender_personal_name: string,
+    receiver_personal_number: string,
+    receiver_personal_name: string,
+    status: String,
+    limit: Number,
     page: Number,
     sender_date: any
   ) {
@@ -163,13 +187,13 @@ export class DocumentListComponent {
   }
 
   public getByReceiverDate(
-    shipping_no: string, 
-    sender_personal_number: string, 
-    sender_personal_name: string, 
-    receiver_personal_number: string, 
-    receiver_personal_name: string, 
-    status: String, 
-    limit: Number, 
+    shipping_no: string,
+    sender_personal_number: string,
+    sender_personal_name: string,
+    receiver_personal_number: string,
+    receiver_personal_name: string,
+    status: String,
+    limit: Number,
     page: Number,
     receiver_date: any
   ) {
@@ -183,6 +207,36 @@ export class DocumentListComponent {
       limit,
       page,
       receiver_date,
+    ).subscribe(
+      (response) => {
+        this.data = response.spdoc_data
+      }
+    )
+  }
+
+  public getByReceiverSenderDate(
+    shipping_no: string,
+    sender_personal_number: string,
+    sender_personal_name: string,
+    receiver_personal_number: string,
+    receiver_personal_name: string,
+    status: String,
+    limit: Number,
+    page: Number,
+    receiver_date: any,
+    sender_date: any,
+  ) {
+    this.dashboardService.getFilterReceiverSenderDate(
+      shipping_no,
+      sender_personal_number,
+      sender_personal_name,
+      receiver_personal_number,
+      receiver_personal_name,
+      status,
+      limit,
+      page,
+      receiver_date,
+      sender_date,
     ).subscribe(
       (response) => {
         this.data = response.spdoc_data

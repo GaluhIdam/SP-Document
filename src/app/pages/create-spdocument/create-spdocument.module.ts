@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CreateSpdocumentRoutingModule } from './create-spdocument-routing.module';
 import { CreateSpdocumentComponent } from './create-spdocument.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     CreateSpdocumentRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
   ]
 })
 export class CreateSpdocumentModule { }

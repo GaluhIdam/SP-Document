@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { faSliders, faBookOpen, faListSquares, faHourglassStart, faCheck, faUser, faArrowRightArrowLeft, faCalendar } from '@fortawesome/free-solid-svg-icons';
-import { CardSpDocument } from 'src/app/core/interfaces/card-sp-document.dto';
-import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { DashboardService } from 'src/app/core/services/rest.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -23,7 +23,14 @@ export class DashboardComponent {
   countOpen!: Number;
   countDelivered!: Number;
 
-  constructor(private dashboardService: DashboardService) {}
+  dataShow: any;
+
+  id_sp_doc!: Number;
+
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router
+    ) {}
 
   ngOnInit() {
     this.getDataCard('%%');
@@ -58,4 +65,16 @@ export class DashboardComponent {
       }
     )
   }
+
+  public showDocument(id_sp_data: number) {
+    this.dashboardService.getShowData(id_sp_data)
+      .subscribe(
+        (response) => {
+          this.dataShow = response.spdoc_data_by_pk
+          this.router.navigate(['/edit-spdocument'], { state: this.dataShow });
+        }
+      )
+  }
+  
+  
 }
