@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft, faChevronDown, faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { DashboardService } from 'src/app/core/services/rest.service';
 import Swal from 'sweetalert2';
+import { EditDocumentSerivice } from './edit-spdocument.service';
 
 @Component({
   selector: 'app-edit-spdocument',
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class EditSpdocumentComponent {
   constructor(
     private route: ActivatedRoute,
-    private dashboardService: DashboardService,
+    private editdocumentService: EditDocumentSerivice,
     private router: Router
   ) { }
   faArrowLeft = faArrowLeft;
@@ -69,7 +69,7 @@ export class EditSpdocumentComponent {
   }
 
   public showDocument(id_sp_data: number) {
-    this.dashboardService.getShowData(id_sp_data)
+    this.editdocumentService.getShowData(id_sp_data)
       .subscribe(
         (response) => {
           this.data_show = response.spdoc_data_by_pk
@@ -156,7 +156,7 @@ export class EditSpdocumentComponent {
     receiver_unit: String = this.mform.get('receiver_unit')?.value,
   ) {
     if (this.mform.valid) {
-      this.dashboardService.updateDocument(
+      this.editdocumentService.updateDocument(
         id_sp_data,
         sender_date,
         receiver_unit,
@@ -195,7 +195,7 @@ export class EditSpdocumentComponent {
     description: String = this.edit_document.get('description')?.value,
     remark: String = this.edit_document.get('remark')?.value
   ) {
-    this.dashboardService.updateDescRemark(
+    this.editdocumentService.updateDescRemark(
       id_description_remark,
       quantity,
       description,
@@ -225,7 +225,7 @@ export class EditSpdocumentComponent {
       confirmButtonText: 'Delete'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.dashboardService.deleteDescRemark(id_description_remark)
+        this.editdocumentService.deleteDescRemark(id_description_remark)
           .subscribe(
             (response) => {
               this.removeValue(i)
@@ -254,7 +254,7 @@ export class EditSpdocumentComponent {
   ) {
     if(this.document.valid) {
       this.addValue()
-      this.dashboardService.addDescMark(
+      this.editdocumentService.addDescMark(
         spdata_id,
         quantity,
         description,

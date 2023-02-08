@@ -1,7 +1,7 @@
 <div class="px-0 bg-white ml-5 rounded-lg drop-shadow-md" style="width: 90vw;">
     <div class="grid grid-cols-2 gap-4 p-4">
         <div class="col-start-1">
-            <button
+            <button type="button"
                 class="border border-regal-blue text-regal-blue rounded-lg px-2 py-2 hover:bg-regal-blue hover:text-white"
                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
                 aria-controls="collapseOne">
@@ -104,7 +104,9 @@
                 <tbody>
                     <tr *ngFor="let row of data; let i = index">
                         <td class="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {{ i + 1 }}
+                            {{ 
+                                (mform.get('limit')?.value * (mform.get('page')?.value - 1)) + ( i + 1 )
+                            }}
                         </td>
                         <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
                             {{row.shipping_no}}
@@ -156,9 +158,8 @@
                                         <hr>
                                     </div>
                                     <button (click)="editDocument(row.id_sp_data)"
-                                        class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-soft-success active:bg-gray-200 hover:bg-gray-100"
-                                        ><fa-icon [icon]="faPencilSquare"
-                                            class="mr-1"></fa-icon> Edit</button>
+                                        class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-soft-success active:bg-gray-200 hover:bg-gray-100"><fa-icon
+                                            [icon]="faPencilSquare" class="mr-1"></fa-icon> Edit</button>
                                     <div class="px-4">
                                         <hr>
                                     </div>
@@ -180,13 +181,49 @@
                 </tbody>
             </table>
             <!-- Pagination -->
-            <div class="mt-10 mb-10 px-2 flex">
-                <div class="columns-1 mr-3">
-                    <h1 class="text-gray-900">Row per page</h1>
+            <div class="mt-10 mb-10 px-2 flex grid grid-cols-2 gap-4 mb-2">
+                <div class="col-start-1 flex">
+                    <div class="columns-1 mr-3">
+                        <h1 class="text-gray-900">Row per page</h1>
+                    </div>
+                    <div class="columns-1">
+                        <input type="number" formControlName="limit"
+                            class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-14" [ngModel]="limit">
+                    </div>
                 </div>
-                <div class="columns-1">
-                    <input type="number" formControlName="limitx"
-                        class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-14" [ngModel]="limit">
+                <div class="col-end-7">
+                    <div class="flex justify-center">
+                        <div class="columns-1 mr-3">
+                            <h1 class="text-gray-900">Page</h1>
+                        </div>
+                        <div class="columns-1">
+                            <input type="number" formControlName="page"
+                                class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-12">
+                        </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="flex list-style-none">
+                                <li class="page-item disabled"><a
+                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                        tabindex="-1" aria-disabled="true"><fa-icon [icon]="faCaretLeft"
+                                            class="mr-1"></fa-icon></a></li>
+                                <li class="page-item active" *ngFor="let no_page of pagination;">
+                                    <div *ngIf="mform.get('page')?.value == no_page.no">
+                                        <button disabled
+                                            class="page-link mr-1 relative block py-1.5 px-3 rounded border-0 bg-regal-blue outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md">{{
+                                            no_page.no }}</button>
+                                    </div>
+                                    <div *ngIf="mform.get('page')?.value != no_page.no">
+                                        <button type="button" (click)="noPage(no_page.no)"
+                                            class="page-link mr-1 relative block py-1.5 px-3 rounded border-1 border-regal-blue transition-all duration-300 text-regal-blue hover:text-white hover:bg-regal-blue shadow-md focus:shadow-md">{{
+                                            no_page.no }}</button>
+                                    </div>
+                                </li>
+                                <li class="page-item"><button
+                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"><fa-icon
+                                            [icon]="faCaretRight" class="mr-1"></fa-icon></button></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

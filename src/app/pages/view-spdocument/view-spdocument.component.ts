@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { DashboardService } from 'src/app/core/services/rest.service';
+import { ViewDocumentService } from './view-document.service';
 
 @Component({
   selector: 'app-view-spdocument',
@@ -13,7 +13,7 @@ export class ViewSpdocumentComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private dashboardService: DashboardService,
+    private viewdocumentService: ViewDocumentService,
     ) {}
 
   id: any;
@@ -35,11 +35,10 @@ export class ViewSpdocumentComponent {
   }
   
   public showDocument(id_sp_data: number) {
-    this.dashboardService.getShowData(id_sp_data)
+    this.viewdocumentService.getShowData(id_sp_data)
       .subscribe(
         (response) => {
           this.data = response.spdoc_data_by_pk
-          console.log(this.data)
         }
       )
   }

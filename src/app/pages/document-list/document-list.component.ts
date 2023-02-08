@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faBookOpen, faEye, faEllipsisVertical, faPencilSquare, faFileInvoice, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen, faEye, faEllipsisVertical, faPencilSquare, faFileInvoice, faCircleCheck, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime, Subscription } from 'rxjs';
-import { DashboardService } from 'src/app/core/services/rest.service';
+import { DocumentListService } from './document-list.service';
 
 @Component({
   selector: 'app-document-list',
@@ -17,6 +17,8 @@ export class DocumentListComponent {
   faPencilSquare = faPencilSquare;
   faFileInvoice = faFileInvoice;
   faCircleCheck = faCircleCheck;
+  faCaretLeft = faCaretLeft;
+  faCaretRight = faCaretRight;
 
   Show: boolean = false
 
@@ -24,8 +26,15 @@ export class DocumentListComponent {
 
   obs!: Subscription;
 
-  limit: Number = 10;
-  page: Number = 0;
+  length!: number;
+  limit: number = 10;
+  page: number = 1;
+  per_page!: number;
+  long_page!: number;
+
+  pagination: {
+    no: number;
+  }[] = [];
 
   mform: FormGroup = new FormGroup({
     shipping_no: new FormControl(),
@@ -40,13 +49,14 @@ export class DocumentListComponent {
 
     status: new FormControl(),
 
-    limitx: new FormControl(),
+    limit: new FormControl(this.limit),
+    page: new FormControl(this.page),
   });
 
   constructor(
-    private dashboardService: DashboardService,
+    private documentlistService: DocumentListService,
     private router: Router
-    ) { }
+  ) { }
 
 
   ngOnInit() {
@@ -54,6 +64,7 @@ export class DocumentListComponent {
       .pipe(debounceTime(500)).subscribe(
         (data) => {
           if (data.sender_date == null && data.receiver_date == null) {
+            this.paginate()
             this.filterSearch(
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
@@ -61,38 +72,12 @@ export class DocumentListComponent {
               data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
               data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
               data.status == null ? '%%' : "%" + data.status + "%",
-              data.limitx == null ? this.limit : data.limitx,
-              this.page
+              data.limit == null ? this.limit : data.limit,
+              this.per_page
             )
-          } else if (data.sender_date || data.receiver_date) {
-            if (data.sender_date) {
-              this.getBySenderDate(
-                data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
-                data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
-                data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
-                data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
-                data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
-                data.status == null ? '%%' : "%" + data.status + "%",
-                data.limitx == null ? this.limit : data.limitx,
-                this.page,
-                data.sender_date
-              )
-            }
-            if (data.receiver_date) {
-              this.getByReceiverDate(
-                data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
-                data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
-                data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
-                data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
-                data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
-                data.status == null ? '%%' : "%" + data.status + "%",
-                data.limitx == null ? this.limit : data.limitx,
-                this.page,
-                data.receiver_date
-              )
-            }
           }
           else if (data.sender_date && data.receiver_date) {
+            this.paginate()
             this.getByReceiverSenderDate(
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
@@ -100,13 +85,44 @@ export class DocumentListComponent {
               data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
               data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
               data.status == null ? '%%' : "%" + data.status + "%",
-              data.limitx == null ? this.limit : data.limitx,
-              this.page,
+              data.limit == null ? this.limit : data.limit,
+              this.per_page,
               data.receiver_date,
               data.sender_date,
             )
           }
+          else if (data.sender_date || data.receiver_date) {
+            if (data.sender_date) {
+              this.paginate()
+              this.getBySenderDate(
+                data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
+                data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
+                data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+                data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
+                data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+                data.status == null ? '%%' : "%" + data.status + "%",
+                data.limit == null ? this.limit : data.limit,
+                this.per_page,
+                data.sender_date
+              )
+            }
+            if (data.receiver_date) {
+              this.paginate()
+              this.getByReceiverDate(
+                data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
+                data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
+                data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+                data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
+                data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+                data.status == null ? '%%' : "%" + data.status + "%",
+                data.limit == null ? this.limit : data.limit,
+                this.per_page,
+                data.receiver_date
+              )
+            }
+          }
           else {
+            this.paginate()
             this.filterSearch(
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
@@ -114,8 +130,8 @@ export class DocumentListComponent {
               data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
               data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
               data.status == null ? '%%' : "%" + data.status + "%",
-              data.limitx == null ? this.limit : data.limitx,
-              this.page
+              data.limit == null ? this.limit : data.limit,
+              this.per_page
             )
           }
         }
@@ -126,13 +142,27 @@ export class DocumentListComponent {
     this.Show = !this.Show;
   }
 
-  public getDataCard(status: String) {
-    this.dashboardService.getDashboard(status == null ? '%%' : status)
-      .subscribe(
-        (response) => {
-          this.data = response.spdoc_data
-        }
-      )
+  public getCountData() {
+    this.long_page = this.length / this.mform.get('limit')?.value
+    this.long_page = Math.ceil(this.long_page)
+    this.pagination = []
+    for(let i = 0; i < this.long_page; i++) {
+      this.pagination.push({
+        no: i + 1
+      })
+    }
+  }
+  
+  public paginate() {
+    if (this.mform.get('page')?.dirty || this.mform.get('limit')?.dirty) {
+      this.per_page = (this.mform.get('page')?.value - 1) * this.mform.get('limit')?.value
+    } else {
+      this.per_page = (this.mform.get('page')?.value - 1) * this.mform.get('limit')?.value
+    }
+  }
+
+  public noPage(no: number) {
+    this.mform.get('page')?.setValue(no)
   }
 
   public filterSearch(
@@ -145,7 +175,7 @@ export class DocumentListComponent {
     limit: Number,
     page: Number
   ) {
-    this.dashboardService.getFilterSearch(
+    this.documentlistService.getFilterSearch(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
@@ -157,7 +187,9 @@ export class DocumentListComponent {
 
     ).subscribe(
       (response) => {
+        this.length = response.spdoc_data_aggregate.aggregate.count
         this.data = response.spdoc_data
+        this.getCountData()
       }
     )
   }
@@ -173,7 +205,7 @@ export class DocumentListComponent {
     page: Number,
     sender_date: any
   ) {
-    this.dashboardService.getFilterSenderDate(
+    this.documentlistService.getFilterSenderDate(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
@@ -185,7 +217,9 @@ export class DocumentListComponent {
       sender_date,
     ).subscribe(
       (response) => {
+        this.length = response.spdoc_data_aggregate.aggregate.count
         this.data = response.spdoc_data
+        this.getCountData()
       }
     )
   }
@@ -201,7 +235,7 @@ export class DocumentListComponent {
     page: Number,
     receiver_date: any
   ) {
-    this.dashboardService.getFilterReceiverDate(
+    this.documentlistService.getFilterReceiverDate(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
@@ -213,7 +247,9 @@ export class DocumentListComponent {
       receiver_date,
     ).subscribe(
       (response) => {
+        this.length = response.spdoc_data_aggregate.aggregate.count
         this.data = response.spdoc_data
+        this.getCountData()
       }
     )
   }
@@ -230,7 +266,7 @@ export class DocumentListComponent {
     receiver_date: any,
     sender_date: any,
   ) {
-    this.dashboardService.getFilterReceiverSenderDate(
+    this.documentlistService.getFilterReceiverSenderDate(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
@@ -243,7 +279,9 @@ export class DocumentListComponent {
       sender_date,
     ).subscribe(
       (response) => {
+        this.length = response.spdoc_data_aggregate.aggregate.count
         this.data = response.spdoc_data
+        this.getCountData()
       }
     )
   }

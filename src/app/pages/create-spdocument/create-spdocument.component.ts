@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faArrowLeft, faChevronDown, faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { CreateDocument } from 'src/app/core/interfaces/create-sp-document.dto';
-import { DashboardService } from 'src/app/core/services/rest.service';
 import { Router } from '@angular/router';
+import { CreateDocumentService } from './create-document.service';
 
 @Component({
   selector: 'app-create-spdocument',
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class CreateSpdocumentComponent {
   
   constructor(
-    private dashboardService: DashboardService,
+    private createdocumentService: CreateDocumentService,
     private router: Router
   ) { }
   
@@ -61,13 +61,12 @@ export class CreateSpdocumentComponent {
 
   public submitDocument() {
     if (this.mform.valid) {
-      this.dashboardService.getLastID()
+      this.createdocumentService.getLastID()
         .subscribe(
           (response) => {
             if (response.spdoc_data.length > 0) {
               this.id_spdoc = (parseInt(response.spdoc_data[0].shipping_no) + 1).toString().padStart(12, "0");
               this.createDocument()
-              console.log(this.id_spdoc)
             }
             else {
               this.id_spdoc = "000000000001"
@@ -89,7 +88,7 @@ export class CreateSpdocumentComponent {
     }
   }
 
-  public createDocument(
+  private createDocument(
     sender_personal_number: Number = this.mform.controls['sender_personal_number'].value,
     sender_personal_name: String = this.mform.controls['sender_personal_name'].value,
     sender_date: Date = this.mform.controls['sender_date'].value,
@@ -100,7 +99,7 @@ export class CreateSpdocumentComponent {
     shipping_no: number = this.id_spdoc,
     data: Array<CreateDocument> = this.data
   ) {
-    this.dashboardService.createDocument(
+    this.createdocumentService.createDocument(
       sender_personal_number,
       sender_personal_name,
       sender_date,
