@@ -11,6 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import 'tw-elements';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from '../app/core/utility/app.init'; 
+import * as _ from 'lodash';
+
 
 @NgModule({
   declarations: [
@@ -36,4 +38,5 @@ import { initializeKeycloak } from '../app/core/utility/app.init';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

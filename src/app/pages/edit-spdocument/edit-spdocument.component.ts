@@ -25,12 +25,7 @@ export class EditSpdocumentComponent {
 
   id_document!: number;
 
-  data: {
-    id_description_remark: number | null
-    quantity: Number | null;
-    remark: String | null;
-    description: String | null;
-  }[] = [];
+  data: any;
 
   data_show: any = {
     sender_personal_number: String,
@@ -52,13 +47,13 @@ export class EditSpdocumentComponent {
     receiver_unit: new FormControl('', [Validators.required]),
   });
   document: FormGroup = new FormGroup({
-    quantity: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    quantity: new FormControl('', [Validators.required]),
     remark: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   })
 
   edit_document: FormGroup = new FormGroup({
-    quantity: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    quantity: new FormControl('', [Validators.required]),
     remark: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   })
@@ -66,15 +61,14 @@ export class EditSpdocumentComponent {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id_sp_data');
     this.showDocument(this.id)
+    this.showDescRemark(this.id)
   }
 
-  public showDocument(id_sp_data: number) {
+  public showDocument(id_sp_data: number): void {
     this.editdocumentService.getShowData(id_sp_data)
       .subscribe(
         (response) => {
           this.data_show = response.spdoc_data_by_pk
-          this.data = response.spdoc_data_by_pk.spdoc_description_remarks
-          this.data_show.spdoc_description_remarks = response.spdoc_data_by_pk.spdoc_description_remarks
           this.mform.get('sender_personal_number')?.setValue(this.data_show.sender_personal_number)
           this.mform.get('sender_personal_name')?.setValue(this.data_show.sender_personal_name)
           this.mform.get('sender_unit')?.setValue(this.data_show.sender_unit)
@@ -84,30 +78,28 @@ export class EditSpdocumentComponent {
       )
   }
 
-  public addValue() {
-    if (this.document?.valid) {
-      this.data.push({
-        id_description_remark: null,
-        quantity: this.document.get('quantity')?.value,
-        description: this.document.get('description')?.value,
-        remark: this.document.get('remark')?.value,
-      });
-      this.clearSubDocument();
-    }
+  public showDescRemark(id_sp_data: number): void {
+    this.editdocumentService.getDescRemark(id_sp_data)
+      .subscribe(
+        (response) => {
+          this.data = response.spdoc_description_remark
+        }
+      )
   }
 
-  public removeValue(i: number) {
-    this.data.splice(i, 1)
+  public addValue(): void {
+    this.showDescRemark(this.id)
+    this.clearSubDocument();
   }
 
-  public editDocument(i: number) {
+  public editDocument(i: number): void {
     this.id_document = i;
     this.edit_document.get('quantity')?.setValue(this.data[i].quantity)
     this.edit_document.get('description')?.setValue(this.data[i].description)
     this.edit_document.get('remark')?.setValue(this.data[i].remark)
   }
 
-  public saveEditDocument(i: number = this.id_document) {
+  public saveEditDocument(i: number = this.id_document): void {
     if (this.edit_document.valid) {
       Swal.fire({
         title: 'Save It?',
@@ -138,7 +130,7 @@ export class EditSpdocumentComponent {
     }
   }
 
-  public clearForm() {
+  public clearForm(): void {
     this.mform.get('sender_date')?.setValue(this.data_show.sender_date)
     this.mform.get('receiver_unit')?.setValue(this.data_show.receiver_unit)
     this.clearSubDocument()
@@ -154,7 +146,7 @@ export class EditSpdocumentComponent {
     id_sp_data: number = this.id,
     sender_date: Date = this.mform.get('sender_date')?.value,
     receiver_unit: String = this.mform.get('receiver_unit')?.value,
-  ) {
+  ): void {
     if (this.mform.valid) {
       this.editdocumentService.updateDocument(
         id_sp_data,
@@ -194,7 +186,7 @@ export class EditSpdocumentComponent {
     quantity: number = this.edit_document.get('quantity')?.value,
     description: String = this.edit_document.get('description')?.value,
     remark: String = this.edit_document.get('remark')?.value
-  ) {
+  ): void {
     this.editdocumentService.updateDescRemark(
       id_description_remark,
       quantity,
@@ -206,8 +198,11 @@ export class EditSpdocumentComponent {
           title: 'Success!',
           text: 'Document has edited!',
           icon: 'success',
+          showConfirmButton: false,
+          timer: 1500
         }).then((result) => {
           if (result.isConfirmed) {
+            this.showDescRemark(this.id)
             return response;
           }
         });
@@ -227,16 +222,15 @@ export class EditSpdocumentComponent {
       if (result.isConfirmed) {
         this.editdocumentService.deleteDescRemark(id_description_remark)
           .subscribe(
-            (response) => {
-              this.removeValue(i)
+            () => {
               Swal.fire({
                 title: 'Success!',
                 text: 'Description & Remark has deleted!',
                 icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
               }).then((result) => {
-                if (result.isConfirmed) {
-                  return response;
-                }
+                  this.showDescRemark(this.id)
               });
             }
           )
@@ -251,17 +245,17 @@ export class EditSpdocumentComponent {
     quantity: number = this.document.get('quantity')?.value,
     description: String = this.document.get('description')?.value,
     remark: String = this.document.get('remark')?.value
-  ) {
-    if(this.document.valid) {
-      this.addValue()
+  ): void {
+    if (this.document.valid) {
       this.editdocumentService.addDescMark(
         spdata_id,
         quantity,
         description,
         remark
       ).subscribe(
-        (response) => {
-          return response;
+        () => {
+          this.addValue()
+          console.log(this.data)
         }
       )
     } else {

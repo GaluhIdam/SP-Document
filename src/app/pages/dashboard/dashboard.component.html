@@ -7,7 +7,8 @@
                         class="px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                 </form>
                 <button type="button" (click)="resetSearch()"
-                    class="bg-regal-blue text-white rounded-r-lg p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border" style="height: 38px;"><fa-icon [icon]="faRefresh" class="mr-1"></fa-icon></button>
+                    class="bg-regal-blue text-white rounded-r-lg p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border"
+                    style="height: 38px;"><fa-icon [icon]="faRefresh" class="mr-1"></fa-icon></button>
                 <div class="flex justify-center">
                     <button
                         class="dropdown-toggle text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
@@ -17,33 +18,15 @@
                     <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
                         aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <a (click)="getByDate()"
+                            <button (click)="getByCreated()" type="button"
                                 class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
-                                By Date</a>
+                                By Created Date</button>
                             <div class="px-4">
                                 <hr>
                             </div>
-                            <a (click)="getByStatus()"
+                            <button (click)="getByUpdated()" type="button"
                                 class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
-                                By Status</a>
-                            <div class="px-4">
-                                <hr>
-                            </div>
-                            <a (click)="getByShippingNo()"
-                                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
-                                By Shipping Number</a>
-                            <div class="px-4">
-                                <hr>
-                            </div>
-                            <a (click)="getBySending()"
-                                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
-                                By Sending</a>
-                            <div class="px-4">
-                                <hr>
-                            </div>
-                            <a (click)="getByReceiving()"
-                                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
-                                By Receiving</a>
+                                By Updated Date</button>
                         </li>
                     </ul>
                 </div>
@@ -56,8 +39,8 @@
             </div>
         </div>
         <div class="flex columns-3 mt-2">
-            <button (click)="mform.get('page')?.setValue(1); mform.get('status')?.setValue('%%')"
-                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 active:bg-gray-100 py-5 px-5 hover:border-b-4 active:border-b-4 hover:border-purple active:border-purple rounded-lg">
+            <button *ngIf="all ==  true" (click)="sortALL()" type="button"
+                class="flex column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-purple rounded-lg">
                 <fa-icon [icon]="faListSquares"
                     class="mr-1 text-3xl bg-medium-purple px-3 py-2 rounded-lg text-purple"></fa-icon>
                 <div class="grid-rows-2 ml-3">
@@ -65,8 +48,18 @@
                     <h1 class="text-3xl font-bold text-purple hover:text-purple">{{ countAll }}</h1>
                 </div>
             </button>
-            <button (click)="mform.get('page')?.setValue(1); mform.get('status')?.setValue('Open')"
-                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 focus:bg-gray-100 py-5 px-5 hover:border-b-4 focus:border-b-4 hover:border-danger focus:border-danger rounded-lg">
+            <button *ngIf="all == false" (click)="sortALL()" type="button"
+                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 active:bg-gray-100 py-5 px-5 hover:border-b-4 active:border-b-4 hover:border-purple active:border-purple rounded-lg active">
+                <fa-icon [icon]="faListSquares"
+                    class="mr-1 text-3xl bg-medium-purple px-3 py-2 rounded-lg text-purple"></fa-icon>
+                <div class="grid-rows-2 ml-3">
+                    <h6 class="text-gray-400 mb-0">All</h6>
+                    <h1 class="text-3xl font-bold text-purple hover:text-purple">{{ countAll }}</h1>
+                </div>
+            </button>
+            <!-- batas -->
+            <button *ngIf="open ==  true" (click)="sortOPEN()"
+                class="flex column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-danger rounded-lg">
                 <fa-icon [icon]="faHourglassStart"
                     class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-danger"></fa-icon>
                 <div class="grid-rows-2 ml-3">
@@ -74,8 +67,26 @@
                     <h1 class="text-3xl font-bold text-danger">{{ countOpen }}</h1>
                 </div>
             </button>
-            <button (click)="mform.get('page')?.setValue(1); mform.get('status')?.setValue('Delivered')"
-                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 focus:bg-gray-100 py-5 px-5 hover:border-b-4 focus:border-b-4 hover:border-success focus:border-success rounded-lg">
+            <button *ngIf="open ==  false" (click)="sortOPEN()"
+                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-danger rounded-lg">
+                <fa-icon [icon]="faHourglassStart"
+                    class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-danger"></fa-icon>
+                <div class="grid-rows-2 ml-3">
+                    <h6 class="text-gray-400 mb-0">Open</h6>
+                    <h1 class="text-3xl font-bold text-danger">{{ countOpen }}</h1>
+                </div>
+            </button>
+            <!-- batas -->
+            <button *ngIf="delivered ==  true" (click)="sortDELIVERED()"
+                class="flex column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-success rounded-lg">
+                <fa-icon [icon]="faCheck" class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-success"></fa-icon>
+                <div class="grid-rows-2 ml-3">
+                    <h6 class="text-gray-400 mb-0">Delivered</h6>
+                    <h1 class="text-3xl font-bold text-success">{{ countDelivered }}</h1>
+                </div>
+            </button>
+            <button *ngIf="delivered ==  false" (click)="sortDELIVERED()"
+                class="flex column-2 w-1/3 p-2 hover:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-success rounded-lg">
                 <fa-icon [icon]="faCheck" class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-success"></fa-icon>
                 <div class="grid-rows-2 ml-3">
                     <h6 class="text-gray-400 mb-0">Delivered</h6>
@@ -166,21 +177,29 @@
                     </div>
                     <div class="columns-2 mt-10 mb-0 w-full items-stretch">
                         <div class="flex">
-                            <button type="button" (click)="showDocument(row.id_sp_data)"
+                            <button type="button" (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalXl"
                                 class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
                                 Letter</button>
                         </div>
                         <div class="relative">
-                            <button for="my-modal" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
+                            <div *ngIf="row.status == 'Delivered'">
+                                <button type="button" disabled
+                                    class="w-full bg-gray-400 p-3 rounded-lg text-white text-center">Receive</button>
+                            </div>
+                            <div *ngIf="row.status == 'Open'">
+                                <button type="button" (click)="confirmReceive(row.id_sp_data)"
+                                    class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Card -->
             </div>
         </div>
+        <h1 class="text-center mt-5 mb-5" *ngIf="length == 0">Data not available!</h1>
         <!-- Pagination -->
-        <form [formGroup]="mform">
+        <form [formGroup]="mform" class="mb-10">
             <div class="mt-10 mb-10 px-2 flex grid grid-cols-2 gap-4 mb-2">
                 <div class="col-start-1 flex">
                     <div class="columns-1 mr-3">
@@ -202,10 +221,23 @@
                         </div>
                         <nav aria-label="Page navigation example">
                             <ul class="flex list-style-none">
-                                <li class="page-item disabled"><a
-                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                                        tabindex="-1" aria-disabled="true"><fa-icon [icon]="faCaretLeft"
-                                            class="mr-1"></fa-icon></a></li>
+                                <div *ngIf="mform.get('page')?.value <= 1">
+                                    <li class="page-item disabled">
+                                        <button
+                                            class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                            tabindex="-1" aria-disabled="true">
+                                            <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
+                                        </button>
+                                    </li>
+                                </div>
+                                <div *ngIf="mform.get('page')?.value > 1">
+                                    <li class="page-item">
+                                        <button (click)="prevPage()" type="button"
+                                            class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
+                                            <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
+                                        </button>
+                                    </li>
+                                </div>
                                 <li class="page-item active" *ngFor="let no_page of pagination;">
                                     <div *ngIf="mform.get('page')?.value == no_page.no">
                                         <button disabled
@@ -218,9 +250,23 @@
                                             no_page.no }}</button>
                                     </div>
                                 </li>
-                                <li class="page-item"><button
-                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"><fa-icon
-                                            [icon]="faCaretRight" class="mr-1"></fa-icon></button></li>
+                                <div *ngIf="mform.get('page')?.value >= pagination.length">
+                                    <li class="page-item disabled">
+                                        <button
+                                            class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                            tabindex="-1" aria-disabled="true">
+                                            <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
+                                        </button>
+                                    </li>
+                                </div>
+                                <div *ngIf="mform.get('page')?.value < pagination.length">
+                                    <li class="page-item">
+                                        <button (click)="nextPage()" type="button"
+                                            class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
+                                            <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
+                                        </button>
+                                    </li>
+                                </div>
                             </ul>
                         </nav>
                     </div>
@@ -228,42 +274,226 @@
             </div>
         </form>
     </div>
-
 </div>
+
+<!-- PDF VIew -->
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-    id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+    id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl relative w-auto pointer-events-none">
         <div
             class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-            <div class="modal-header flex flex-shrink-0 items-center justify-center p-4 rounded-t-md">
-                <h5 class="text-xl text-center font-medium leading-normal text-gray-800" id="exampleModalLabel">
-                    Receive
+            <div
+                class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalXlLabel">
+                    <fa-icon [icon]="faFilePdf" class="mr-1" style="color: #006298;"></fa-icon> See Letter
                 </h5>
+                <button type="button"
+                    class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body relative p-4">
-                <div class="form-control w-full px-4 py-1 mb-3">
-                    <label class="label mb-4">
-                        <span class="label-text text-gray-900 text-sm">ID Number</span>
-                    </label>
-                    <input type="text" placeholder="Please fill this..."
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
-                </div>
-                <div class="form-control w-full px-4 py-1 mb-3">
-                    <label class="label mb-4">
-                        <span class="label-text text-gray-900 text-sm">Password</span>
-                    </label>
-                    <input type="text" placeholder="Please fill this..."
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            <div class="modal-body relative p-4" id="htmlData">
+                <div class="bg-white rounded-lg mt-5 px-5">
+                    <div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- ... -->
+                            <div class="col-start-1">
+                                <img [src]="link_image" class="w-3/4" alt="icon-gmf">
+                            </div>
+                            <!-- ... -->
+                            <div class="col-end-7">
+                                <div class="flex">
+                                    <h1 class=" text-right flex">NO. SP <h1 class="ml-5 font-bold  text-right">{{sp_no}}
+                                        </h1>
+                                    </h1>
+                                </div>
+                                <h1 class="font-bold mt-2 underline underline-offset-8">SURAT PENGIRIMAN</h1>
+                                <h1 class="mt-0 ">Shipping Document</h1>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-10 gap-0 mt-1">
+                            <div>
+                                <div class="flex w-fit">
+                                    <div class="grid flex">
+                                        <h1 class="mt-2  underline underline-offset-8 flex">Kepada</h1>
+                                    </div>
+                                </div>
+                                <h1 class="mt-0 ">To</h1>
+                                <div class="flex">
+                                    <div class="grid flex">
+                                        <h1 class="mt-2  underline underline-offset-8 flex">Dikirim oleh</h1>
+                                    </div>
+                                </div>
+                                <h1 class="mt-0  w-fit">Sent By</h1>
+                            </div>
+                            <div class="w-80">
+                                <div class="flex">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <h1 class="mt-2  font-bold">: {{ receiver }}</h1>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <h1 class="mt-8  font-bold">: {{ sender }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="flex flex-col">
+                                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="overflow-hidden">
+                                            <table class="min-w-full border border-3 border-black text-center">
+                                                <thead class="border border-3 border-black">
+                                                    <tr class="mb-3">
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Tanggal</h1>
+                                                            <h1 class="font-bold  mt-2">Date</h1>
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Banyaknya</h1>
+                                                            <h1 class="font-bold  mt-2">Quantity</h1>
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-4 border-r">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Macam dari
+                                                                barang
+                                                                barang</h1>
+                                                            <h1 class="font-bold  mt-2">Description of goods
+                                                            </h1>
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-4">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Keterangan</h1>
+                                                            <h1 class="font-bold  mt-2">Remark</h1>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border border-3 border-black"
+                                                        *ngFor="let row of data_pdf">
+                                                        <td
+                                                            class="font-bold border border-3 border-black px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
+                                                            <h1 class="">{{ row.created_at | date: 'longDate' }}
+                                                            </h1>
+                                                        </td>
+                                                        <td
+                                                            class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                                            <h1 class="">{{ row.quantity }}</h1>
+                                                        </td>
+                                                        <td
+                                                            class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                                            <h1 class="">{{ row.description }}</h1>
+                                                        </td>
+                                                        <td
+                                                            class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <h1 class="">{{ row.remark }}</h1>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border border-3 border-black">
+                                                        <td
+                                                            class="border border-3 border-black px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
+                                                        </td>
+                                                        <td
+                                                            class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+
+                                                        </td>
+                                                        <td
+                                                            class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r">
+                                                            <div class="grid grid-cols-3">
+                                                                <div class="col-start-1 w-54">
+                                                                    <div class="w-54">
+                                                                        <div class="grid grid-cols-1">
+                                                                            <h1
+                                                                                class="col-start-1 mt-2  underline underline-offset-8 flex font-bold">
+                                                                                Dikirim oleh</h1>
+                                                                            <h1 class="col-end-7 mt-2  flex ml-5">
+                                                                                :</h1>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="w-54">
+                                                                        <div class="grid grid-cols-1">
+                                                                            <h1 class="col-start-1 mt-2  flex">
+                                                                                Packed by</h1>
+                                                                            <h1 class="col-end-7 mt-2  flex ml-11">
+                                                                                :</h1>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <h1 class="mt-2 ml-1 font-bold  w-fit">{{
+                                                                        sender_name }}
+                                                                    </h1>
+                                                                    <h1 class="mt-2 ml-1  mb-3 w-fit">{{
+                                                                        sender_number }}</h1>
+                                                                </div>
+                                                                <div class="flex mt-3">
+                                                                    <ngx-barcode *ngIf="sender_number"
+                                                                        [bc-value]="sender_number" [bc-height]="60"
+                                                                        [bc-display-value]="false"></ngx-barcode>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td
+                                                            class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="grid grid-cols-4 mt-1 w-fit">
+                                                <div class="columns-1">
+                                                    <div class="grid grid-cols-1">
+                                                        <h1
+                                                            class="col-start-1 mt-2  underline underline-offset-8 flex font-bold w-fit">
+                                                            Penerima</h1>
+                                                        <h1 class="col-end-4 mt-2  flex">:</h1>
+                                                    </div>
+                                                    <div class="grid grid-cols-1">
+                                                        <h1 class="col-start-1 mt-2  flex w-fit">
+                                                            Received</h1>
+                                                        <h1 class="col-end-4 mt-2  flex">:</h1>
+                                                    </div>
+                                                </div>
+                                                <div class="columns-1">
+                                                    <ngx-barcode *ngIf="receive_number" [bc-value]="receive_number"
+                                                        [bc-height]="50" [bc-margin]="5"
+                                                        [bc-display-value]="false"></ngx-barcode>
+                                                    <h1 class="mt-2 mb-5 ml-1 ">{{ receive_name == '' ? 'Not Received' :
+                                                        receive_name }} / {{
+                                                        receive_number == '' ? 'Not Received' : receive_number }}</h1>
+                                                </div>
+                                            </div>
+                                            <div class="flex">
+                                                <div class="grid grid-cols-2 gap-4">
+                                                    <h1
+                                                        class="col-start-1 mt-2  underline underline-offset-8 flex font-bold">
+                                                        Tanggal</h1>
+                                                    <h1 class="col-end-5 mt-2  flex font-bold">:</h1>
+                                                </div>
+                                                <h1 class="mt-2 ml-3 ">{{ sender_date | date: 'longDate' }}</h1>
+                                            </div>
+                                            <h1 class="mt-0  mb-10">Date</h1>
+                                            <h1 class="mt-5 mb-5">GMF/A-111</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md">
-                <div class="columns-2 mt-5 mb-5 w-full flex justify-center">
-                    <button type="button" data-bs-dismiss="modal"
-                        class="mb-2 mx-2 w-48 inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Cancel</button>
-                    <button type="button"
-                        class="mb-2 mx-2 w-48 inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
-                </div>
+            <div class="modal-footer text-center">
+                <hr>
+                <button type="button" (click)="openPDF()"
+                    class="bg-regal-blue text-white rounded p-2 mb-5 mt-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border">
+                    <fa-icon [icon]="faCircleDown" class="mr-1"></fa-icon> Download
+                </button>
             </div>
         </div>
     </div>

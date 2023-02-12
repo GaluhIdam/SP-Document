@@ -4,6 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewSpdocumentComponent } from './view-spdocument.component';
 import { ViewSpdocumentRoutingModule } from './view-spdocument-routing.module';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ViewSpdocumentRoutingModule } from './view-spdocument-routing.module';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    NgxBarcodeModule
   ]
 })
 export class ViewSpdocumentModule { }

@@ -98,7 +98,7 @@ export class CreateSpdocumentComponent {
     status: String = this.status,
     shipping_no: number = this.id_spdoc,
     data: Array<CreateDocument> = this.data
-  ) {
+  ): void {
     this.createdocumentService.createDocument(
       sender_personal_number,
       sender_personal_name,
@@ -156,7 +156,7 @@ export class CreateSpdocumentComponent {
     this.data.splice(i, 1)
   }
 
-  public clearForm() {
+  public clearForm(): void {
     this.mform.controls['sender_personal_number'].reset();
     this.mform.controls['sender_personal_name'].reset();
     this.mform.controls['sender_unit'].reset();
@@ -165,7 +165,7 @@ export class CreateSpdocumentComponent {
     this.clearSubDocument()
   }
 
-  public clearSubDocument() {
+  public clearSubDocument(): void {
     this.document.controls['quantity'].reset();
     this.document.controls['description'].reset();
     this.document.controls['remark'].reset();

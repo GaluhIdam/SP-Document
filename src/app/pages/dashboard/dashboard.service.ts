@@ -17,7 +17,8 @@ export class DashboardService {
     //Routes
     urlDashboard: any = this.base_url + 'sort-sp-document';
     urlCount: any = this.base_url + 'count-sp-document';
-    urlSearchFilter: any = this.base_url + 'search-filter-sp-document'
+    urlSearchFilter: any = this.base_url + 'search-filter-sp-document';
+    urlReceive: any = this.base_url + 'receive/';
 
     //Credentials
     headers = new HttpHeaders()
@@ -40,6 +41,7 @@ export class DashboardService {
         shipping_no_order: 'asc' | 'desc' | '',
         sender_date_order: 'asc' | 'desc' | '',
         receiver_date_order: 'asc' | 'desc' | '',
+        updated_at: 'asc' | 'desc' | '',
     ): Observable<any> {
 
         const params = new HttpParams()
@@ -55,7 +57,8 @@ export class DashboardService {
             .set('status_order', status_order)
             .set('shipping_no_order', shipping_no_order)
             .set('sender_date_order', sender_date_order)
-            .set('receiver_date_order', receiver_date_order);
+            .set('receiver_date_order', receiver_date_order)
+            .set('updated_at', updated_at);
 
         return this.http.get<any>(this.urlSearchFilter, { 'params': params, 'headers': this.headers })
             .pipe(
@@ -109,6 +112,33 @@ export class DashboardService {
             .set('cat_status', cat_status);
 
         return this.http.get<any>(this.urlCount, { 'params': params, 'headers': this.headers })
+            .pipe(
+                map((response) => {
+                    return response;
+                }),
+                catchError((error) => {
+                    console.log(error);
+                    throw error;
+                })
+            )
+    }
+
+    //Receive Document
+    receiveDocument(
+        id_sp_data: any,
+        receiver_personal_number: any,
+        receiver_personal_name: any,
+        receiver_date: any,
+        status: any
+    ): Observable<any> {
+        const body = {
+            'id_sp_data': id_sp_data,
+            'receiver_personal_number': receiver_personal_number,
+            'receiver_personal_name': receiver_personal_name,
+            'receiver_date': receiver_date,
+            'status': status,
+        }
+        return this.http.put(this.urlReceive + id_sp_data, body, { 'headers': this.headers })
             .pipe(
                 map((response) => {
                     return response;

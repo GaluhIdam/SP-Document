@@ -29,6 +29,7 @@ export class HeaderComponent {
   };
 
   photo: any;
+  photo_default: any = 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg';
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -70,7 +71,6 @@ export class HeaderComponent {
   //GET Personal Number from Keycloak
   private initializeUserOptions(): void {
     this.personal_number = this.keycloakService.getUsername();
-    console.log(this.personal_number)
   }
 
   //Get Personal Info from SOE
@@ -79,12 +79,11 @@ export class HeaderComponent {
     .subscribe(
       (response) => {
         this.user = response
-        console.log(this.user)
       }
     )
   }
 
   public logout(): void {
-    this.keycloakService.logout(this.url_local)
+    this.keycloakService.logout(this.url_local).then(() => this.keycloakService.clearToken());
   }
 }

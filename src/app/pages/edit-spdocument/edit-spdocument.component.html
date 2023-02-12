@@ -156,7 +156,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    <tr class="bg-white text-gray-900" *ngFor="let datas of data_show.spdoc_description_remarks; let i  = index">
+                                    <tr class="bg-white text-gray-900" *ngFor="let datas of data; let i  = index">
                                         <td class="py-2 text-center">{{ i + 1 }}</td>
                                         <td class="py-2 text-center">{{ datas.quantity }}</td>
                                         <td class="py-2 text-center">{{ datas.description }}</td>
@@ -210,7 +210,7 @@
                             class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                         <div *ngIf="edit_document.get('quantity')?.invalid && edit_document.get('quantity')?.touched"
                             class="invalid-feedback">
-                            This field is required and must be a number.
+                            This field is required.
                         </div>
                     </div>
                     <div class="form-control w-full px-4 py-1 mb-3">

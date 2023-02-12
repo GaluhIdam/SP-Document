@@ -20,7 +20,8 @@ module.exports = {
         'soft-success-ax': '#DFF0D0',
         'soft-success-outline': '#ABD883',
         'soft-danger': '#F1D0D0',
-        'disabled-form': '#C0C0C0'
+        'disabled-form': '#C0C0C0',
+        'black': '#000000'
       }
     },
   },

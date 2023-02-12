@@ -6,6 +6,7 @@ import { DocumentListComponent } from './document-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 
 @NgModule({
@@ -18,10 +19,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-    NgxPaginationModule
+    NgxBarcodeModule
   ],
   exports: [
-    NgxPaginationModule
   ]
 })
 export class DocumentListModule { }

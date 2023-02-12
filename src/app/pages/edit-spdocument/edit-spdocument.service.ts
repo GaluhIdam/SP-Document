@@ -18,6 +18,7 @@ export class EditDocumentSerivice {
 
     //Routes
     urlShowDocument: any = this.base_url + 'show-sp-document';
+    urlShowDescRemark: any = this.base_url + 'get-desc-remark/';
     urlUpdateDocument: any = this.base_url + 'update-sp-document';
     urlUpdateDescRemark: any = this.base_url + 'update-desc-remark';
     urlDeleteDescRemark: any = this.base_url + 'delete-desc-remark';
@@ -36,6 +37,22 @@ export class EditDocumentSerivice {
             .pipe(
                 map((response) => {
                     return response;
+                }),
+                catchError((error) => {
+                    console.log(error);
+                    throw error;
+                })
+            )
+    }
+
+    //Get Description & Remark
+    getDescRemark(
+        id_sp_data: number,
+    ): Observable<any> {
+        return this.http.get<any>(this.urlShowDescRemark + id_sp_data, { 'headers': this.headers })
+            .pipe(
+                map((response) => {
+                    return response
                 }),
                 catchError((error) => {
                     console.log(error);
