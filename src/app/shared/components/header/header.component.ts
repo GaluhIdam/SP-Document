@@ -4,7 +4,6 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { faAngleRight, faBell, faChevronDown, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
 import { filter } from 'rxjs/operators';
-import { baseURL } from 'src/app/core/services/baseURL';
 import { HeaderService } from './header.service';
 
 @Component({
@@ -84,7 +83,6 @@ export class HeaderComponent {
   }
 
   public logout(): void {
-    // this.keycloakService.logout().then(() => this.keycloakService.clearToken());
     window.location.href = "https://dev-auth.gmf-aeroasia.co.id/auth/realms/spdoc/protocol/openid-connect/logout?";
   }
 }

@@ -26,6 +26,7 @@
     "keycloak-js": "^20.0.3",
     "loadsh": "^0.0.4",
     "ngx-barcode": "^0.3.0",
+    "ngx-cookie-service": "^15.0.0",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.7.1",
