@@ -84,6 +84,7 @@ export class HeaderComponent {
   }
 
   public logout(): void {
-    this.keycloakService.logout(this.url_local).then(() => this.keycloakService.clearToken());
+    // this.keycloakService.logout().then(() => this.keycloakService.clearToken());
+    window.location.href = "https://dev-auth.gmf-aeroasia.co.id/auth/realms/spdoc/protocol/openid-connect/logout?";
   }
 }

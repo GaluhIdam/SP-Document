@@ -5,8 +5,8 @@ export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boo
       keycloak.init({
         config: {
           url: 'https://dev-auth.gmf-aeroasia.co.id/auth',
-          realm: 'kitting',
-          clientId: 'kitting-web'
+          realm: 'spdoc',
+          clientId: 'spdoc'
         },
         initOptions: {
             checkLoginIframe: true,
