@@ -659,8 +659,22 @@ export class DocumentListComponent {
       )
   }
 
-  public test() {
-    console.log('test')
+  public sortASCDESC(
+    shipping_no_order: String,
+    sender_personal_number_order: String,
+    sender_personal_name_order: String,
+    sender_date_order: String,
+    receiver_personal_number_order: String,
+    receiver_personal_name_order: String,
+    receiver_date_order: String,
+    ) {
+    this.mform.get('shipping_no_order')?.setValue(shipping_no_order)
+    this.mform.get('sender_personal_number_order')?.setValue(sender_personal_number_order)
+    this.mform.get('sender_personal_name_order')?.setValue(sender_personal_name_order)
+    this.mform.get('sender_date_order')?.setValue(sender_date_order)
+    this.mform.get('receiver_personal_number_order')?.setValue(receiver_personal_number_order)
+    this.mform.get('receiver_personal_name_order')?.setValue(receiver_personal_name_order)
+    this.mform.get('receiver_date_order')?.setValue(receiver_date_order)
   }
 
   ngOnDestroy() {

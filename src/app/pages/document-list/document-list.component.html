@@ -32,16 +32,18 @@
                                             <div class="flex items-center justify-center">
                                                 <h1 class="font-medium">Shipping Nopeg</h1>
                                                 <a>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true" (click)="mform.get('shipping_no_order')?.setValue('asc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('asc', '', '', '', '', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
                                                         </path>
                                                     </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        (click)="mform.get('shipping_no_order')?.setValue('desc')" aria-hidden="true"
-                                                        fill="currentColor" viewBox="0 0 320 512">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white"
+                                                        (click)="sortASCDESC('desc', '', '', '', '', '', '')"
+                                                        aria-hidden="true" fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
                                                         </path>
@@ -53,17 +55,17 @@
                                             <div class="flex items-center justify-center">
                                                 <h1 class="font-medium">Sender Nopeg</h1>
                                                 <a>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('sender_personal_number_order')?.setValue('asc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', 'asc', '', '', '', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
                                                         </path>
                                                     </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('sender_personal_number_order')?.setValue('desc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', 'desc', '', '', '', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
@@ -76,17 +78,17 @@
                                             <div class="flex items-center justify-center">
                                                 <h1 class="font-medium">Sender Name</h1>
                                                 <a>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('sender_personal_name_order')?.setValue('asc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', 'asc', '', '', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
                                                         </path>
                                                     </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('sender_personal_name_order')?.setValue('desc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', 'desc', '', '', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
@@ -99,15 +101,17 @@
                                             <div class="flex items-center justify-center">
                                                 <h1 class="font-medium">Sender Date</h1>
                                                 <a>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true" (click)="mform.get('sender_date_order')?.setValue('asc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', 'asc', '', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
                                                         </path>
                                                     </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true" (click)="mform.get('sender_date_order')?.setValue('desc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', 'desc', '', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
@@ -120,17 +124,17 @@
                                             <div class="flex items-center justify-center">
                                                 <h1 class="font-medium">Receiver Nopeg</h1>
                                                 <a>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('receiver_personal_number_order')?.setValue('asc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', '', 'asc', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
                                                         </path>
                                                     </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('receiver_personal_number_order')?.setValue('desc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', '', 'desc', '', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
@@ -143,17 +147,17 @@
                                             <div class="flex items-center justify-center">
                                                 <h1 class="font-medium">Receiver Name</h1>
                                                 <a>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('receiver_personal_name_order')?.setValue('asc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', '', '', 'asc', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
                                                         </path>
                                                     </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true"
-                                                        (click)="mform.get('receiver_personal_name_order')?.setValue('desc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', '', '', 'desc', '')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
@@ -166,15 +170,17 @@
                                             <div class="flex items-center justify-center">
                                                 <h1 class="font-medium">Receiver Date</h1>
                                                 <a>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true" (click)="mform.get('receiver_date_order')?.setValue('asc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', '', '', '', 'asc')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
                                                         </path>
                                                     </svg>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 p-0 ml-1 hover:bg-white"
-                                                        aria-hidden="true" (click)="mform.get('receiver_date_order')?.setValue('desc')"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                        (click)="sortASCDESC('', '', '', '', '', '', 'desc')"
                                                         fill="currentColor" viewBox="0 0 320 512">
                                                         <path fill="currentColor"
                                                             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
@@ -190,8 +196,8 @@
                                             Action
                                         </th>
                                     </tr>
-                                    <tr id="collapseOne" class="accordion-collapse collapse text-gray-900" aria-labelledby="headingOne"
-                                        data-bs-parent="#accordionExample">
+                                    <tr id="collapseOne" class="accordion-collapse collapse text-gray-900"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <th scope="col" class="accordion-body text-sm font-medium px-2 py-3 border">
                                         </th>
                                         <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
@@ -237,34 +243,43 @@
                                         <th scope="col" class="accordion-body text-sm font-medium px-2 py-3 border">
                                         </th>
                                     </tr>
-                
+
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let row of data; let i = index">
-                                        <td class="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <td
+                                            class="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             {{
                                             (mform.get('limit')?.value * (mform.get('page')?.value - 1)) + ( i + 1 )
                                             }}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                        <td
+                                            class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
                                             {{row.shipping_no}}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                        <td
+                                            class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
                                             {{ row.sender_personal_number == null ? '-' : row.sender_personal_number }}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                        <td
+                                            class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
                                             {{ row.sender_personal_name == null ? '-' : row.sender_personal_name }}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                        <td
+                                            class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
                                             {{ row.sender_date == null ? '-' : row.sender_date | date: 'longDate' }}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
-                                            {{ row.receiver_personal_number == "" ? '-' : row.receiver_personal_number }}
+                                        <td
+                                            class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                            {{ row.receiver_personal_number == "" ? '-' : row.receiver_personal_number
+                                            }}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                        <td
+                                            class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
                                             {{ row.receiver_personal_name == "" ? '-' : row.receiver_personal_name }}
                                         </td>
-                                        <td class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                        <td
+                                            class="text-sm text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
                                             {{ row.receiver_date == null ? '-' : row.receiver_date | date: 'fullDate' }}
                                         </td>
                                         <td
@@ -282,7 +297,8 @@
                                             class="text-sm font-sm border px-6 py-4 whitespace-nowrap justify-center dropstart relative">
                                             <button
                                                 class="dropdown-toggle border border-regal-blue rounded-lg text-regal-blue bg-white hover:text-white hover:bg-regal-blue py-1 px-3"
-                                                type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                                                type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
                                                 <fa-icon [icon]="faEllipsisVertical" class="mx-0"></fa-icon>
                                             </button>
                                             <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
@@ -298,13 +314,14 @@
                                                     <div *ngIf="row.status ==  'Open'">
                                                         <button (click)="editDocument(row.id_sp_data)"
                                                             class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-soft-success active:bg-gray-200 hover:bg-gray-100"><fa-icon
-                                                                [icon]="faPencilSquare" class="mr-1"></fa-icon> Edit</button>
+                                                                [icon]="faPencilSquare" class="mr-1"></fa-icon>
+                                                            Edit</button>
                                                         <div class="px-4">
                                                             <hr>
                                                         </div>
                                                     </div>
-                                                    <button (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalXl"
+                                                    <button (click)="showDocumentPDF(row.id_sp_data)"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModalXl"
                                                         class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-regal-blue active:bg-gray-200 hover:bg-gray-100"><fa-icon
                                                             [icon]="faFileInvoice" class="mr-1"></fa-icon>
                                                         Letter</button>
