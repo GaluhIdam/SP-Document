@@ -29,7 +29,7 @@ export class ViewSpdocumentComponent {
     sender_date: Date,
     receiver_personal_number: String,
     receiver_personal_name: String,
-    receiver_unit: Date,
+    receiver_unit: String,
     receiver_date: Date,
   };
 
@@ -54,6 +54,7 @@ export class ViewSpdocumentComponent {
       .subscribe(
         (response) => {
           this.data = response.spdoc_data_by_pk
+          console.log(this.data)
           this.sp_no = response.spdoc_data_by_pk.shipping_no
           this.data_pdf = response.spdoc_data_by_pk.spdoc_description_remarks
           this.receiver = response.spdoc_data_by_pk.receiver_unit

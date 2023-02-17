@@ -60,7 +60,7 @@ export class DashboardComponent {
 
   length!: number;
   page: number = 1;
-  limit: number = 9;
+  limit: number = 10;
   per_page!: number;
   long_page!: number;
   isActive: any;
