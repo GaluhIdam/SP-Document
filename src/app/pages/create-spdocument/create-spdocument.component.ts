@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { CreateDocument } from 'src/app/core/interfaces/create-sp-document.dto';
 import { Router } from '@angular/router';
 import { CreateDocumentService } from './create-document.service';
+import { HeaderService } from 'src/app/shared/components/header/header.service';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-create-spdocument',
@@ -12,16 +14,23 @@ import { CreateDocumentService } from './create-document.service';
   styleUrls: ['./create-spdocument.component.css']
 })
 export class CreateSpdocumentComponent {
-  
+
   constructor(
     private createdocumentService: CreateDocumentService,
+    private keycloakService: KeycloakService,
+    private headerService: HeaderService,
     private router: Router
   ) { }
-  
+
   faArrowLeft = faArrowLeft;
   faChevronDown = faChevronDown;
   faPenSquare = faPenSquare;
   faTrash = faTrash;
+
+  dateNow!: String
+  personal_number!: String;
+  personalName!: String;
+  unit!: String;
 
 
   data: {
@@ -41,10 +50,10 @@ export class CreateSpdocumentComponent {
   id_document!: number;
 
   mform: FormGroup = new FormGroup({
-    sender_personal_number: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
-    sender_personal_name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]),
-    sender_date: new FormControl('', [Validators.required]),
-    sender_unit: new FormControl('', [Validators.required]),
+    sender_personal_number: new FormControl({value: this.personal_number, disabled: true}, [Validators.required, Validators.pattern('^[0-9]+$')]),
+    sender_personal_name: new FormControl({value: this.personalName, disabled: true}, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]),
+    sender_date: new FormControl({value: this.dateNow, disabled: true}, [Validators.required]),
+    sender_unit: new FormControl({value: this.unit, disabled: true}, [Validators.required]),
     receiver_unit: new FormControl('', [Validators.required]),
   });
   document: FormGroup = new FormGroup({
@@ -58,6 +67,15 @@ export class CreateSpdocumentComponent {
     remark: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   })
+
+  ngOnInit() {
+    this.initializeUserOptions()
+    this.getUserData(this.personal_number)
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+    this.dateNow = formattedDate
+
+  }
 
   public submitDocument() {
     if (this.mform.valid) {
@@ -169,5 +187,21 @@ export class CreateSpdocumentComponent {
     this.document.controls['quantity'].reset();
     this.document.controls['description'].reset();
     this.document.controls['remark'].reset();
+  }
+
+  //GET Personal Number from Keycloak
+  private initializeUserOptions(): void {
+    this.personal_number = this.keycloakService.getUsername();
+  }
+
+  //Get Personal Info from SOE
+  private getUserData(personal_number: any): void {
+    this.headerService.getUserData(personal_number)
+      .subscribe(
+        (response) => {
+          this.personalName = response.personalName
+          this.unit = response.unit
+        }
+      )
   }
 }

@@ -15,7 +15,7 @@
                         <span class="label-text text-gray-900">Sender Nopeg</span>
                     </label>
                     <input type="text" formControlName="sender_personal_number" name="sender_personal_number"
-                        id="sender_personal_number" placeholder="Please fill this..."
+                        id="sender_personal_number" placeholder="Please fill this..." [ngModel]="personal_number"
                         [ngClass]="{ 'is-invalid': mform.get('sender_personal_number')?.invalid && mform.get('sender_personal_number')?.touched}"
                         class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_personal_number')?.invalid && mform.get('sender_personal_number')?.touched"
@@ -28,7 +28,7 @@
                         <span class="label-text text-gray-900">Sender Name</span>
                     </label>
                     <input type="text" formControlName="sender_personal_name" name="sender_personal_name"
-                        id="sender_personal_name" placeholder="Please fill this..."
+                        id="sender_personal_name" placeholder="Please fill this..." [ngModel]="personalName"
                         [ngClass]="{ 'is-invalid': mform.get('sender_personal_name')?.invalid && mform.get('sender_personal_name')?.touched}"
                         class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" />
                     <p *ngIf="mform.get('sender_personal_name')?.invalid && mform.get('sender_personal_name')?.touched"
@@ -41,7 +41,7 @@
                         <span class="label-text text-gray-900">Sender Unit</span>
                     </label>
                     <input type="text" formControlName="sender_unit" name="sender_unit" id="sender_unit"
-                        placeholder="Please fill this..."
+                        placeholder="Please fill this..." [ngModel]="unit"
                         [ngClass]="{ 'is-invalid': mform.get('sender_unit')?.invalid && mform.get('sender_unit')?.touched}"
                         class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_unit')?.invalid && mform.get('sender_unit')?.touched"
@@ -53,7 +53,7 @@
                     <label class="label">
                         <span class="label-text text-gray-900">Sender Date</span>
                     </label>
-                    <input type="date" formControlName="sender_date" id="sender_date"
+                    <input type="date" formControlName="sender_date" id="sender_date" [ngModel]="dateNow"
                         [ngClass]="{'is-invalid': mform.get('sender_date')?.invalid && mform.get('sender_date')?.touched}"
                         class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_date')?.invalid && mform.get('sender_date')?.touched"
