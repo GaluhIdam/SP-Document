@@ -112,6 +112,9 @@ export class DashboardComponent {
     this.obs = this.mform.valueChanges
       .pipe(debounceTime(500)).subscribe(
         () => {
+          if (this.mform.get('page')?.value < 1) {
+            this.mform.get('page')?.setValue(1)
+          }
           this.paginate()
           this.getDataDocument(
             this.mform.get('limit')?.value,
@@ -335,7 +338,7 @@ export class DashboardComponent {
         }
       )
   }
-  
+
   public confirmReceive(
     id_sp_data: any,
   ): void {

@@ -106,6 +106,9 @@ export class DocumentListComponent {
     this.obs = this.mform.valueChanges
       .pipe(debounceTime(500)).subscribe(
         (data) => {
+          if(data.page < 1) {
+            this.mform.get('page')?.setValue(1)
+          }
           if (data.sender_date == null && data.receiver_date == null) {
             this.paginate()
             this.filterSearch(
