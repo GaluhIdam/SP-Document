@@ -20,7 +20,7 @@
                         aria-labelledby="dropdownMenuButton1">
                         <li>
                             <button (click)="getByCreated()" type="button"
-                                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
+                                class="dropdown-item text-sm text-left py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
                                 By Created Date</button>
                             <div class="px-4">
                                 <hr>
@@ -28,6 +28,25 @@
                             <button (click)="getByUpdated()" type="button"
                                 class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
                                 By Updated Date</button>
+                        </li>
+                    </ul>
+                    <button
+                        class="dropdown-toggle text-sm text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                        type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <fa-icon [icon]="faFilter" class="mr-1"></fa-icon> Filter By
+                    </button>
+                    <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                        aria-labelledby="dropdownMenuButton2">
+                        <li>
+                            <button (click)="getByUnit()" type="button"
+                                class="dropdown-item text-sm text-left py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
+                                By Unit</button>
+                            <div class="px-4">
+                                <hr>
+                            </div>
+                            <button (click)="getByMyDocument()" type="button"
+                                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
+                                By My Document</button>
                         </li>
                     </ul>
                 </div>
@@ -127,6 +146,25 @@
                     </li>
                 </ul>
             </div>
+            <button
+                class="dropdown-toggle text-sm text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                <fa-icon [icon]="faFilter" class="mr-1"></fa-icon>
+            </button>
+            <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                aria-labelledby="dropdownMenuButton2">
+                <li>
+                    <button (click)="getByUnit()" type="button"
+                        class="dropdown-item text-sm text-left py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
+                        By Unit</button>
+                    <div class="px-4">
+                        <hr>
+                    </div>
+                    <button (click)="getByMyDocument()" type="button"
+                        class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">Sort
+                        By My Document</button>
+                </li>
+            </ul>
         </div>
         <div class="static">
             <div class="flex columns-3 mt-2 bg-white rounded rounded-lg mt-5">
@@ -187,6 +225,7 @@
             </div>
         </div>
     </div>
+
     <!-- Card Desktop -->
     <div class="static max-[600px]:hidden">
         <div class="px-0 mt-5">
@@ -227,8 +266,10 @@
                     </div>
                     <div class="columns-2 w-full flex items-stretch">
                         <div class="grid grid-cols-2 gap-4 w-full">
-                            <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-' : row.sender_unit }}</h1>
-                            <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit == "" ? '-' : row.receiver_unit }}</h1>
+                            <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-'
+                                : row.sender_unit }}</h1>
+                            <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit ==
+                                "" ? '-' : row.receiver_unit }}</h1>
                         </div>
                     </div>
                     <div class="columns-2 w-full flex items-stretch">
@@ -372,7 +413,6 @@
             </div>
         </form>
     </div>
-
     <!-- Card Mobile -->
     <div class="static min-[600px]:hidden">
         <div class="static mt-5 mb-5 w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg"
@@ -410,8 +450,10 @@
             </div>
             <div class="columns-2 w-full flex items-stretch">
                 <div class="grid grid-cols-2 gap-4 w-full">
-                    <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-' : row.sender_unit }}</h1>
-                    <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit == "" ? '-' : row.receiver_unit }}</h1>
+                    <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-' :
+                        row.sender_unit }}</h1>
+                    <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit == "" ? '-'
+                        : row.receiver_unit }}</h1>
                 </div>
             </div>
             <div class="columns-2 w-full flex items-stretch">
@@ -551,7 +593,6 @@
         </form>
     </div>
 </div>
-
 <!-- PDF Desktop VIew -->
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
     id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" aria-modal="true" role="dialog">
@@ -774,3 +815,12 @@
         </div>
     </div>
 </div>
+
+<!-- PDF Mobile View -->
+<!-- <div class="!visible hidden" id="collapseExample" data-te-collapse-item>
+    <div class="block rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-700 dark:text-neutral-50">
+        Some placeholder content for the collapse component. This panel is
+        hidden by default but revealed when the user activates the relevant
+        trigger.
+    </div>
+</div> -->

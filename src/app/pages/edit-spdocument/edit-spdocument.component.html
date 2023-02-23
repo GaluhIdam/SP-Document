@@ -7,9 +7,9 @@
                         class="text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
                         <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon> Back</a>
                 </div>
-                <h1 class="text-lg font-semibold text-gray-900 text-center">Edit SP Document</h1>
+                <h1 class="text-lg font-semibold text-gray-900 text-center max-[600px]:hidden">Edit SP Document</h1>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-4">
                 <div class="form-control w-full px-4 py-1">
                     <label class="label">
                         <span class="label-text text-gray-900">Sender Nopeg</span>
@@ -17,7 +17,7 @@
                     <input type="text" formControlName="sender_personal_number" name="sender_personal_number"
                         id="sender_personal_number" placeholder="Please fill this..."
                         [ngClass]="{ 'is-invalid': mform.get('sender_personal_number')?.invalid && mform.get('sender_personal_number')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none disabled:bg-disabled-form focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none disabled:bg-gray-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_personal_number')?.invalid && mform.get('sender_personal_number')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Nopeg is required and Number (0-9).
@@ -30,7 +30,7 @@
                     <input type="text" formControlName="sender_personal_name" name="sender_personal_name"
                         id="sender_personal_name" placeholder="Please fill this..."
                         [ngClass]="{ 'is-invalid': mform.get('sender_personal_name')?.invalid && mform.get('sender_personal_name')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none disabled:bg-disabled-form focus:border-sky-500 focus:ring-1 focus:ring-sky-500" />
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none disabled:bg-gray-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500" />
                     <p *ngIf="mform.get('sender_personal_name')?.invalid && mform.get('sender_personal_name')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Name is required & Alphabet (A-z).
@@ -40,9 +40,10 @@
                     <label class="label">
                         <span class="label-text text-gray-900">Sender Unit</span>
                     </label>
-                    <input type="text" formControlName="sender_unit" name="sender_unit" id="sender_unit" placeholder="Please fill this..."
+                    <input type="text" formControlName="sender_unit" name="sender_unit" id="sender_unit"
+                        placeholder="Please fill this..."
                         [ngClass]="{ 'is-invalid': mform.get('sender_unit')?.invalid && mform.get('sender_unit')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none disabled:bg-disabled-form focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none disabled:bg-gray-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_unit')?.invalid && mform.get('sender_unit')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Unit is required.
@@ -54,23 +55,43 @@
                     </label>
                     <input type="date" formControlName="sender_date" id="sender_date"
                         [ngClass]="{'is-invalid': mform.get('sender_date')?.invalid && mform.get('sender_date')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none disabled:bg-gray-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_date')?.invalid && mform.get('sender_date')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Date is required.
                     </p>
+                    <p class="text-xs mt-1 py-1 italic text-danger">
+                        Note : The sending date will change according to the current date. Previous Send Date is <b>{{dateNow}}</b>
+                    </p>
+                </div>
+                <hr class="mt-5 min-[600px]:mb-5">
+                <hr class="min-[600px]:mt-5 mb-5">
+                <div class="form-control w-full px-4 py-1">
+                    <label class="label">
+                        <span class="label-text text-gray-900">Receiver Nopeg</span>
+                    </label>
+                    <div class="flex">
+                        <input type="number" formControlName="receiver_personal_number" id="receiver_personal_number"
+                            placeholder="-"
+                            [ngClass]="{'is-invalid': mform.get('receiver_personal_number')?.invalid && mform.get('receiver_personal_number')?.touched}"
+                            class="mr-2 bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                    </div>
                 </div>
                 <div class="form-control w-full px-4 py-1">
                     <label class="label">
-                        <span class="label-text text-gray-900">Receiver</span>
+                        <span class="label-text text-gray-900">Receiver Name</span>
                     </label>
-                    <input type="text" formControlName="receiver_unit" id="receiver_unit" placeholder="Please fill this..."
-                        [ngClass]="{'is-invalid': mform.get('receiver_unit')?.invalid && mform.get('receiver_unit')?.touched}"
+                    <input type="text" formControlName="receiver_personal_name" id="receiver_personal_name"
+                        placeholder="-"
                         class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
-                    <p *ngIf="mform.get('receiver_unit')?.invalid && mform.get('receiver_unit')?.touched"
-                        class="invalid-feedback mt-2 italic">
-                        Receiver is required.
-                    </p>
+                </div>
+                <div class="form-control w-full px-4 py-1">
+                    <label class="label">
+                        <span class="label-text text-gray-900">Receiver Unit</span>
+                    </label>
+                    <input type="text" formControlName="receiver_unit" id="receiver_unit"
+                        placeholder="Please fill this..."
+                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                 </div>
             </div>
             <div class="px-4 mt-10">
@@ -90,91 +111,98 @@
                         <div class="row mb-5 text-gray-900">
                             <hr>
                         </div>
-                            <div class="flex" [formGroup]="document">
-                                <div class="w-fit">
-                                    <div class="form-control w-full px-2">
-                                        <label class="label">
-                                            <span class="label-text text-gray-900">QTY</span>
-                                        </label>
-                                        <input type="number" formControlName="quantity" id="quantity"
-                                            [ngClass]="{ 'is-invalid': document.get('quantity')?.invalid && document.get('quantity')?.touched }"
-                                            class="w-20 bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
-                                        <div *ngIf="document.get('quantity')?.invalid && document.get('quantity')?.touched"
-                                            class="invalid-feedback">
-                                            This field is required and must be a number.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-full">
-                                    <div class="form-control w-full px-2">
-                                        <label class="label">
-                                            <span class="label-text text-gray-900">Description</span>
-                                        </label>
-                                        <input type="text" formControlName="description" id="description" placeholder="Please fill this..."
-                                            [ngClass]="{ 'is-invalid': document.get('description')?.invalid && document.get('description')?.touched }"
-                                            class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
-                                        <div *ngIf="document.get('description')?.invalid && document.get('description')?.touched"
-                                            class="invalid-feedback">
-                                            This field is required and must be a text with numbers and spaces.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-full">
-                                    <div class="form-control w-full px-2">
-                                        <label class="label">
-                                            <span class="label-text text-gray-900">Remark</span>
-                                        </label>
-                                        <input type="text" formControlName="remark" id="remark" placeholder="Please fill this..."
-                                            [ngClass]="{ 'is-invalid': document.get('remark')?.invalid && document.get('remark')?.touched }"
-                                            class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
-                                        <div *ngIf="document.get('remark')?.invalid && document.get('remark')?.touched"
-                                            class="invalid-feedback">
-                                            This field is required and must be a text with numbers and spaces.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w-fit">
-                                    <div class="form-control w-full px-2">
-                                        <label class="label">
-                                            <span class="label-text text-gray-900">Action</span>
-                                        </label>
-                                        <button (click)="addRemark()" type="button"
-                                            class="w-fit mt-1 border border-regal-blue text-white py-2 px-3 rounded-lg bg-regal-blue hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue">
-                                            Submit</button>
+                        <div class="min-[600px]:flex" [formGroup]="document">
+                            <div class="max-[600px]:w-full min-[600px]:w-fit">
+                                <div class="form-control w-full px-2">
+                                    <label class="label">
+                                        <span class="label-text text-gray-900">QTY</span>
+                                    </label>
+                                    <input type="number" formControlName="quantity" id="quantity"
+                                        [ngClass]="{ 'is-invalid': document.get('quantity')?.invalid && document.get('quantity')?.touched }"
+                                        class="w-20 bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                                    <div *ngIf="document.get('quantity')?.invalid && document.get('quantity')?.touched"
+                                        class="invalid-feedback">
+                                        This field is required and must be a number.
                                     </div>
                                 </div>
                             </div>
-                        <div class="row">
-                            <table class="mt-10 w-full">
-                                <thead>
-                                    <tr class="bg-soft-blue text-gray-900">
-                                        <th class="py-3">No.</th>
-                                        <th class="py-3">QTY</th>
-                                        <th class="py-3">Description</th>
-                                        <th class="py-3">Remark</th>
-                                        <th class="py-3">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white">
-                                    <tr class="bg-white text-gray-900" *ngFor="let datas of data; let i  = index">
-                                        <td class="py-2 text-center">{{ i + 1 }}</td>
-                                        <td class="py-2 text-center">{{ datas.quantity }}</td>
-                                        <td class="py-2 text-center">{{ datas.description }}</td>
-                                        <td class="py-2 text-center">{{ datas.remark }}</td>
-                                        <td class="py-2 text-center">
-                                            <button for="my-modal-3" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop" (click)="editDocument(i)"
-                                                class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
-                                                <fa-icon [icon]="faPenSquare"></fa-icon>
-                                            </button>
-                                            <button (click)="deleteRemark(datas.id_description_remark, i)" type="button"
-                                                class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
-                                                <fa-icon [icon]="faTrash"></fa-icon>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="w-full">
+                                <div class="form-control w-full px-2">
+                                    <label class="label">
+                                        <span class="label-text text-gray-900">Description</span>
+                                    </label>
+                                    <input type="text" formControlName="description" id="description"
+                                        placeholder="Please fill this..."
+                                        [ngClass]="{ 'is-invalid': document.get('description')?.invalid && document.get('description')?.touched }"
+                                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                                    <div *ngIf="document.get('description')?.invalid && document.get('description')?.touched"
+                                        class="invalid-feedback">
+                                        This field is required and must be a text with numbers and spaces.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <div class="form-control w-full px-2">
+                                    <label class="label">
+                                        <span class="label-text text-gray-900">Remark</span>
+                                    </label>
+                                    <input type="text" formControlName="remark" id="remark"
+                                        placeholder="Please fill this..."
+                                        [ngClass]="{ 'is-invalid': document.get('remark')?.invalid && document.get('remark')?.touched }"
+                                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                                    <div *ngIf="document.get('remark')?.invalid && document.get('remark')?.touched"
+                                        class="invalid-feedback">
+                                        This field is required and must be a text with numbers and spaces.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-fit">
+                                <div class="form-control w-full px-2">
+                                    <label class="label  max-[600px]:hidden">
+                                        <span class="label-text text-gray-900">Action</span>
+                                    </label>
+                                    <button (click)="addRemark()" type="button"
+                                        class="w-fit mt-1 border border-regal-blue text-white py-2 px-3 rounded-lg bg-regal-blue hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue">
+                                        Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row overflow-x-auto">
+                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                <table class="mt-10 min-w-full">
+                                    <thead>
+                                        <tr class="bg-soft-blue text-gray-900">
+                                            <th class="py-3 px-5 whitespace-nowrap">No.</th>
+                                            <th class="py-3 px-5 whitespace-nowrap">QTY</th>
+                                            <th class="py-3 px-5 whitespace-nowrap">Description</th>
+                                            <th class="py-3 px-5 whitespace-nowrap">Remark</th>
+                                            <th class="py-3 px-5 whitespace-nowrap">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white">
+                                        <tr class="bg-white text-gray-900" *ngFor="let datas of data; let i  = index">
+                                            <td class="py-2 px-5 whitespace-nowrap text-center">{{ i + 1 }}</td>
+                                            <td class="py-2 px-5 whitespace-nowrap text-center">{{ datas.quantity }}
+                                            </td>
+                                            <td class="py-2 px-5 whitespace-nowrap text-left">{{ datas.description }}
+                                            </td>
+                                            <td class="py-2 px-5 whitespace-nowrap text-left">{{ datas.remark }}</td>
+                                            <td class="py-2 px-5 whitespace-nowrap text-center">
+                                                <button for="my-modal-3" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop" (click)="editDocument(i)"
+                                                    class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
+                                                    <fa-icon [icon]="faPenSquare"></fa-icon>
+                                                </button>
+                                                <button (click)="deleteRemark(datas.id_description_remark, i)"
+                                                    type="button"
+                                                    class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
+                                                    <fa-icon [icon]="faTrash"></fa-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,7 +219,7 @@
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
     id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+    <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none w-auto">
         <form [formGroup]="edit_document" (ngSubmit)="saveEditDocument()">
             <div
                 class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
@@ -200,7 +228,7 @@
                         Edit Description Document
                     </h5>
                 </div>
-                <div class="modal-body relative p-4">
+                <div class="modal-body relative p-4 w-auto">
                     <div class="form-control w-full px-4 py-1 mb-3">
                         <label class="label mb-4">
                             <span class="label-text text-gray-900 text-sm">Quantity</span>
@@ -238,12 +266,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md">
-                    <div class="columns-2 mt-5 mb-5 w-full flex justify-center">
+                <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md w-auto">
+                    <div class="columns-2 mt-5 mb-5 w-full flex justify-center px-3">
                         <button type="button" data-bs-dismiss="modal"
-                            class="mb-2 mx-2 w-48 inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Cancel</button>
+                            class="mb-2 mx-2 w-full inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Cancel</button>
                         <button type="submit" data-bs-dismiss="modal"
-                            class="mb-2 mx-2 w-48 inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
+                            class="mb-2 mx-2 w-full inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
                     </div>
                 </div>
             </div>

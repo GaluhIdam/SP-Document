@@ -55,12 +55,15 @@ export class DocumentListComponent {
 
     sender_personal_number: new FormControl(),
     sender_personal_name: new FormControl(),
+    sender_unit: new FormControl(),
     sender_date: new FormControl(),
 
     receiver_personal_number: new FormControl(),
     receiver_personal_name: new FormControl(),
+    receiver_unit: new FormControl(),
     receiver_date: new FormControl(),
 
+    description: new FormControl(),
     status: new FormControl(),
 
     limit: new FormControl(this.limit),
@@ -73,6 +76,8 @@ export class DocumentListComponent {
     receiver_personal_number_order: new FormControl(),
     receiver_personal_name_order: new FormControl(),
     receiver_date_order: new FormControl(),
+    receiver_unit_order: new FormControl(),
+    sender_unit_order: new FormControl(),
   });
 
   //Data PDF
@@ -115,18 +120,23 @@ export class DocumentListComponent {
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
               data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+              data.sender_unit == null ? '%%' : "%" + data.sender_unit + "%",
               data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
               data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+              data.receiver_unit == null ? '%%' : '%%' + data.receiver_unit + "%",
+              data.description == null ? '%%' : "%" + data.description + "%",
               data.status == null ? '%%' : "%" + data.status + "%",
               data.limit == null ? this.limit : data.limit,
               this.per_page,
-              data.shipping_no_order == null ? '' : data.shipping_no_order,
+              data.shipping_no_order == null ? 'desc' : data.shipping_no_order,
               data.sender_personal_number_order == null ? '' : data.sender_personal_number_order,
               data.sender_personal_name_order == null ? '' : data.sender_personal_name_order,
               data.sender_date_order == null ? '' : data.sender_date_order,
               data.receiver_personal_number_order == null ? '' : data.receiver_personal_number_order,
               data.receiver_personal_name_order == null ? '' : data.receiver_personal_name_order,
               data.receiver_date_order == null ? '' : data.receiver_date_order,
+              data.receiver_unit_order == null ? '' : data.receiver_unit_order,
+              data.sender_unit_order == null ? '' : data.sender_unit_order,
             )
           }
           else if (data.sender_date && data.receiver_date) {
@@ -135,8 +145,11 @@ export class DocumentListComponent {
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
               data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+              data.sender_unit == null ? '%%' : "%" + data.sender_unit + "%",
               data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
               data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+              data.receiver_unit == null ? '%%' : '%%' + data.receiver_unit + "%",
+              data.description == null ? '%%' : "%" + data.description + "%",
               data.status == null ? '%%' : "%" + data.status + "%",
               data.limit == null ? this.limit : data.limit,
               this.per_page,
@@ -149,6 +162,8 @@ export class DocumentListComponent {
               data.receiver_personal_number_order == null ? '' : data.receiver_personal_number_order,
               data.receiver_personal_name_order == null ? '' : data.receiver_personal_name_order,
               data.receiver_date_order == null ? '' : data.receiver_date_order,
+              data.receiver_unit_order == null ? '' : data.receiver_unit_order,
+              data.sender_unit_order == null ? '' : data.sender_unit_order,
             )
           }
           else if (data.sender_date || data.receiver_date) {
@@ -158,8 +173,11 @@ export class DocumentListComponent {
                 data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
                 data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
                 data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+                data.sender_unit == null ? '%%' : "%" + data.sender_unit + "%",
                 data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
                 data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+                data.receiver_unit == null ? '%%' : '%%' + data.receiver_unit + "%",
+                data.description == null ? '%%' : "%" + data.description + "%",
                 data.status == null ? '%%' : "%" + data.status + "%",
                 data.limit == null ? this.limit : data.limit,
                 this.per_page,
@@ -171,6 +189,8 @@ export class DocumentListComponent {
                 data.receiver_personal_number_order == null ? '' : data.receiver_personal_number_order,
                 data.receiver_personal_name_order == null ? '' : data.receiver_personal_name_order,
                 data.receiver_date_order == null ? '' : data.receiver_date_order,
+                data.receiver_unit_order == null ? '' : data.receiver_unit_order,
+                data.sender_unit_order == null ? '' : data.sender_unit_order,
               )
             }
             if (data.receiver_date) {
@@ -179,8 +199,11 @@ export class DocumentListComponent {
                 data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
                 data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
                 data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+                data.sender_unit == null ? '%%' : "%" + data.sender_unit + "%",
                 data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
                 data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+                data.receiver_unit == null ? '%%' : '%%' + data.receiver_unit + "%",
+                data.description == null ? '%%' : '%%' + data.description + "%",
                 data.status == null ? '%%' : "%" + data.status + "%",
                 data.limit == null ? this.limit : data.limit,
                 this.per_page,
@@ -192,6 +215,8 @@ export class DocumentListComponent {
                 data.receiver_personal_number_order == null ? '' : data.receiver_personal_number_order,
                 data.receiver_personal_name_order == null ? '' : data.receiver_personal_name_order,
                 data.receiver_date_order == null ? '' : data.receiver_date_order,
+                data.receiver_unit_order == null ? '' : data.receiver_unit_order,
+                data.sender_unit_order == null ? '' : data.sender_unit_order,
               )
             }
           }
@@ -201,18 +226,23 @@ export class DocumentListComponent {
               data.shipping_no == null ? '%%' : "%" + data.shipping_no + "%",
               data.sender_personal_number == null ? '%%' : "%" + data.sender_personal_number + "%",
               data.sender_personal_name == null ? '%%' : "%" + data.sender_personal_name + "%",
+              data.sender_unit == null ? '%%' : "%" + data.sender_unit + "%",
               data.receiver_personal_number == null ? '%%' : '%%' + data.receiver_personal_number + "%",
               data.receiver_personal_name == null ? '%%' : '%%' + data.receiver_personal_name + "%",
+              data.receiver_unit == null ? '%%' : '%%' + data.receiver_unit + "%",
+              data.description == null ? '%%' : "%" + data.description + "%",
               data.status == null ? '%%' : "%" + data.status + "%",
               data.limit == null ? this.limit : data.limit,
               this.per_page,
-              data.shipping_no_order == null ? '' : data.shipping_no_order,
+              data.shipping_no_order == null ? 'desc' : data.shipping_no_order,
               data.sender_personal_number_order == null ? '' : data.sender_personal_number_order,
               data.sender_personal_name_order == null ? '' : data.sender_personal_name_order,
               data.sender_date_order == null ? '' : data.sender_date_order,
               data.receiver_personal_number_order == null ? '' : data.receiver_personal_number_order,
               data.receiver_personal_name_order == null ? '' : data.receiver_personal_name_order,
               data.receiver_date_order == null ? '' : data.receiver_date_order,
+              data.receiver_unit_order == null ? '' : data.receiver_unit_order,
+              data.sender_unit_order == null ? '' : data.sender_unit_order,
             )
           }
         }
@@ -250,8 +280,11 @@ export class DocumentListComponent {
     shipping_no: string,
     sender_personal_number: string,
     sender_personal_name: string,
+    sender_unit: string,
     receiver_personal_number: string,
     receiver_personal_name: string,
+    receiver_unit: string,
+    description: String,
     status: String,
     limit: Number,
     page: Number,
@@ -262,13 +295,18 @@ export class DocumentListComponent {
     receiver_personal_number_order: any,
     receiver_personal_name_order: any,
     receiver_date_order: any,
+    receiver_unit_order: any,
+    sender_unit_order: any,
   ): void {
     this.documentlistService.getFilterSearch(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
+      sender_unit,
       receiver_personal_number,
       receiver_personal_name,
+      receiver_unit,
+      description,
       status,
       limit,
       page,
@@ -279,22 +317,27 @@ export class DocumentListComponent {
       receiver_personal_number_order,
       receiver_personal_name_order,
       receiver_date_order,
-
+      receiver_unit_order,
+      sender_unit_order,
     ).subscribe(
       (response) => {
         this.length = response.spdoc_data_aggregate.aggregate.count
         this.data = response.spdoc_data
+        console.log(this.data)
         this.getCountData()
       }
     )
   }
 
   public getBySenderDate(
-    shipping_no: string,
-    sender_personal_number: string,
-    sender_personal_name: string,
-    receiver_personal_number: string,
-    receiver_personal_name: string,
+    shipping_no: any,
+    sender_personal_number: any,
+    sender_personal_name: any,
+    sender_unit: any,
+    receiver_personal_number: any,
+    receiver_personal_name: any,
+    receiver_unit: any,
+    description: any,
     status: String,
     limit: Number,
     page: Number,
@@ -306,13 +349,18 @@ export class DocumentListComponent {
     receiver_personal_number_order: any,
     receiver_personal_name_order: any,
     receiver_date_order: any,
+    receiver_unit_order: any,
+    sender_unit_order: any,
   ): void {
     this.documentlistService.getFilterSenderDate(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
+      sender_unit,
       receiver_personal_number,
       receiver_personal_name,
+      receiver_unit,
+      description,
       status,
       limit,
       page,
@@ -324,6 +372,8 @@ export class DocumentListComponent {
       receiver_personal_number_order,
       receiver_personal_name_order,
       receiver_date_order,
+      receiver_unit_order,
+      sender_unit_order,
     ).subscribe(
       (response) => {
         this.length = response.spdoc_data_aggregate.aggregate.count
@@ -337,8 +387,11 @@ export class DocumentListComponent {
     shipping_no: string,
     sender_personal_number: string,
     sender_personal_name: string,
+    sender_unit: string,
     receiver_personal_number: string,
     receiver_personal_name: string,
+    receiver_unit: string,
+    description: string,
     status: String,
     limit: Number,
     page: Number,
@@ -350,13 +403,18 @@ export class DocumentListComponent {
     receiver_personal_number_order: any,
     receiver_personal_name_order: any,
     receiver_date_order: any,
+    receiver_unit_order: any,
+    sender_unit_order: any,
   ): void {
     this.documentlistService.getFilterReceiverDate(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
+      sender_unit,
       receiver_personal_number,
       receiver_personal_name,
+      receiver_unit,
+      description,
       status,
       limit,
       page,
@@ -368,6 +426,8 @@ export class DocumentListComponent {
       receiver_personal_number_order,
       receiver_personal_name_order,
       receiver_date_order,
+      receiver_unit_order,
+      sender_unit_order,
     ).subscribe(
       (response) => {
         this.length = response.spdoc_data_aggregate.aggregate.count
@@ -381,8 +441,11 @@ export class DocumentListComponent {
     shipping_no: string,
     sender_personal_number: string,
     sender_personal_name: string,
+    sender_unit: string,
     receiver_personal_number: string,
     receiver_personal_name: string,
+    receiver_unit: string,
+    description: String,
     status: String,
     limit: Number,
     page: Number,
@@ -395,13 +458,18 @@ export class DocumentListComponent {
     receiver_personal_number_order: any,
     receiver_personal_name_order: any,
     receiver_date_order: any,
+    receiver_unit_order: any,
+    sender_unit_order: any,
   ): void {
     this.documentlistService.getFilterReceiverSenderDate(
       shipping_no,
       sender_personal_number,
       sender_personal_name,
+      sender_unit,
       receiver_personal_number,
       receiver_personal_name,
+      receiver_unit,
+      description,
       status,
       limit,
       page,
@@ -414,6 +482,8 @@ export class DocumentListComponent {
       receiver_personal_number_order,
       receiver_personal_name_order,
       receiver_date_order,
+      receiver_unit_order,
+      sender_unit_order,
     ).subscribe(
       (response) => {
         this.length = response.spdoc_data_aggregate.aggregate.count
@@ -545,8 +615,11 @@ export class DocumentListComponent {
         this.mform.get('shipping_no')?.value == null ? '%%' : "%" + this.mform.get('shipping_no')?.value + "%",
         this.mform.get('sender_personal_number')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_number')?.value + "%",
         this.mform.get('sender_personal_name')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_name')?.value + "%",
+        this.mform.get('sender_unit')?.value == null ? '%%' : "%" + this.mform.get('sender_unit')?.value + "%",
         this.mform.get('receiver_personal_number')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_number')?.value + "%",
         this.mform.get('receiver_personal_name')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_name')?.value + "%",
+        this.mform.get('receiver_unit')?.value == null ? '%%' : '%%' + this.mform.get('receiver_unit')?.value + "%",
+        this.mform.get('description')?.value == null ? '%%' : "%" + this.mform.get('description')?.value + "%",
         this.mform.get('status')?.value == null ? '%%' : "%" + this.mform.get('status')?.value + "%",
         this.mform.get('limit')?.value == null ? this.limit : this.mform.get('limit')?.value,
         this.per_page,
@@ -557,6 +630,8 @@ export class DocumentListComponent {
         this.mform.get('receiver_personal_number_order')?.value == null ? '' : this.mform.get('receiver_personal_number_order')?.value,
         this.mform.get('receiver_personal_name_order')?.value == null ? '' : this.mform.get('receiver_personal_name_order')?.value,
         this.mform.get('receiver_date_order')?.value == null ? '' : this.mform.get('receiver_date_order')?.value,
+        this.mform.get('receiver_unit_order')?.value == null ? '' : this.mform.get('receiver_unit_order')?.value,
+        this.mform.get('sender_unit_order')?.value == null ? '' : this.mform.get('sender_unit_order')?.value,
       )
     }
     else if (this.mform.get('sender_date')?.value && this.mform.get('receiver_date')?.value) {
@@ -565,9 +640,12 @@ export class DocumentListComponent {
         this.mform.get('shipping_no')?.value == null ? '%%' : "%" + this.mform.get('shipping_no')?.value + "%",
         this.mform.get('sender_personal_number')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_number')?.value + "%",
         this.mform.get('sender_personal_name')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_name')?.value + "%",
+        this.mform.get('sender_unit')?.value == null ? '%%' : "%" + this.mform.get('sender_unit')?.value + "%",
         this.mform.get('receiver_personal_number')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_number')?.value + "%",
         this.mform.get('receiver_personal_name')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_name')?.value + "%",
+        this.mform.get('receiver_unit')?.value == null ? '%%' : '%%' + this.mform.get('receiver_unit')?.value + "%",
         this.mform.get('status')?.value == null ? '%%' : "%" + this.mform.get('status')?.value + "%",
+        this.mform.get('description')?.value == null ? '%%' : "%" + this.mform.get('status')?.value + "%",
         this.mform.get('limit')?.value == null ? this.limit : this.mform.get('limit')?.value,
         this.per_page,
         this.mform.get('receiver_date')?.value,
@@ -579,6 +657,8 @@ export class DocumentListComponent {
         this.mform.get('receiver_personal_number_order')?.value == null ? '' : this.mform.get('receiver_personal_number_order')?.value,
         this.mform.get('receiver_personal_name_order')?.value == null ? '' : this.mform.get('receiver_personal_name_order')?.value,
         this.mform.get('receiver_date_order')?.value == null ? '' : this.mform.get('receiver_date_order')?.value,
+        this.mform.get('receiver_unit_order')?.value == null ? '' : this.mform.get('receiver_unit_order')?.value,
+        this.mform.get('sender_unit_order')?.value == null ? '' : this.mform.get('sender_unit_order')?.value,
       )
     }
     else if (this.mform.get('sender_date')?.value || this.mform.get('receiver_date')?.value) {
@@ -588,8 +668,11 @@ export class DocumentListComponent {
           this.mform.get('shipping_no')?.value == null ? '%%' : "%" + this.mform.get('shipping_no')?.value + "%",
           this.mform.get('sender_personal_number')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_number')?.value + "%",
           this.mform.get('sender_personal_name')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_name')?.value + "%",
+          this.mform.get('sender_unit')?.value == null ? '%%' : "%" + this.mform.get('sender_unit')?.value + "%",
           this.mform.get('receiver_personal_number')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_number')?.value + "%",
           this.mform.get('receiver_personal_name')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_name')?.value + "%",
+          this.mform.get('receiver_unit')?.value == null ? '%%' : '%%' + this.mform.get('receiver_unit')?.value + "%",
+          this.mform.get('description')?.value == null ? '%%' : '%%' + this.mform.get('description')?.value + "%",
           this.mform.get('status')?.value == null ? '%%' : "%" + this.mform.get('status')?.value + "%",
           this.mform.get('limit')?.value == null ? this.limit : this.mform.get('limit')?.value,
           this.per_page,
@@ -601,6 +684,8 @@ export class DocumentListComponent {
           this.mform.get('receiver_personal_number_order')?.value == null ? '' : this.mform.get('receiver_personal_number_order')?.value,
           this.mform.get('receiver_personal_name_order')?.value == null ? '' : this.mform.get('receiver_personal_name_order')?.value,
           this.mform.get('receiver_date_order')?.value == null ? '' : this.mform.get('receiver_date_order')?.value,
+          this.mform.get('receiver_unit_order')?.value == null ? '' : this.mform.get('receiver_unit_order')?.value,
+          this.mform.get('sender_unit_order')?.value == null ? '' : this.mform.get('sender_unit_order')?.value,
         )
       }
       if (this.mform.get('receiver_date')?.value) {
@@ -609,8 +694,11 @@ export class DocumentListComponent {
           this.mform.get('shipping_no')?.value == null ? '%%' : "%" + this.mform.get('shipping_no')?.value + "%",
           this.mform.get('sender_personal_number')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_number')?.value + "%",
           this.mform.get('sender_personal_name')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_name')?.value + "%",
+          this.mform.get('sender_unit')?.value == null ? '%%' : "%" + this.mform.get('sender_unit')?.value + "%",
           this.mform.get('receiver_personal_number')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_number')?.value + "%",
           this.mform.get('receiver_personal_name')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_name')?.value + "%",
+          this.mform.get('receiver_unit')?.value == null ? '%%' : '%%' + this.mform.get('receiver_unit')?.value + "%",
+          this.mform.get('description')?.value == null ? '%%' : '%%' + this.mform.get('description')?.value + "%",
           this.mform.get('status')?.value == null ? '%%' : "%" + this.mform.get('status')?.value + "%",
           this.mform.get('limit')?.value == null ? this.limit : this.mform.get('limit')?.value,
           this.per_page,
@@ -622,6 +710,8 @@ export class DocumentListComponent {
           this.mform.get('receiver_personal_number_order')?.value == null ? '' : this.mform.get('receiver_personal_number_order')?.value,
           this.mform.get('receiver_personal_name_order')?.value == null ? '' : this.mform.get('receiver_personal_name_order')?.value,
           this.mform.get('receiver_date_order')?.value == null ? '' : this.mform.get('receiver_date_order')?.value,
+          this.mform.get('receiver_unit_order')?.value == null ? '' : this.mform.get('receiver_unit_order')?.value,
+          this.mform.get('sender_unit_order')?.value == null ? '' : this.mform.get('sender_unit_order')?.value,
         )
       }
     }
@@ -631,8 +721,11 @@ export class DocumentListComponent {
         this.mform.get('shipping_no')?.value == null ? '%%' : "%" + this.mform.get('shipping_no')?.value + "%",
         this.mform.get('sender_personal_number')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_number')?.value + "%",
         this.mform.get('sender_personal_name')?.value == null ? '%%' : "%" + this.mform.get('sender_personal_name')?.value + "%",
+        this.mform.get('sender_unit')?.value == null ? '%%' : "%" + this.mform.get('sender_unit')?.value + "%",
         this.mform.get('receiver_personal_number')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_number')?.value + "%",
         this.mform.get('receiver_personal_name')?.value == null ? '%%' : '%%' + this.mform.get('receiver_personal_name')?.value + "%",
+        this.mform.get('receiver_unit')?.value == null ? '%%' : '%%' + this.mform.get('receiver_unit')?.value + "%",
+        this.mform.get('description')?.value == null ? '%%' : "%" + this.mform.get('description')?.value + "%",
         this.mform.get('status')?.value == null ? '%%' : "%" + this.mform.get('status')?.value + "%",
         this.mform.get('limit')?.value == null ? this.limit : this.mform.get('limit')?.value,
         this.per_page,
@@ -643,6 +736,8 @@ export class DocumentListComponent {
         this.mform.get('receiver_personal_number_order')?.value == null ? '' : this.mform.get('receiver_personal_number_order')?.value,
         this.mform.get('receiver_personal_name_order')?.value == null ? '' : this.mform.get('receiver_personal_name_order')?.value,
         this.mform.get('receiver_date_order')?.value == null ? '' : this.mform.get('receiver_date_order')?.value,
+        this.mform.get('receiver_unit_order')?.value == null ? '' : this.mform.get('receiver_unit_order')?.value,
+        this.mform.get('sender_unit_order')?.value == null ? '' : this.mform.get('sender_unit_order')?.value,
       )
     }
   }
@@ -670,6 +765,8 @@ export class DocumentListComponent {
     receiver_personal_number_order: String,
     receiver_personal_name_order: String,
     receiver_date_order: String,
+    receiver_unit_order: String,
+    sender_unit_order: String,
     ) {
     this.mform.get('shipping_no_order')?.setValue(shipping_no_order)
     this.mform.get('sender_personal_number_order')?.setValue(sender_personal_number_order)
@@ -678,6 +775,8 @@ export class DocumentListComponent {
     this.mform.get('receiver_personal_number_order')?.setValue(receiver_personal_number_order)
     this.mform.get('receiver_personal_name_order')?.setValue(receiver_personal_name_order)
     this.mform.get('receiver_date_order')?.setValue(receiver_date_order)
+    this.mform.get('receiver_unit_order')?.setValue(receiver_unit_order)
+    this.mform.get('sender_unit_order')?.setValue(sender_unit_order)
   }
 
   ngOnDestroy() {

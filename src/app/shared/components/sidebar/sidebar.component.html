@@ -1,20 +1,168 @@
-<aside class="w-fit justify-center bg-white h-full" aria-label="Sidebar">
-    <img src="/assets/gmf-logo.webp" class="w-36 p-4" alt="icon-gmf">
-    <p class="text-sm text-center font-semibold text-regal-blue">SP Document</p>
-    <div class="overflow-y-auto py-4 px-7 bg-white rounded">
-        <ul class="space-y-4">
-            <li class="flex justify-center">
-                <a routerLink="dashboard" routerLinkActive="active"
-                    class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue active:bg-regal-blue">
-                    <fa-icon [icon]="faHouse"></fa-icon>
-                </a>
-            </li>
-            <li class="flex justify-center">
-                <a routerLink="document-list" routerLinkActive="active"
-                    class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue">
-                    <fa-icon [icon]="faTicketSimple"></fa-icon>
-                </a>
-            </li>
-        </ul>
+
+    <div class="flex">
+        <!-- Sidebar Desktop -->
+        <aside class="w-fit justify-center bg-white max-[600px]:hidden" aria-label="Sidebar">
+            <img src="/assets/gmf-logo.webp" class="w-36 p-4" alt="icon-gmf">
+            <p class="text-sm text-center font-semibold text-regal-blue">SP Document</p>
+            <div class="overflow-y-auto py-4 px-7 bg-white rounded">
+                <ul class="space-y-4">
+                    <li class="flex justify-center">
+                        <a routerLink="dashboard" routerLinkActive="active"
+                            class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue active:bg-regal-blue active:text-white active">
+                            <fa-icon [icon]="faHouse"></fa-icon>
+                        </a>
+                    </li>
+                    <li class="flex justify-center">
+                        <a routerLink="document-list" routerLinkActive="active"
+                            class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue">
+                            <fa-icon [icon]="faTicketSimple"></fa-icon>
+                        </a>
+                    </li>
+                    <li class="flex justify-center">
+                        <a routerLink="my-document" routerLinkActive="active"
+                            class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue">
+                            <fa-icon [icon]="faInbox"></fa-icon>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Sidebar Mobile -->
+        <aside [hidden]="navbar == true" class="w-fit justify-center bg-white min-[600px]:hidden" aria-label="Sidebar">
+            <img src="/assets/gmf-logo.webp" class="w-36 p-4" alt="icon-gmf">
+            <p class="text-sm text-center font-semibold text-regal-blue">SP Document</p>
+            <div class="overflow-y-auto py-4 px-7 bg-white rounded">
+                <ul class="space-y-4">
+                    <li class="flex justify-center">
+                        <a routerLink="dashboard" routerLinkActive="active"
+                            class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue active:bg-regal-blue active:text-white active">
+                            <fa-icon [icon]="faHouse"></fa-icon>
+                        </a>
+                    </li>
+                    <li class="flex justify-center">
+                        <a routerLink="document-list" routerLinkActive="active"
+                            class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue">
+                            <fa-icon [icon]="faTicketSimple"></fa-icon>
+                        </a>
+                    </li>
+                    <li class="flex justify-center">
+                        <a routerLink="my-document" routerLinkActive="active"
+                            class="border-2 items-center px-5 py-4 text-gray-400 hover:text-white rounded-lg hover:bg-regal-blue">
+                            <fa-icon [icon]="faInbox"></fa-icon>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Sidebar -->
+        <div class="w-full">
+            <!-- Header -->
+            <div class="p-5 text-xl font-semibold">
+                <div class="grid max-[600px]:grid-cols-2 min-[600px]:grid-cols-3 gap-4 relative">
+                    <div class="col-start-1 flex">
+                        <button (click)="showHide()"
+                            class="min-[600px]:hidden mr-2 px-3 py-0 text-sm text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                            type="button">
+                            <fa-icon [icon]="faBars"></fa-icon>
+                        </button>
+                        <button routerLink="/create-spdocument"
+                            class="min-[600px]:hidden mr-1 px-3 py-0 text-sm text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                            type="button">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                        </button>
+                        <h1 class="text-gray-900 max-[600px]:hidden" style="margin-top: 7px;">{{title}}</h1>
+                        <fa-icon [icon]="faAngleRight" class="mx-3 text-gray-500 max-[600px]:hidden" style="margin-top: 7px;"></fa-icon>
+                    </div>
+                    <div class="col-start-2 col-span-4 text-center">
+                        <h1 class="mt-3 text-center text-sm min-[600px]:hidden w-full whitespace-wrap">{{title}}</h1>
+                    </div>
+                    <div class="col-end-7 flex">
+                        <!-- Notifications -->
+                        <button
+                            class="dropdown-toggle py-1 mr-3 text-regal-blue border border-regal-blue rounded-lg hover:bg-regal-blue hover:text-white focus:bg-regal-blue focus:text-white"
+                            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <fa-icon [icon]="faBell" class="mx-3"></fa-icon>
+                        </button>
+                        <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                            aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <h1
+                                    class="dropdown-item text-lg text-center py-2 px-4 font-bold block w-full bg-white text-gray-700">
+                                    Notifications</h1>
+                                <div class="px-4">
+                                    <hr>
+                                </div>
+                                <!-- List Notif -->
+                                <div class="px-5 flex py-3">
+                                    <div class="columns-1 mr-3">
+                                        <img class="w-10 h-10 rounded-full" [src]="photo" alt="avatar">
+                                    </div>
+                                    <div class="columns-1 mr-3">
+                                        <h4 class="font-normal">Faisal Iqbal has been create SP Document</h4>
+                                        <p class="text-xs font-normal text-muted text-gray-400 py-1">1 Hours Ago</p>
+                                    </div>
+                                    <div class="columns-1">
+                                        <button
+                                            class="btn text-regal-blue border border-regal-blue text-sm font-normal rounded-lg px-3 py-2 hover:bg-regal-blue hover:text-white">View</button>
+                                    </div>
+                                </div>
+                                <!-- line -->
+                                <div class="px-4">
+                                    <hr>
+                                </div>
+                                <a 
+                                    class="dropdown-item text-sm py-2 px-4 font-bold text-center block w-full bg-white text-regal-blue">See
+                                    All</a>
+                            </li>
+                        </ul>
+                        <!-- Profile -->
+                        <div class="dropdown max-[600px]:hidden">
+                            <button class="dropdown-toggle relative column-3 flex border border-regal-blue rounded-r-full"
+                                type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="column-1">
+                                    <fa-icon [icon]="faChevronDown" class="mx-3 text-regal-blue text-sm"></fa-icon>
+                                </div>
+                                <div class="column-1 mr-4 text-right">
+                                    <p class="text-sm text-gray-900">{{ user.personalName }}</p>
+                                    <p class="text-xs text-gray-500">{{ user.unit }}</p>
+                                </div>
+                                <div class="columns-1">
+                                    <img [src]="photo" class="w-10 h-10 rounded-full" alt="avatar">
+                                </div>
+                            </button>
+                            <ul class="mt-1 dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                                aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <button type="button" (click)="logout()"
+                                        class="flex dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">
+                                        <fa-icon [icon]="faRightFromBracket" class="mx-1 text-danger text-sm"></fa-icon>
+                                        <p class="text-danger">Logout</p>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="dropdown min-[600px]:hidden">
+                            <button class="dropdown-toggle relative column-3 flex border border-regal-blue rounded-full"
+                                type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="columns-1">
+                                    <img [src]="photo" class="w-10 h-10 rounded-full" alt="avatar">
+                                </div>
+                            </button>
+                            <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-5 hidden m-0 bg-clip-padding border-none"
+                                aria-labelledby="dropdownMenuButton2">
+                                <li>
+                                    <button type="button" (click)="logout()"
+                                        class="flex dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">
+                                        <fa-icon [icon]="faRightFromBracket" class="mx-1 text-danger text-sm"></fa-icon>
+                                        <p class="text-danger">Logout</p>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header -->
+            <router-outlet></router-outlet>
+        </div>
     </div>
-</aside>

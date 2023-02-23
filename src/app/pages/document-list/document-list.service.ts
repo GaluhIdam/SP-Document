@@ -33,8 +33,11 @@ export class DocumentListService {
         shipping_no: any,
         sender_personal_number: any,
         sender_personal_name: any,
+        sender_unit: any,
         receiver_personal_number: any,
         receiver_personal_name: any,
+        receiver_unit: any,
+        description: any,
         status: any,
         limit: any,
         page: any,
@@ -45,13 +48,18 @@ export class DocumentListService {
         receiver_personal_number_order: any,
         receiver_personal_name_order: any,
         receiver_date_order: any,
+        receiver_unit_order: any,
+        sender_unit_order:any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
             .set('sender_personal_number', sender_personal_number)
             .set('sender_personal_name', sender_personal_name)
+            .set('sender_unit', sender_unit)
             .set('receiver_personal_number', receiver_personal_number)
             .set('receiver_personal_name', receiver_personal_name)
+            .set('receiver_unit', receiver_unit)
+            .set('description', description)
             .set('status', status)
             .set('limit', limit)
             .set('offset', page)
@@ -62,6 +70,8 @@ export class DocumentListService {
             .set('receiver_personal_number_order', receiver_personal_number_order)
             .set('receiver_personal_name_order', receiver_personal_name_order)
             .set('receiver_date_order', receiver_date_order)
+            .set('receiver_unit_order', receiver_unit_order)
+            .set('sender_unit_order', sender_unit_order)
 
         return this.http.get<any>(this.urlFilter, { 'params': params, 'headers': this.headers })
             .pipe(
@@ -80,8 +90,11 @@ export class DocumentListService {
         shipping_no: any,
         sender_personal_number: any,
         sender_personal_name: any,
+        sender_unit: any,
         receiver_personal_number: any,
         receiver_personal_name: any,
+        receiver_unit: any,
+        description: any,
         status: any,
         limit: any,
         page: any,
@@ -93,17 +106,22 @@ export class DocumentListService {
         receiver_personal_number_order: any,
         receiver_personal_name_order: any,
         receiver_date_order: any,
+        receiver_unit_order: any,
+        sender_unit_order:any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
             .set('sender_personal_number', sender_personal_number)
             .set('sender_personal_name', sender_personal_name)
+            .set('sender_unit', sender_unit)
             .set('receiver_personal_number', receiver_personal_number)
             .set('receiver_personal_name', receiver_personal_name)
-            .set('sender_date', sender_date)
+            .set('receiver_unit', receiver_unit)
+            .set('description', description)
             .set('status', status)
             .set('limit', limit)
             .set('offset', page)
+            .set('sender_date', sender_date)
             .set('shipping_no_order', shipping_no_order)
             .set('sender_personal_number_order', sender_personal_number_order)
             .set('sender_personal_name_order', sender_personal_name_order)
@@ -111,6 +129,8 @@ export class DocumentListService {
             .set('receiver_personal_number_order', receiver_personal_number_order)
             .set('receiver_personal_name_order', receiver_personal_name_order)
             .set('receiver_date_order', receiver_date_order)
+            .set('receiver_unit_order', receiver_unit_order)
+            .set('sender_unit_order', sender_unit_order)
 
         return this.http.get<any>(this.urlFilterSender, { 'params': params, 'headers': this.headers })
             .pipe(
@@ -129,8 +149,11 @@ export class DocumentListService {
         shipping_no: any,
         sender_personal_number: any,
         sender_personal_name: any,
+        sender_unit: any,
         receiver_personal_number: any,
         receiver_personal_name: any,
+        receiver_unit: any,
+        description: any,
         status: any,
         limit: any,
         page: any,
@@ -142,17 +165,22 @@ export class DocumentListService {
         receiver_personal_number_order: any,
         receiver_personal_name_order: any,
         receiver_date_order: any,
+        receiver_unit_order: any,
+        sender_unit_order:any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
             .set('sender_personal_number', sender_personal_number)
             .set('sender_personal_name', sender_personal_name)
+            .set('sender_unit', sender_unit)
             .set('receiver_personal_number', receiver_personal_number)
             .set('receiver_personal_name', receiver_personal_name)
-            .set('receiver_date', receiver_date)
+            .set('receiver_unit', receiver_unit)
+            .set('description', description)
             .set('status', status)
             .set('limit', limit)
             .set('offset', page)
+            .set('receiver_date', receiver_date)
             .set('shipping_no_order', shipping_no_order)
             .set('sender_personal_number_order', sender_personal_number_order)
             .set('sender_personal_name_order', sender_personal_name_order)
@@ -160,6 +188,8 @@ export class DocumentListService {
             .set('receiver_personal_number_order', receiver_personal_number_order)
             .set('receiver_personal_name_order', receiver_personal_name_order)
             .set('receiver_date_order', receiver_date_order)
+            .set('receiver_unit_order', receiver_unit_order)
+            .set('sender_unit_order', sender_unit_order)
 
         return this.http.get<any>(this.urlFilterReceiver, { 'params': params, 'headers': this.headers })
             .pipe(
@@ -178,8 +208,11 @@ export class DocumentListService {
         shipping_no: any,
         sender_personal_number: any,
         sender_personal_name: any,
+        sender_unit: any,
         receiver_personal_number: any,
         receiver_personal_name: any,
+        receiver_unit: any,
+        description: any,
         status: any,
         limit: any,
         page: any,
@@ -192,17 +225,22 @@ export class DocumentListService {
         receiver_personal_number_order: any,
         receiver_personal_name_order: any,
         receiver_date_order: any,
+        receiver_unit_order: any,
+        sender_unit_order:any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
             .set('sender_personal_number', sender_personal_number)
             .set('sender_personal_name', sender_personal_name)
+            .set('sender_unit', sender_unit)
             .set('receiver_personal_number', receiver_personal_number)
             .set('receiver_personal_name', receiver_personal_name)
+            .set('receiver_unit', receiver_unit)
 
             .set('receiver_date', receiver_date)
             .set('sender_date', sender_date)
 
+            .set('description', description)
             .set('status', status)
             .set('limit', limit)
             .set('offset', page)
@@ -214,6 +252,8 @@ export class DocumentListService {
             .set('receiver_personal_number_order', receiver_personal_number_order)
             .set('receiver_personal_name_order', receiver_personal_name_order)
             .set('receiver_date_order', receiver_date_order)
+            .set('receiver_unit_order', receiver_unit_order)
+            .set('sender_unit_order', sender_unit_order)
 
         return this.http.get<any>(this.urlLastRecSen, { 'params': params, 'headers': this.headers })
             .pipe(

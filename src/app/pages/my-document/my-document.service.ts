@@ -9,16 +9,15 @@ import { baseURL } from 'src/app/core/services/baseURL';
         providedIn: 'root'
     }
 )
-export class DashboardService {
+
+export class MyDocumentService {
     constructor(private http: HttpClient) { }
 
     //Base URL
     base_url: String = baseURL.BASE_URL
-    //Routes
-    urlDashboard: any = this.base_url + 'sort-sp-document';
-    urlCount: any = this.base_url + 'count-sp-document';
-    urlSearchFilter: any = this.base_url + 'search-filter-sp-document';
-    urlReceive: any = this.base_url + 'receive/';
+    urlDashboardPrivateNumber = this.base_url + 'dashboard-private-number';
+    urlDashboardPrivateUnit = this.base_url + 'dashboard-private-unit';
+    urlCountNumber = this.base_url + 'count-sp-private-number';
 
     //Credentials
     headers = new HttpHeaders()
@@ -26,8 +25,7 @@ export class DashboardService {
         .set('Hasura-Client-Name', 'hasura-console')
         .set('x-hasura-admin-secret', 'h4sur4forB3tt3r4pi');
 
-    //Test
-    getDataDocument(
+    getDataDocumentNumber(
         limit: any,
         offset: any,
         sender_personal_name: any,
@@ -44,6 +42,9 @@ export class DashboardService {
         sender_date_order: 'asc' | 'desc' | '',
         receiver_date_order: 'asc' | 'desc' | '',
         updated_at: 'asc' | 'desc' | '',
+        sender_personal_number_p: any,
+        receiver_personal_number_p: any,
+        receiver_unit_p: any,
     ): Observable<any> {
 
         const params = new HttpParams()
@@ -63,42 +64,11 @@ export class DashboardService {
             .set('sender_date_order', sender_date_order)
             .set('receiver_date_order', receiver_date_order)
             .set('updated_at', updated_at)
+            .set('sender_personal_number_p', sender_personal_number_p)
+            .set('receiver_personal_number_p', receiver_personal_number_p)
+            .set('receiver_unit_p', receiver_unit_p)
 
-        return this.http.get<any>(this.urlSearchFilter, { 'params': params, 'headers': this.headers })
-            .pipe(
-                map((response) => {
-                    return response;
-                }),
-                catchError((error) => {
-                    console.log(error);
-                    throw error;
-                })
-            )
-    }
-
-    //Get All Data & By Status [Open, Delivered]
-    getDashboard(
-        status: any,
-        limit: number,
-        offset: number,
-        shipping_no: any,
-        created_at: any,
-        sender_date: any,
-        receiver_date: any,
-        status_order: any,
-    ): Observable<any> {
-
-        const params = new HttpParams()
-            .set('status', status)
-            .set('limit', limit)
-            .set('offset', offset)
-            .set('shipping_no', shipping_no)
-            .set('created_at', created_at)
-            .set('sender_date', sender_date)
-            .set('receiver_date', receiver_date)
-            .set('status_order', status_order)
-
-        return this.http.get<any>(this.urlDashboard, { 'params': params, 'headers': this.headers })
+        return this.http.get<any>(this.urlDashboardPrivateNumber, { 'params': params, 'headers': this.headers })
             .pipe(
                 map((response) => {
                     return response;
@@ -111,39 +81,20 @@ export class DashboardService {
     }
 
     //Get Result Count Data
-    getCountCard(cat_status: any): Observable<any> {
+    getCountCardNumber(
+        cat_status: any,
+        sender_personal_number_p: any,
+        receiver_personal_number_p: any,
+        receiver_unit_p: any,
+        ): Observable<any> {
         const params = new HttpParams()
-            .set('cat_status', cat_status);
+            .set('cat_status', cat_status)
+            .set('sender_personal_number_p', sender_personal_number_p)
+            .set('receiver_personal_number_p', receiver_personal_number_p)
+            .set('receiver_unit_p', receiver_unit_p)
 
-        return this.http.get<any>(this.urlCount, { 'params': params, 'headers': this.headers })
-            .pipe(
-                map((response) => {
-                    return response;
-                }),
-                catchError((error) => {
-                    console.log(error);
-                    throw error;
-                })
-            )
-    }
 
-    //Receive Document
-    receiveDocument(
-        id_sp_data: any,
-        receiver_personal_number: any,
-        receiver_personal_name: any,
-        receiver_date: any,
-        receiver_unit: any,
-    ): Observable<any> {
-        const body = {
-            'id_sp_data': id_sp_data,
-            'receiver_personal_number': receiver_personal_number,
-            'receiver_personal_name': receiver_personal_name,
-            'receiver_date': receiver_date,
-            'receiver_unit': receiver_unit,
-            'status': 'Delivered',
-        }
-        return this.http.put(this.urlReceive + id_sp_data, body, { 'headers': this.headers })
+        return this.http.get<any>(this.urlCountNumber, { 'params': params, 'headers': this.headers })
             .pipe(
                 map((response) => {
                     return response;

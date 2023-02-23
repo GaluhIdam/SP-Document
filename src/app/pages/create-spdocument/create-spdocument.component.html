@@ -7,9 +7,9 @@
                         class="text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
                         <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon> Back</a>
                 </div>
-                <h1 class="text-lg font-semibold text-gray-900 text-center">Create SP Document</h1>
+                <h1 class="text-lg font-semibold text-gray-900 text-center max-[600px]:hidden">Create SP Document</h1>
             </div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-4">
                 <div class="form-control w-full px-4 py-1">
                     <label class="label">
                         <span class="label-text text-gray-900">Sender Nopeg</span>
@@ -17,7 +17,7 @@
                     <input type="text" formControlName="sender_personal_number" name="sender_personal_number"
                         id="sender_personal_number" placeholder="Please fill this..." [ngModel]="personal_number"
                         [ngClass]="{ 'is-invalid': mform.get('sender_personal_number')?.invalid && mform.get('sender_personal_number')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        class="bg-gray-100 disabled:bg-gray-300 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_personal_number')?.invalid && mform.get('sender_personal_number')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Nopeg is required and Number (0-9).
@@ -30,7 +30,7 @@
                     <input type="text" formControlName="sender_personal_name" name="sender_personal_name"
                         id="sender_personal_name" placeholder="Please fill this..." [ngModel]="personalName"
                         [ngClass]="{ 'is-invalid': mform.get('sender_personal_name')?.invalid && mform.get('sender_personal_name')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" />
+                        class="bg-gray-100 disabled:bg-gray-300 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" />
                     <p *ngIf="mform.get('sender_personal_name')?.invalid && mform.get('sender_personal_name')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Name is required & Alphabet (A-z).
@@ -43,7 +43,7 @@
                     <input type="text" formControlName="sender_unit" name="sender_unit" id="sender_unit"
                         placeholder="Please fill this..." [ngModel]="unit"
                         [ngClass]="{ 'is-invalid': mform.get('sender_unit')?.invalid && mform.get('sender_unit')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        class="bg-gray-100 disabled:bg-gray-300 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_unit')?.invalid && mform.get('sender_unit')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Unit is required.
@@ -55,24 +55,21 @@
                     </label>
                     <input type="date" formControlName="sender_date" id="sender_date" [ngModel]="dateNow"
                         [ngClass]="{'is-invalid': mform.get('sender_date')?.invalid && mform.get('sender_date')?.touched}"
-                        class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                        class="bg-gray-100 disabled:bg-gray-300 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
                     <p *ngIf="mform.get('sender_date')?.invalid && mform.get('sender_date')?.touched"
                         class="invalid-feedback mt-2 italic">
                         Sender Date is required.
                     </p>
                 </div>
+                <hr class="mt-5 min-[600px]:mb-5">
+                <hr class="min-[600px]:mt-5 mb-5">
                 <div class="form-control w-full px-4 py-1">
                     <label class="label">
-                        <span class="label-text text-gray-900">Receiver</span>
+                        <span class="label-text text-gray-900">Receiver Unit</span>
                     </label>
                     <input type="text" formControlName="receiver_unit" id="receiver_unit"
-                        placeholder="Please fill this..."
-                        [ngClass]="{'is-invalid': mform.get('receiver_unit')?.invalid && mform.get('receiver_unit')?.touched}"
+                        placeholder="e.g JKTTDI-2"
                         class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
-                    <p *ngIf="mform.get('receiver_unit')?.invalid && mform.get('receiver_unit')?.touched"
-                        class="invalid-feedback mt-2 italic">
-                        Receiver is required.
-                    </p>
                 </div>
             </div>
             <div class="px-4 mt-10">
@@ -92,8 +89,8 @@
                         <div class="row mb-5 text-gray-900">
                             <hr>
                         </div>
-                        <div class="flex" [formGroup]="document">
-                            <div class="w-fit">
+                        <div class="min-[600px]:flex" [formGroup]="document">
+                            <div class="max-[600px]:w-full min-[600px]:w-fit">
                                 <div class="form-control w-full px-2">
                                     <label class="label">
                                         <span class="label-text text-gray-900">QTY</span>
@@ -139,7 +136,7 @@
                             </div>
                             <div class="w-fit">
                                 <div class="form-control w-full px-2">
-                                    <label class="label">
+                                    <label class="label max-[600px]:hidden">
                                         <span class="label-text text-gray-900">Action</span>
                                     </label>
                                     <button (click)="addValue()" type="button"
@@ -148,37 +145,39 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <table class="mt-10 w-full">
-                                <thead>
-                                    <tr class="bg-soft-blue text-gray-900">
-                                        <th class="py-3">No.</th>
-                                        <th class="py-3">QTY</th>
-                                        <th class="py-3">Description</th>
-                                        <th class="py-3">Remark</th>
-                                        <th class="py-3">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white">
-                                    <tr class="bg-white text-gray-900" *ngFor="let datas of data; let i  = index">
-                                        <td class="py-2 text-center">{{ i + 1 }}</td>
-                                        <td class="py-2 text-center">{{ datas.quantity }}</td>
-                                        <td class="py-2 text-center">{{ datas.description }}</td>
-                                        <td class="py-2 text-center">{{ datas.remark }}</td>
-                                        <td class="py-2 text-center">
-                                            <button for="my-modal-3" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop" (click)="editDocument(i)"
-                                                class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
-                                                <fa-icon [icon]="faPenSquare"></fa-icon>
-                                            </button>
-                                            <button (click)="removeValue(i)"
-                                                class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
-                                                <fa-icon [icon]="faTrash"></fa-icon>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="row overflow-x-auto">
+                            <div class="py-2 inline-block min-w-full  px-1">
+                                <table class="mt-10 min-w-full">
+                                    <thead>
+                                        <tr class="bg-soft-blue text-gray-900">
+                                            <th class="py-3 px-5 whitespace-nowrap">No.</th>
+                                            <th class="py-3 px-5 whitespace-nowrap">QTY</th>
+                                            <th class="py-3 px-5 whitespace-nowrap">Description</th>
+                                            <th class="py-3 px-5 whitespace-nowrap">Remark</th>
+                                            <th class="py-3 px-5 whitespace-nowrap w-36">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white">
+                                        <tr class="bg-white text-gray-900" *ngFor="let datas of data; let i  = index">
+                                            <td class="py-2 px-5 text-center whitespace-nowrap">{{ i + 1 }}</td>
+                                            <td class="py-2 px-5 text-center whitespace-nowrap">{{ datas.quantity }}</td>
+                                            <td class="py-2 px-5 text-left whitespace-nowrap">{{ datas.description }}</td>
+                                            <td class="py-2 px-5 text-left whitespace-nowrap">{{ datas.remark }}</td>
+                                            <td class="py-2 px-5 text-center whitespace-nowrap">
+                                                <button for="my-modal-3" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop" (click)="editDocument(i)"
+                                                    class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-success text-success hover:border hover:border-white hover:bg-success hover:text-white">
+                                                    <fa-icon [icon]="faPenSquare"></fa-icon>
+                                                </button>
+                                                <button (click)="removeValue(i)"
+                                                    class="btn py-1 px-3 text-base mx-1 rounded-lg bg-white border border-danger text-danger hover:border hover:border-white hover:bg-danger hover:text-white">
+                                                    <fa-icon [icon]="faTrash"></fa-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,9 +244,9 @@
                 <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md">
                     <div class="columns-2 mt-5 mb-5 w-full flex justify-center">
                         <button type="button" data-bs-dismiss="modal"
-                            class="mb-2 mx-2 w-48 inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Cancel</button>
-                        <button type="submit"  data-bs-dismiss="modal" [disabled]="!edit_document.valid"
-                            class="mb-2 mx-2 w-48 inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
+                            class="mb-2 mx-2 w-full inline-block border-regal-blue border-regal-blue border p-2 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">Cancel</button>
+                        <button type="submit" data-bs-dismiss="modal" [disabled]="!edit_document.valid"
+                            class="mb-2 mx-2 w-full inline-block bg-regal-blue p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white">Save</button>
                     </div>
                 </div>
             </div>

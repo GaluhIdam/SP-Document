@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faChevronDown, faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faChevronDown, faMagnifyingGlass, faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { KeycloakService } from 'keycloak-angular';
+import { HeaderService } from 'src/app/shared/components/header/header.service';
 import Swal from 'sweetalert2';
 import { EditDocumentSerivice } from './edit-spdocument.service';
 
@@ -14,12 +16,20 @@ export class EditSpdocumentComponent {
   constructor(
     private route: ActivatedRoute,
     private editdocumentService: EditDocumentSerivice,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService,
+    private keycloakService: KeycloakService,
   ) { }
   faArrowLeft = faArrowLeft;
   faChevronDown = faChevronDown;
   faPenSquare = faPenSquare;
   faTrash = faTrash;
+  faMagnifyingGlass = faMagnifyingGlass;
+
+  personal_number: any;
+
+  sender_nopeg: any
+  dateNow!: String
 
   id: any;
 
@@ -43,8 +53,10 @@ export class EditSpdocumentComponent {
     sender_personal_number: new FormControl({ value: '', disabled: true }, [Validators.required]),
     sender_personal_name: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]),
     sender_unit: new FormControl({ value: '', disabled: true }, [Validators.required]),
-    sender_date: new FormControl('', [Validators.required]),
-    receiver_unit: new FormControl('', [Validators.required]),
+    sender_date: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    receiver_personal_number: new FormControl({ value:'', disabled: true }),
+    receiver_personal_name: new FormControl({ value: '', disabled: true }),
+    receiver_unit: new FormControl(''),
   });
   document: FormGroup = new FormGroup({
     quantity: new FormControl('', [Validators.required]),
@@ -59,6 +71,12 @@ export class EditSpdocumentComponent {
   })
 
   ngOnInit() {
+    this.initializeUserOptions()
+    this.getUserData(this.personal_number)
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+    this.mform.get('sender_date')?.setValue(formattedDate)
+
     this.id = this.route.snapshot.paramMap.get('id_sp_data');
     this.showDocument(this.id)
     this.showDescRemark(this.id)
@@ -69,11 +87,17 @@ export class EditSpdocumentComponent {
       .subscribe(
         (response) => {
           this.data_show = response.spdoc_data_by_pk
+          this.sender_nopeg =  response.spdoc_data_by_pk.sender_personal_number
+          if (this.personal_number != this.sender_nopeg) {
+            this.router.navigate(['/document-list']);
+          }
           this.mform.get('sender_personal_number')?.setValue(this.data_show.sender_personal_number)
           this.mform.get('sender_personal_name')?.setValue(this.data_show.sender_personal_name)
           this.mform.get('sender_unit')?.setValue(this.data_show.sender_unit)
-          this.mform.get('sender_date')?.setValue(this.data_show.sender_date)
+          this.dateNow = this.data_show.sender_date
           this.mform.get('receiver_unit')?.setValue(this.data_show.receiver_unit)
+          this.mform.get('receiver_personal_name')?.setValue(this.data_show.receiver_personal_name)
+          this.mform.get('receiver_personal_number')?.setValue(this.data_show.receiver_personal_number)
         }
       )
   }
@@ -230,7 +254,7 @@ export class EditSpdocumentComponent {
                 showConfirmButton: false,
                 timer: 1500
               }).then((result) => {
-                  this.showDescRemark(this.id)
+                this.showDescRemark(this.id)
               });
             }
           )
@@ -255,11 +279,35 @@ export class EditSpdocumentComponent {
       ).subscribe(
         () => {
           this.addValue()
-          console.log(this.data)
         }
       )
     } else {
       this.document.markAllAsTouched()
     }
+  }
+
+  public getUserReceiver(personal_number: any) {
+    this.headerService.getUserData(personal_number)
+      .subscribe(
+        (response) => {
+          this.mform.get('receiver_personal_name')?.setValue(response.personalName)
+          this.mform.get('receiver_unit')?.setValue(response.unit)
+        }
+      )
+  }
+
+  //GET Personal Number from Keycloak
+  private initializeUserOptions(): void {
+    this.personal_number = this.keycloakService.getUsername();
+  }
+
+  //Get Personal Info from SOE
+  private getUserData(personal_number: any): void {
+    this.headerService.getUserData(personal_number)
+      .subscribe(
+        (response) => {
+          this.personal_number = response.personalNumber
+        }
+      )
   }
 }

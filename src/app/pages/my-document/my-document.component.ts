@@ -1,21 +1,23 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { faSliders, faBookOpen, faListSquares, faHourglassStart, faCheck, faUser, faArrowRightArrowLeft, faCalendar, faCaretRight, faCaretLeft, faRefresh, faFilePdf, faCircleDown } from '@fortawesome/free-solid-svg-icons';
+import { faSliders, faBookOpen, faListSquares, faHourglassStart, faCheck, faUser, faArrowRightArrowLeft, faCalendar, faCaretRight, faCaretLeft, faRefresh, faFilePdf, faCircleDown, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime, Subscription } from 'rxjs';
-import { DashboardService } from './dashboard.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ViewDocumentService } from '../view-spdocument/view-document.service';
 import Swal from 'sweetalert2';
 import { KeycloakService } from 'keycloak-angular';
 import { HeaderService } from 'src/app/shared/components/header/header.service';
+import { DashboardService } from '../dashboard/dashboard.service';
+import { MyDocumentService } from './my-document.service';
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-my-document',
+  templateUrl: './my-document.component.html',
+  styleUrls: ['./my-document.component.css']
 })
-export class DashboardComponent {
+export class MyDocumentComponent {
   value: any = 123;
   faSliders = faSliders;
   faBookOpen = faBookOpen;
@@ -30,6 +32,7 @@ export class DashboardComponent {
   faRefresh = faRefresh;
   faFilePdf = faFilePdf;
   faCircleDown = faCircleDown;
+  faFilter = faFilter;
 
   //Order By
   created_at: String = 'desc';
@@ -80,11 +83,15 @@ export class DashboardComponent {
   receive_number: any;
   receive_date: any;
   data_pdf: any;
-  personal_number!: string;
-  user: any;
+  personal_number!: String;
+  user: any = {
+    personalName: String,
+    unit: String,
+  };
 
   constructor(
     private dashboardService: DashboardService,
+    private mydocumentService: MyDocumentService,
     private viewdocumentService: ViewDocumentService,
     private keycloakService: KeycloakService,
     private headerService: HeaderService,
@@ -101,13 +108,15 @@ export class DashboardComponent {
     sender_date_order: new FormControl(''),
     receiver_date_order: new FormControl(''),
     updated_at: new FormControl(''),
-    sender_unit: new FormControl(''),
-    receiver_unit: new FormControl(''),
+    sender_personal_number_p: new FormControl(''),
+    receiver_personal_number_p: new FormControl(''),
+    receiver_unit_p: new FormControl(''),
   });
 
   ngOnInit() {
     this.initializeUserOptions()
     this.getUserData(this.personal_number)
+    this.getByUnit()
     this.getCountAllTotal();
     this.getCountOpenTotal();
     this.getCountDeliveredTotal();
@@ -118,25 +127,28 @@ export class DashboardComponent {
             this.mform.get('page')?.setValue(1)
           }
           this.paginate()
-          this.getDataDocument(
-            this.mform.get('limit')?.value,
-            this.per_page,
-            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('status')?.value == '' ? '%%' : '%' + this.mform.get('status')?.value + '%',
+            this.getDataDocumentNumber(
+              this.mform.get('limit')?.value,
+              this.per_page,
+              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+              this.mform.get('status')?.value == '' ? '%%' : '%' + this.mform.get('status')?.value + '%',
 
-            this.mform.get('created_at')?.value == '' ? '' : this.mform.get('created_at')?.value,
-            this.mform.get('status_order')?.value == '' ? '' : this.mform.get('status_order')?.value,
-            this.mform.get('shipping_no_order')?.value == '' ? '' : this.mform.get('shipping_no_order')?.value,
-            this.mform.get('sender_date_order')?.value == '' ? '' : this.mform.get('sender_date_order')?.value,
-            this.mform.get('receiver_date_order')?.value == '' ? '' : this.mform.get('receiver_date_order')?.value,
-            this.mform.get('updated_at')?.value == '' ? '' : this.mform.get('updated_at')?.value,
-          )
+              this.mform.get('created_at')?.value == '' ? '' : this.mform.get('created_at')?.value,
+              this.mform.get('status_order')?.value == '' ? '' : this.mform.get('status_order')?.value,
+              this.mform.get('shipping_no_order')?.value == '' ? '' : this.mform.get('shipping_no_order')?.value,
+              this.mform.get('sender_date_order')?.value == '' ? '' : this.mform.get('sender_date_order')?.value,
+              this.mform.get('receiver_date_order')?.value == '' ? '' : this.mform.get('receiver_date_order')?.value,
+              this.mform.get('updated_at')?.value == '' ? '' : this.mform.get('updated_at')?.value,
+              this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('sender_personal_number_p')?.value + '%',
+              this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_personal_number_p')?.value + '%',
+              this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%',
+            )
         }
       )
   }
@@ -210,6 +222,21 @@ export class DashboardComponent {
     this.mform.get('updated_at')?.setValue('desc')
   }
 
+
+  public getByUnit() {
+    this.mform.get('receiver_unit_p')?.setValue('JKTTDI-2')
+    this.mform.get('sender_personal_number_p')?.setValue('')
+    this.mform.get('receiver_personal_number_p')?.setValue('')
+    this.loadData()
+  }
+  
+  public getByMyDocument() {
+    this.mform.get('receiver_unit_p')?.setValue('')
+    this.mform.get('sender_personal_number_p')?.setValue(this.personal_number)
+    this.mform.get('receiver_personal_number_p')?.setValue(this.personal_number)
+    this.loadData()
+  }
+
   public nextPage() {
     this.mform.get('page')?.setValue(this.mform.get('page')?.value + 1)
   }
@@ -219,24 +246,54 @@ export class DashboardComponent {
   }
 
   //TOTAL
-  public getCountAllTotal(cat_status: String = "%%"): void {
-    this.dashboardService.getCountCard(cat_status)
+  public getCountAllTotal(
+    cat_status: String = "%%",
+    sender_personal_number_p: any = this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : this.mform.get('sender_personal_number_p')?.value,
+    receiver_personal_number_p: any = this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : this.mform.get('receiver_personal_number_p')?.value,
+    receiver_unit_p: any = this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%'
+  ): void {
+    this.mydocumentService.getCountCardNumber(
+      cat_status,
+      sender_personal_number_p,
+      receiver_personal_number_p,
+      receiver_unit_p
+    )
       .subscribe(
         (response) => {
           this.countAll = response.spdoc_data_aggregate.aggregate.count
         }
       )
   }
-  public getCountOpenTotal(cat_status: String = "Open"): void {
-    this.dashboardService.getCountCard(cat_status)
+  public getCountOpenTotal(
+    cat_status: String = "Open",
+    sender_personal_number_p: any = this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : this.mform.get('sender_personal_number_p')?.value,
+    receiver_personal_number_p: any = this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : this.mform.get('receiver_personal_number_p')?.value,
+    receiver_unit_p: any = this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%'
+  ): void {
+    this.mydocumentService.getCountCardNumber(
+      cat_status,
+      sender_personal_number_p,
+      receiver_personal_number_p,
+      receiver_unit_p
+    )
       .subscribe(
         (response) => {
           this.countOpen = response.spdoc_data_aggregate.aggregate.count
         }
       )
   }
-  public getCountDeliveredTotal(cat_status: String = "Delivered"): void {
-    this.dashboardService.getCountCard(cat_status)
+  public getCountDeliveredTotal(
+    cat_status: String = "Delivered",
+    sender_personal_number_p: any = this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : this.mform.get('sender_personal_number_p')?.value,
+    receiver_personal_number_p: any = this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : this.mform.get('receiver_personal_number_p')?.value,
+    receiver_unit_p: any = this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%'
+  ): void {
+    this.mydocumentService.getCountCardNumber(
+      cat_status,
+      sender_personal_number_p,
+      receiver_personal_number_p,
+      receiver_unit_p
+    )
       .subscribe(
         (response) => {
           this.countDelivered = response.spdoc_data_aggregate.aggregate.count
@@ -288,7 +345,7 @@ export class DashboardComponent {
     this.mform.get('page')?.setValue(no)
   }
 
-  public getDataDocument(
+  public getDataDocumentNumber(
     limit: number,
     offset: number,
     sender_personal_name: any,
@@ -305,8 +362,11 @@ export class DashboardComponent {
     sender_date_order: any,
     receiver_date_order: any,
     updated_at: any,
+    sender_personal_number_p: any,
+    receiver_personal_number_p: any,
+    receiver_unit_p: any,
   ): void {
-    this.dashboardService.getDataDocument(
+    this.mydocumentService.getDataDocumentNumber(
       limit,
       offset,
       sender_personal_name,
@@ -323,6 +383,9 @@ export class DashboardComponent {
       sender_date_order,
       receiver_date_order,
       updated_at,
+      sender_personal_number_p,
+      receiver_personal_number_p,
+      receiver_unit_p
     ).subscribe(
       (response) => {
         this.data = response.spdoc_data
@@ -373,7 +436,7 @@ export class DashboardComponent {
           this.user.personalNumber,
           this.user.personalName,
           longdate,
-          this.user.unit,
+          'Delivered'
         ),
           Swal.fire({
             icon: 'success',
@@ -394,14 +457,14 @@ export class DashboardComponent {
     receiver_personal_number: any,
     receiver_personal_name: any,
     receiver_date: any,
-    receiver_unit: any,
+    status: any
   ): void {
     this.dashboardService.receiveDocument(
       id_sp_data,
       receiver_personal_number,
       receiver_personal_name,
       receiver_date,
-      receiver_unit
+      status
     ).subscribe((response) => {
       return response
     })
@@ -412,7 +475,7 @@ export class DashboardComponent {
     this.getCountOpenTotal();
     this.getCountDeliveredTotal();
     this.paginate()
-    this.getDataDocument(
+    this.getDataDocumentNumber(
       this.mform.get('limit')?.value,
       this.per_page,
       this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
@@ -430,6 +493,9 @@ export class DashboardComponent {
       this.mform.get('sender_date_order')?.value == '' ? '' : this.mform.get('sender_date_order')?.value,
       this.mform.get('receiver_date_order')?.value == '' ? '' : this.mform.get('receiver_date_order')?.value,
       this.mform.get('updated_at')?.value == '' ? '' : this.mform.get('updated_at')?.value,
+      this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('sender_personal_number_p')?.value + '%',
+      this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_personal_number_p')?.value + '%',
+      this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%',
     )
   }
 }

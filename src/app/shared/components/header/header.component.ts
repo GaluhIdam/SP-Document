@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { faAngleRight, faBell, faChevronDown, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
@@ -6,17 +6,24 @@ import { KeycloakService } from 'keycloak-angular';
 import { filter } from 'rxjs/operators';
 import { HeaderService } from './header.service';
 
+@Injectable({
+  providedIn: 'root'
+})
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   template: `{{data}}`
 })
+
 export class HeaderComponent {
   faAngleRight = faAngleRight;
   faBell = faBell;
   faChevronDown = faChevronDown;
   faRightFromBracket = faRightFromBracket;
+
+  navbar: boolean = false;
 
   url_local: any = 'http://localhost:4200'
   title: any;
@@ -83,6 +90,10 @@ export class HeaderComponent {
   }
 
   public logout(): void {
-    window.location.href = "https://dev-auth.gmf-aeroasia.co.id/auth/realms/spdoc/protocol/openid-connect/logout?";
+    this.keycloakService.logout().then(() => this.keycloakService.clearToken());
+  }
+
+  public showHide() {
+    this.navbar = true;
   }
 }

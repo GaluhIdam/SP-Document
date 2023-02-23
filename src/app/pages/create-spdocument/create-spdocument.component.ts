@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { faArrowLeft, faChevronDown, faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faChevronDown, faPenSquare, faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { CreateDocument } from 'src/app/core/interfaces/create-sp-document.dto';
 import { Router } from '@angular/router';
@@ -26,6 +26,7 @@ export class CreateSpdocumentComponent {
   faChevronDown = faChevronDown;
   faPenSquare = faPenSquare;
   faTrash = faTrash;
+  faMagnifyingGlass = faMagnifyingGlass;
 
   dateNow!: String
   personal_number!: String;
@@ -39,22 +40,18 @@ export class CreateSpdocumentComponent {
     description: String | null;
   }[] = [];
 
-  receiver_personal_name: String = "";
-  receiver_personal_number: String = "";
-  receiver_date: String = "";
 
   status: String = "Open"
 
-  myDate = new Date()
   id_spdoc!: any;
   id_document!: number;
 
   mform: FormGroup = new FormGroup({
-    sender_personal_number: new FormControl({value: this.personal_number, disabled: true}, [Validators.required, Validators.pattern('^[0-9]+$')]),
-    sender_personal_name: new FormControl({value: this.personalName, disabled: true}, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]),
-    sender_date: new FormControl({value: this.dateNow, disabled: true}, [Validators.required]),
-    sender_unit: new FormControl({value: this.unit, disabled: true}, [Validators.required]),
-    receiver_unit: new FormControl('', [Validators.required]),
+    sender_personal_number: new FormControl({ value: this.personal_number, disabled: true }, [Validators.required, Validators.pattern('^[0-9]+$')]),
+    sender_personal_name: new FormControl({ value: this.personalName, disabled: true }, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]),
+    sender_date: new FormControl({ value: this.dateNow, disabled: true }, [Validators.required]),
+    sender_unit: new FormControl({ value: this.unit, disabled: true }, [Validators.required]),
+    receiver_unit: new FormControl(''),
   });
   document: FormGroup = new FormGroup({
     quantity: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
@@ -78,24 +75,35 @@ export class CreateSpdocumentComponent {
   }
 
   public submitDocument() {
-    if (this.mform.valid) {
-      this.createdocumentService.getLastID()
-        .subscribe(
-          (response) => {
-            if (response.spdoc_data.length > 0) {
-              this.id_spdoc = (parseInt(response.spdoc_data[0].shipping_no) + 1).toString().padStart(12, "0");
-              this.createDocument()
-            }
-            else {
-              this.id_spdoc = "000000000001"
-              this.createDocument()
-            }
-          }
-        )
+    if (this.data.length > 0) {
+      Swal.fire({
+        title: 'Create It?',
+        showDenyButton: true,
+        text: "Are you sure want to create this document?",
+        icon: 'question',
+        denyButtonText: `Cancel`,
+        confirmButtonText: 'Create'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.createdocumentService.getLastID()
+            .subscribe(
+              (response) => {
+                if (response.spdoc_data.length > 0) {
+                  this.id_spdoc = (parseInt(response.spdoc_data[0].shipping_no) + 1).toString().padStart(12, "0");
+                  this.createDocument()
+                }
+                else {
+                  this.id_spdoc = "000000000001"
+                  this.createDocument()
+                }
+              }
+            )
+        }
+      });
     } else {
       Swal.fire({
         title: 'Failed!',
-        text: 'Validation Error!',
+        text: 'Please insert document!',
         icon: 'error',
         confirmButtonText: 'OK'
       }).then((result) => {
@@ -133,11 +141,10 @@ export class CreateSpdocumentComponent {
           title: 'Success!',
           text: 'Document has created!',
           icon: 'success',
-          confirmButtonText: 'OK'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigate(['/document-list']);
-          }
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          this.router.navigate(['/dashboard']);
         });
       }
     )
@@ -201,6 +208,16 @@ export class CreateSpdocumentComponent {
         (response) => {
           this.personalName = response.personalName
           this.unit = response.unit
+        }
+      )
+  }
+
+  public getUserReceiver(personal_number: any) {
+    this.headerService.getUserData(personal_number)
+      .subscribe(
+        (response) => {
+          this.mform.get('receiver_personal_name')?.setValue(response.personalName)
+          this.mform.get('receiver_unit')?.setValue(response.unit)
         }
       )
   }

@@ -6,9 +6,9 @@
                     class="text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
                     <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon> Back</a>
             </div>
-            <h1 class="text-lg font-semibold text-gray-900 text-center">View SP Document</h1>
+            <h1 class="text-lg font-semibold text-gray-900 text-center max-[600px]:hidden">View SP Document</h1>
         </div>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-4">
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Sender Nopeg</span>
@@ -27,7 +27,7 @@
                 <label class="label">
                     <span class="label-text text-gray-900">Sender Unit</span>
                 </label>
-                <input type="text" [value]="data.sender_unit == '' || data.sender_unit == null ? '-' : data.sender_unit" disabled
+                <input type="text" [value]="data.sender_unit == '' || data.sender_unit == null ? '-' : data.sender_unit"
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
@@ -37,6 +37,8 @@
                 <input type="date" [value]="data.sender_date == '' || data.sender_date == null ? null : data.sender_date" disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
+            <hr class="mt-5 min-[600px]:mb-5">
+            <hr class="min-[600px]:mt-5 mb-5">
             <div class="form-control w-full px-4 py-1">
                 <label class="label">
                     <span class="label-text text-gray-900">Receiver Nopeg</span>
@@ -67,22 +69,22 @@
             </div>
         </div>
         <div class="px-4 mt-10">
-            <div class="row">
-                <table class="mt-10 w-full">
+            <div class="row overflow-x-auto">
+                <table class="mt-10  min-w-full">
                     <thead>
                         <tr class="bg-soft-blue text-gray-900">
-                            <th class="py-3">No.</th>
-                            <th class="py-3">QTY</th>
-                            <th class="py-3">Description</th>
-                            <th class="py-3">Remark</th>
+                            <th class="py-3 px-5 whitespace-nowrap">No.</th>
+                            <th class="py-3 px-5 whitespace-nowrap">QTY</th>
+                            <th class="py-3 px-5 whitespace-nowrap">Description</th>
+                            <th class="py-3 px-5 whitespace-nowrap">Remark</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white">
                         <tr class="bg-white text-gray-900" *ngFor="let row of data.spdoc_description_remarks; let i = index">
-                            <td class="py-2 text-center">{{ i + 1 }}</td>
-                            <td class="py-2 text-center">{{ row.quantity }}</td>
-                            <td class="py-2 text-center">{{ row.description }}</td>
-                            <td class="py-2 text-center">{{ row.remark }}</td>
+                            <td class="py-2 text-center px-5 whitespace-nowrap">{{ i + 1 }}</td>
+                            <td class="py-2 text-center px-5 whitespace-nowrap">{{ row.quantity }}</td>
+                            <td class="py-2 text-left px-5 whitespace-nowrap">{{ row.description }}</td>
+                            <td class="py-2 text-left px-5 whitespace-nowrap">{{ row.remark }}</td>
                         </tr>
                     </tbody>
                 </table>

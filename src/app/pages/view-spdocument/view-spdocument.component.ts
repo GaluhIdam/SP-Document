@@ -54,7 +54,6 @@ export class ViewSpdocumentComponent {
       .subscribe(
         (response) => {
           this.data = response.spdoc_data_by_pk
-          console.log(this.data)
           this.sp_no = response.spdoc_data_by_pk.shipping_no
           this.data_pdf = response.spdoc_data_by_pk.spdoc_description_remarks
           this.receiver = response.spdoc_data_by_pk.receiver_unit
