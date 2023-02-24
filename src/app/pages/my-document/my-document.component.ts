@@ -89,6 +89,8 @@ export class MyDocumentComponent {
     unit: String,
   };
 
+  unit_x!: String;
+
   constructor(
     private dashboardService: DashboardService,
     private mydocumentService: MyDocumentService,
@@ -224,7 +226,7 @@ export class MyDocumentComponent {
 
 
   public getByUnit() {
-    this.mform.get('receiver_unit_p')?.setValue('JKTTDI-2')
+    this.getUserData(this.personal_number)
     this.mform.get('sender_personal_number_p')?.setValue('')
     this.mform.get('receiver_personal_number_p')?.setValue('')
     this.loadData()
@@ -406,6 +408,7 @@ export class MyDocumentComponent {
       .subscribe(
         (response) => {
           this.user = response
+          this.mform.get('receiver_unit_p')?.setValue(response.unit)
         }
       )
   }
@@ -435,8 +438,7 @@ export class MyDocumentComponent {
           id_sp_data,
           this.user.personalNumber,
           this.user.personalName,
-          longdate,
-          'Delivered'
+          longdate
         ),
           Swal.fire({
             icon: 'success',
@@ -456,15 +458,13 @@ export class MyDocumentComponent {
     id_sp_data: any,
     receiver_personal_number: any,
     receiver_personal_name: any,
-    receiver_date: any,
-    status: any
+    receiver_date: any
   ): void {
     this.dashboardService.receiveDocument(
       id_sp_data,
       receiver_personal_number,
       receiver_personal_name,
       receiver_date,
-      status
     ).subscribe((response) => {
       return response
     })

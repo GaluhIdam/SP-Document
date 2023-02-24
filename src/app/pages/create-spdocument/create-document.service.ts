@@ -19,6 +19,7 @@ export class CreateDocumentService {
     //Routes
     urlLastDocument: any = this.base_url + 'last-sp-document';
     urlCreateDocument: any = this.base_url + 'create-sp-document';
+    urlNotif: any = this.base_url + 'insert-notif';
 
     //Credentials
     headers = new HttpHeaders()
@@ -65,6 +66,30 @@ export class CreateDocumentService {
         }
 
         return this.http.post<any>(this.urlCreateDocument, body, { 'headers': this.headers })
+            .pipe(
+                map((response) => {
+                    return response;
+                }),
+                catchError((error) => {
+                    throw error
+                })
+            )
+    }
+
+    //Insert Notif
+    insertNotif(
+        id_spdoc: any,
+        status: any,
+        title: any,
+        unit: any
+    ): Observable<any> {
+        const body = {
+            "id_spdoc": id_spdoc,
+            "status": status,
+            "title": title,
+            "unit": unit
+        }
+        return this.http.post<any>(this.urlNotif, body, { 'headers': this.headers })
             .pipe(
                 map((response) => {
                     return response;

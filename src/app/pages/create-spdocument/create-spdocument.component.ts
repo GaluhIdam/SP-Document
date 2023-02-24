@@ -136,7 +136,16 @@ export class CreateSpdocumentComponent {
       shipping_no,
       data,
     ).subscribe(
-      () => {
+      (response) => {
+        console.log(response)
+        if(response.insert_spdoc_data.returning[0].receiver_unit != '' || null) {
+          this.insertNotif(
+            response.insert_spdoc_data.returning[0].id_sp_data,
+            'false',
+            'New SP Document',
+            response.insert_spdoc_data.returning[0].receiver_unit
+          )
+        }
         Swal.fire({
           title: 'Success!',
           text: 'Document has created!',
@@ -179,6 +188,25 @@ export class CreateSpdocumentComponent {
 
   public removeValue(i: number) {
     this.data.splice(i, 1)
+  }
+
+  //Notif
+  private insertNotif(
+    id_spdoc: any,
+    status: any,
+    title: any,
+    unit: any
+  ): void {
+    this.createdocumentService.insertNotif(
+      id_spdoc,
+      status,
+      title,
+      unit
+    ).subscribe(
+      (response) => {
+        return response;
+      }
+    )
   }
 
   public clearForm(): void {

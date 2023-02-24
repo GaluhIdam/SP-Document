@@ -1,10 +1,15 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { faAngleRight, faBell, faChevronDown, faRightFromBracket, faHouse, faTicketSimple, faInbox, faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
-import { filter } from 'rxjs/operators';
+import { interval } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
+import { baseURL } from 'src/app/core/services/baseURL';
 import { LayoutService } from '../layout/layout.service';
+import { SidebarService } from './sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,21 +31,42 @@ export class SidebarComponent {
   url_local: any = 'http://localhost:4200'
   title: any;
 
+  notif: any = {
+    spdoc_notif: []
+  };
+
   personal_number: any;
-  user: any  = {
+  user: any = {
     personalName: String,
     unit: String,
   };
 
+  mform: FormGroup = new FormGroup({
+    receiver_unit_p: new FormControl(''),
+  })
+
   photo: any;
   photo_default: any = 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg';
   navbar: boolean = true;
+
+  //Base URL
+  base_url: String = baseURL.BASE_URL
+  //Routes
+  urlNotif: any = this.base_url + 'get-notif';
+
+  //Credentials
+  headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Hasura-Client-Name', 'hasura-console')
+    .set('x-hasura-admin-secret', 'h4sur4forB3tt3r4pi');
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private keycloakService: KeycloakService,
     private layoutService: LayoutService,
+    private http: HttpClient,
+    private sidebarService: SidebarService
   ) {
   }
 
@@ -65,6 +91,22 @@ export class SidebarComponent {
       })
   }
 
+  startPolling(
+    status: any,
+    unit: any,
+  ) {
+
+    const params = new HttpParams()
+      .set('status', status)
+      .set('unit', unit);
+
+    interval(500).pipe(
+      switchMap(() => this.http.get(this.urlNotif, { 'params': params, 'headers': this.headers }))
+    ).subscribe((response) => {
+      this.notif = response
+    });
+  }
+
   getChild(activatedRoute: ActivatedRoute): any {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
@@ -84,6 +126,8 @@ export class SidebarComponent {
       .subscribe(
         (response) => {
           this.user = response
+          this.mform.get('receiver_unit_p')?.setValue(response.unit)
+          this.startPolling('false', this.mform.get('receiver_unit_p')?.value)
         }
       )
   }
@@ -93,10 +137,23 @@ export class SidebarComponent {
   }
 
   public showHide() {
-    if(this.navbar == false) {
+    if (this.navbar == false) {
       this.navbar = true;
     } else {
       this.navbar = false;
     }
   }
+
+  public showDocument(id_sp_data: number, id_notif: any): void {
+    this.readNotif(id_notif)
+    this.router.navigate(['/view-spdocument/' + id_sp_data]);
+  }
+
+  public readNotif(id_notif: any): void {
+    this.sidebarService.readNotif(id_notif).subscribe(
+      (response) => {
+        return response;
+      }
+    )
+  } 
 }

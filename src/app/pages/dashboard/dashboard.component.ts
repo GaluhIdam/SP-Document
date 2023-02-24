@@ -128,7 +128,7 @@ export class DashboardComponent {
             this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
             this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
             this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-            this.mform.get('status')?.value == '' ? '%%' : '%' + this.mform.get('status')?.value + '%',
+            'Delivered',
 
             this.mform.get('created_at')?.value == '' ? '' : this.mform.get('created_at')?.value,
             this.mform.get('status_order')?.value == '' ? '' : this.mform.get('status_order')?.value,
@@ -373,7 +373,6 @@ export class DashboardComponent {
           this.user.personalNumber,
           this.user.personalName,
           longdate,
-          this.user.unit,
         ),
           Swal.fire({
             icon: 'success',
@@ -394,14 +393,12 @@ export class DashboardComponent {
     receiver_personal_number: any,
     receiver_personal_name: any,
     receiver_date: any,
-    receiver_unit: any,
   ): void {
     this.dashboardService.receiveDocument(
       id_sp_data,
       receiver_personal_number,
       receiver_personal_name,
       receiver_date,
-      receiver_unit
     ).subscribe((response) => {
       return response
     })
@@ -431,5 +428,11 @@ export class DashboardComponent {
       this.mform.get('receiver_date_order')?.value == '' ? '' : this.mform.get('receiver_date_order')?.value,
       this.mform.get('updated_at')?.value == '' ? '' : this.mform.get('updated_at')?.value,
     )
+  }
+
+  ngOnDestroy() {
+    this.getCountAllTotal();
+    this.getCountOpenTotal();
+    this.getCountDeliveredTotal();
   }
 }

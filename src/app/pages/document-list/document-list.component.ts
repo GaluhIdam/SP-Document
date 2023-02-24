@@ -573,7 +573,6 @@ export class DocumentListComponent {
           this.user.personalNumber,
           this.user.personalName,
           longdate,
-          'Delivered'
         ),
           Swal.fire({
             icon: 'success',
@@ -595,14 +594,12 @@ export class DocumentListComponent {
     receiver_personal_number: any,
     receiver_personal_name: any,
     receiver_date: any,
-    status: any
   ): void {
     this.dashboardService.receiveDocument(
       id_sp_data,
       receiver_personal_number,
       receiver_personal_name,
       receiver_date,
-      status
     ).subscribe((response) => {
       return response
     })

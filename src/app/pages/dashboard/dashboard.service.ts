@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { interval, Observable } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { baseURL } from 'src/app/core/services/baseURL';
 
-@Injectable(
-    {
-        providedIn: 'root'
-    }
-)
+@Injectable({
+    providedIn: 'root'
+})
 export class DashboardService {
     constructor(private http: HttpClient) { }
 
@@ -133,14 +131,12 @@ export class DashboardService {
         receiver_personal_number: any,
         receiver_personal_name: any,
         receiver_date: any,
-        receiver_unit: any,
     ): Observable<any> {
         const body = {
             'id_sp_data': id_sp_data,
             'receiver_personal_number': receiver_personal_number,
             'receiver_personal_name': receiver_personal_name,
             'receiver_date': receiver_date,
-            'receiver_unit': receiver_unit,
             'status': 'Delivered',
         }
         return this.http.put(this.urlReceive + id_sp_data, body, { 'headers': this.headers })

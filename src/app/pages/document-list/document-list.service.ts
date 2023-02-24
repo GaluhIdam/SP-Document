@@ -4,11 +4,9 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { baseURL } from 'src/app/core/services/baseURL';
 
-@Injectable(
-    {
-        providedIn: 'root'
-    }
-)
+@Injectable({
+    providedIn: 'root'
+})
 export class DocumentListService {
 
     constructor(private http: HttpClient) { }
@@ -49,7 +47,7 @@ export class DocumentListService {
         receiver_personal_name_order: any,
         receiver_date_order: any,
         receiver_unit_order: any,
-        sender_unit_order:any
+        sender_unit_order: any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
@@ -107,7 +105,7 @@ export class DocumentListService {
         receiver_personal_name_order: any,
         receiver_date_order: any,
         receiver_unit_order: any,
-        sender_unit_order:any
+        sender_unit_order: any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
@@ -166,7 +164,7 @@ export class DocumentListService {
         receiver_personal_name_order: any,
         receiver_date_order: any,
         receiver_unit_order: any,
-        sender_unit_order:any
+        sender_unit_order: any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
@@ -226,7 +224,7 @@ export class DocumentListService {
         receiver_personal_name_order: any,
         receiver_date_order: any,
         receiver_unit_order: any,
-        sender_unit_order:any
+        sender_unit_order: any
     ): Observable<any> {
         const params = new HttpParams()
             .set('shipping_no', shipping_no)
