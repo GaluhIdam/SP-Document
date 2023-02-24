@@ -78,9 +78,17 @@
                 </div>
                 <div class="col-end-7 flex">
                     <!-- Notifications -->
-                    <button
+                    <button *ngIf="notif.spdoc_notif.length == 0"
                         class="dropdown-toggle py-1 mr-3 text-regal-blue border border-regal-blue rounded-lg hover:bg-regal-blue hover:text-white focus:bg-regal-blue focus:text-white"
                         type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <fa-icon [icon]="faBell" class="mx-3"></fa-icon>
+                    </button>
+                    <button *ngIf="notif.spdoc_notif.length > 0"
+                        class="dropdown-toggle py-1 mr-3 text-regal-blue border border-regal-blue rounded-lg hover:bg-regal-blue hover:text-white focus:bg-regal-blue focus:text-white"
+                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div
+                            class="absolute top-0 max-[600px]:right-19 bottom-auto left-auto z-10 inline-block translate-x-2/4 -translate-y-1/2 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 rounded-full bg-danger p-2.5 text-xs">
+                        </div>
                         <fa-icon [icon]="faBell" class="mx-3"></fa-icon>
                     </button>
                     <ul class="dropdown-menu max-[600px]:w-screen absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
@@ -93,9 +101,9 @@
                                 <hr>
                             </div>
                             <!-- List Notif -->
-                            <div  *ngFor="let row of notif.spdoc_notif">
-                                <button class="px-5 flex py-3 text-left" (click)="showDocument(row.id_spdoc, row.id_notif)" type="button"
-                                   >
+                            <div *ngFor="let row of notif.spdoc_notif">
+                                <button class="px-5 flex py-3 text-left"
+                                    (click)="showDocument(row.id_spdoc, row.id_notif)" type="button">
                                     <div class="columns-1 mr-3 w-12">
                                         <img class="w-10 h-10 rounded-full"
                                             [src]="'https://talentlead.gmf-aeroasia.co.id/images/avatar/' + row.notif_spdoc.sender_personal_number + '.jpg'"
@@ -105,9 +113,10 @@
                                         <h4 class="font-semibold max-[600px]:text-xs">
                                             <span
                                                 class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger text-white px-[0.65em] pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-semibold leading-none text-primary-700">New</span>
-                                                {{row.title}} from {{row.notif_spdoc.sender_personal_name}}
+                                            {{row.title}} from {{row.notif_spdoc.sender_personal_name}}
                                         </h4>
-                                        <p class="text-xs font-normal  max-[600px]:text-xs text-muted text-gray-400 py-1">
+                                        <p
+                                            class="text-xs font-normal  max-[600px]:text-xs text-muted text-gray-400 py-1">
                                             {{row.created_at | date: 'fullDate'}}</p>
                                     </div>
                                 </button>
