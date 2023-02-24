@@ -119,9 +119,6 @@ export class MyDocumentComponent {
     this.initializeUserOptions()
     this.getUserData(this.personal_number)
     this.getByUnit()
-    this.getCountAllTotal();
-    this.getCountOpenTotal();
-    this.getCountDeliveredTotal();
     this.obs = this.mform.valueChanges
       .pipe(debounceTime(500)).subscribe(
         () => {
@@ -129,28 +126,28 @@ export class MyDocumentComponent {
             this.mform.get('page')?.setValue(1)
           }
           this.paginate()
-            this.getDataDocumentNumber(
-              this.mform.get('limit')?.value,
-              this.per_page,
-              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-              this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
-              this.mform.get('status')?.value == '' ? '%%' : '%' + this.mform.get('status')?.value + '%',
+          this.getDataDocumentNumber(
+            this.mform.get('limit')?.value,
+            this.per_page,
+            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+            this.mform.get('search_global')?.value == '' ? '%%' : '%' + this.mform.get('search_global')?.value + '%',
+            this.mform.get('status')?.value == '' ? '%%' : '%' + this.mform.get('status')?.value + '%',
 
-              this.mform.get('created_at')?.value == '' ? '' : this.mform.get('created_at')?.value,
-              this.mform.get('status_order')?.value == '' ? '' : this.mform.get('status_order')?.value,
-              this.mform.get('shipping_no_order')?.value == '' ? '' : this.mform.get('shipping_no_order')?.value,
-              this.mform.get('sender_date_order')?.value == '' ? '' : this.mform.get('sender_date_order')?.value,
-              this.mform.get('receiver_date_order')?.value == '' ? '' : this.mform.get('receiver_date_order')?.value,
-              this.mform.get('updated_at')?.value == '' ? '' : this.mform.get('updated_at')?.value,
-              this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('sender_personal_number_p')?.value + '%',
-              this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_personal_number_p')?.value + '%',
-              this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%',
-            )
+            this.mform.get('created_at')?.value == '' ? '' : this.mform.get('created_at')?.value,
+            this.mform.get('status_order')?.value == '' ? '' : this.mform.get('status_order')?.value,
+            this.mform.get('shipping_no_order')?.value == '' ? '' : this.mform.get('shipping_no_order')?.value,
+            this.mform.get('sender_date_order')?.value == '' ? '' : this.mform.get('sender_date_order')?.value,
+            this.mform.get('receiver_date_order')?.value == '' ? '' : this.mform.get('receiver_date_order')?.value,
+            this.mform.get('updated_at')?.value == '' ? '' : this.mform.get('updated_at')?.value,
+            this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('sender_personal_number_p')?.value + '%',
+            this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_personal_number_p')?.value + '%',
+            this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%',
+          )
         }
       )
   }
@@ -231,7 +228,7 @@ export class MyDocumentComponent {
     this.mform.get('receiver_personal_number_p')?.setValue('')
     this.loadData()
   }
-  
+
   public getByMyDocument() {
     this.mform.get('receiver_unit_p')?.setValue('')
     this.mform.get('sender_personal_number_p')?.setValue(this.personal_number)
@@ -409,6 +406,9 @@ export class MyDocumentComponent {
         (response) => {
           this.user = response
           this.mform.get('receiver_unit_p')?.setValue(response.unit)
+          this.getCountAllTotal();
+          this.getCountOpenTotal();
+          this.getCountDeliveredTotal();
         }
       )
   }

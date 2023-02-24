@@ -95,12 +95,11 @@ export class SidebarComponent {
     status: any,
     unit: any,
   ) {
-
     const params = new HttpParams()
       .set('status', status)
       .set('unit', unit);
 
-    interval(500).pipe(
+    interval(1000).pipe(
       switchMap(() => this.http.get(this.urlNotif, { 'params': params, 'headers': this.headers }))
     ).subscribe((response) => {
       this.notif = response
