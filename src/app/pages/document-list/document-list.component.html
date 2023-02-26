@@ -412,7 +412,7 @@
                                                             class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-regal-blue active:bg-gray-200 hover:bg-gray-100"><fa-icon
                                                                 [icon]="faFileInvoice" class="mr-1"></fa-icon>
                                                             Letter</button>
-                                                        <div *ngIf="row.status == 'Open'">
+                                                        <div *ngIf="row.status == 'Open' && row.receiver_unit == mform.get('receiver_unit_user')?.value && mform.get('receiver_unit_p')?.value != ''">
                                                             <div class="px-4">
                                                                 <hr>
                                                             </div>

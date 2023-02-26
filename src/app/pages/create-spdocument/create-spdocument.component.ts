@@ -71,7 +71,6 @@ export class CreateSpdocumentComponent {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
     this.dateNow = formattedDate
-
   }
 
   public submitDocument() {
@@ -119,7 +118,7 @@ export class CreateSpdocumentComponent {
     sender_personal_name: String = this.mform.controls['sender_personal_name'].value,
     sender_date: Date = this.mform.controls['sender_date'].value,
     sender_unit: String = this.mform.controls['sender_unit'].value,
-    receiver_unit: String = this.mform.controls['receiver_unit'].value,
+    receiver_unit: String = this.mform.controls['receiver_unit'].value.toUpperCase(),
     created_by: String = this.mform.controls['sender_personal_name'].value,
     status: String = this.status,
     shipping_no: number = this.id_spdoc,
@@ -137,7 +136,6 @@ export class CreateSpdocumentComponent {
       data,
     ).subscribe(
       (response) => {
-        console.log(response)
         if(response.insert_spdoc_data.returning[0].receiver_unit != '' || null) {
           this.insertNotif(
             response.insert_spdoc_data.returning[0].id_sp_data,
@@ -153,7 +151,7 @@ export class CreateSpdocumentComponent {
           showConfirmButton: false,
           timer: 1500
         }).then(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/my-document']);
         });
       }
     )
@@ -204,7 +202,16 @@ export class CreateSpdocumentComponent {
       unit
     ).subscribe(
       (response) => {
+        this.sendNotif(unit)
         return response;
+      }
+    )
+  }
+
+  public sendNotif(unit: any): void {
+    this.createdocumentService.pushNotif(unit, 'false').subscribe(
+      (response) => {
+        return response
       }
     )
   }

@@ -5,9 +5,12 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { faAngleRight, faBell, faChevronDown, faRightFromBracket, faHouse, faTicketSimple, faInbox, faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
+import { ToastrService } from 'ngx-toastr';
 import { interval } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
+import { io } from 'socket.io-client';
 import { baseURL } from 'src/app/core/services/baseURL';
+import Swal from 'sweetalert2';
 import { LayoutService } from '../layout/layout.service';
 import { SidebarService } from './sidebar.service';
 
@@ -17,6 +20,8 @@ import { SidebarService } from './sidebar.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  socket: any;
+
   faAngleRight = faAngleRight;
   faBell = faBell;
   faChevronDown = faChevronDown;
@@ -51,8 +56,6 @@ export class SidebarComponent {
 
   //Base URL
   base_url: String = baseURL.BASE_URL
-  //Routes
-  urlNotif: any = this.base_url + 'get-notif';
 
   //Credentials
   headers = new HttpHeaders()
@@ -60,19 +63,21 @@ export class SidebarComponent {
     .set('Hasura-Client-Name', 'hasura-console')
     .set('x-hasura-admin-secret', 'h4sur4forB3tt3r4pi');
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private keycloakService: KeycloakService,
     private layoutService: LayoutService,
-    private http: HttpClient,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private toastr: ToastrService
   ) {
   }
 
   ngOnInit() {
     this.initializeUserOptions()
     this.getUserData(this.personal_number)
+    this.getRealtimeNotif()
     this.photo = 'https://talentlead.gmf-aeroasia.co.id/images/avatar/' + this.personal_number + '.jpg';
     this.activatedRoute.data.subscribe(data => {
       this.title = data;
@@ -91,22 +96,15 @@ export class SidebarComponent {
       })
   }
 
-  startPolling(
-    status: any,
-    unit: any,
-  ) {
-    const params = new HttpParams()
-      .set('status', status)
-      .set('unit', unit);
-
-    interval(1000).pipe(
-      switchMap(() => this.http.get(this.urlNotif, { 'params': params, 'headers': this.headers }))
+  public getNotif(status: any, unit: any): void {
+    this.sidebarService.getNotif(
+      status, unit
     ).subscribe((response) => {
       this.notif = response
-    });
+    })
   }
 
-  getChild(activatedRoute: ActivatedRoute): any {
+  private getChild(activatedRoute: ActivatedRoute): any {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
     } else {
@@ -126,7 +124,7 @@ export class SidebarComponent {
         (response) => {
           this.user = response
           this.mform.get('receiver_unit_p')?.setValue(response.unit)
-          this.startPolling('false', this.mform.get('receiver_unit_p')?.value)
+          this.getNotif('false', this.mform.get('receiver_unit_p')?.value)
         }
       )
   }
@@ -143,16 +141,32 @@ export class SidebarComponent {
     }
   }
 
-  public showDocument(id_sp_data: number, id_notif: any): void {
-    this.readNotif(id_notif)
-    this.router.navigate(['/view-spdocument/' + id_sp_data]);
+  public showDocument(id_sp_data: number, id_notif: number): void {
+    this.router.navigate(['/view-spdocument/' + id_sp_data], { queryParams: { id: id_notif } });
   }
 
-  public readNotif(id_notif: any): void {
-    this.sidebarService.readNotif(id_notif).subscribe(
-      (response) => {
-        return response;
+  private getRealtimeNotif() {
+    this.socket = io('http://172.16.41.107:8380');
+    this.socket.on('connect', () => {
+      console.log('Connected');
+    });
+    //Get Data Socket
+    this.socket.on('notification/spdoc', (data: any) => {
+      if (data.data.unit == this.mform.get('receiver_unit_p')?.value && data.data.status == 'false') {
+        this.getNotif('false', this.mform.get('receiver_unit_p')?.value)
+        this.toastr.info('New SP Document', 'Notification');
+      } else {
+        this.getNotif('false', this.mform.get('receiver_unit_p')?.value)
       }
-    )
-  } 
+    });
+    this.socket.on('events', function (data: any) {
+      console.log('event', data);
+    });
+    this.socket.on('exception', function (data: any) {
+      console.log('event', data);
+    });
+    this.socket.on('disconnect', function () {
+      console.log('Disconnected');
+    });
+  }
 }

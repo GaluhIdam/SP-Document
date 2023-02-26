@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft, faChevronDown, faMagnifyingGlass, faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
 import { HeaderService } from 'src/app/shared/components/header/header.service';
+import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
 import Swal from 'sweetalert2';
+import { CreateDocumentService } from '../create-spdocument/create-document.service';
 import { EditDocumentSerivice } from './edit-spdocument.service';
 
 @Component({
@@ -13,12 +15,15 @@ import { EditDocumentSerivice } from './edit-spdocument.service';
   styleUrls: ['./edit-spdocument.component.css']
 })
 export class EditSpdocumentComponent {
+  check_notif: any;
   constructor(
     private route: ActivatedRoute,
     private editdocumentService: EditDocumentSerivice,
     private router: Router,
     private headerService: HeaderService,
     private keycloakService: KeycloakService,
+    private createdocumentService: CreateDocumentService,
+    private sidebarService: SidebarService,
   ) { }
   faArrowLeft = faArrowLeft;
   faChevronDown = faChevronDown;
@@ -54,9 +59,10 @@ export class EditSpdocumentComponent {
     sender_personal_name: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]),
     sender_unit: new FormControl({ value: '', disabled: true }, [Validators.required]),
     sender_date: new FormControl({ value: '', disabled: true }, [Validators.required]),
-    receiver_personal_number: new FormControl({ value:'', disabled: true }),
+    receiver_personal_number: new FormControl({ value: '', disabled: true }),
     receiver_personal_name: new FormControl({ value: '', disabled: true }),
     receiver_unit: new FormControl(''),
+    check_notif: new FormControl('')
   });
   document: FormGroup = new FormGroup({
     quantity: new FormControl('', [Validators.required]),
@@ -87,7 +93,7 @@ export class EditSpdocumentComponent {
       .subscribe(
         (response) => {
           this.data_show = response.spdoc_data_by_pk
-          this.sender_nopeg =  response.spdoc_data_by_pk.sender_personal_number
+          this.sender_nopeg = response.spdoc_data_by_pk.sender_personal_number
           if (this.personal_number != this.sender_nopeg) {
             this.router.navigate(['/document-list']);
           }
@@ -169,7 +175,7 @@ export class EditSpdocumentComponent {
   public sendEditDocument(
     id_sp_data: number = this.id,
     sender_date: Date = this.mform.get('sender_date')?.value,
-    receiver_unit: String = this.mform.get('receiver_unit')?.value,
+    receiver_unit: String = this.mform.get('receiver_unit')?.value.toUpperCase(),
   ): void {
     if (this.mform.valid) {
       this.editdocumentService.updateDocument(
@@ -182,11 +188,33 @@ export class EditSpdocumentComponent {
             title: 'Success!',
             text: 'Document has edited!',
             icon: 'success',
-            confirmButtonText: 'OK'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['/view-spdocument/' + this.id]);
-            }
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+            this.createdocumentService.checkNotif(id_sp_data)
+              .subscribe(
+                (response) => {
+                  if (response.spdoc_notif.length > 0) {
+                    this.updateNotif(
+                      id_sp_data,
+                      'false',
+                      'New SP Document',
+                      receiver_unit
+                    )
+                    this.router.navigate(['/view-spdocument/' + this.id]);
+                  } else if (receiver_unit != '' || null) {
+                    this.insertNotif(
+                      id_sp_data,
+                      'false',
+                      'New SP Document',
+                      receiver_unit
+                    )
+                    this.router.navigate(['/view-spdocument/' + this.id]);
+                  } else {
+                    this.router.navigate(['/view-spdocument/' + this.id]);
+                  }
+                }
+              )
           });
         }
       )
@@ -310,4 +338,60 @@ export class EditSpdocumentComponent {
         }
       )
   }
+
+  //Notif
+  private insertNotif(
+    id_spdoc: any,
+    status: any,
+    title: any,
+    unit: any
+  ): void {
+    this.createdocumentService.insertNotif(
+      id_spdoc,
+      status,
+      title,
+      unit
+    ).subscribe(
+      (response) => {
+        this.sendNotif(unit)
+        return response;
+      }
+    )
+  }
+
+  public sendNotif(unit: any): void {
+    this.createdocumentService.pushNotif(unit, 'false').subscribe(
+      (response) => {
+        return response
+      }
+    )
+  }
+
+  private updateNotif(
+    id_spdoc: any,
+    status: any,
+    title: any,
+    unit: any
+  ) {
+    this.createdocumentService.updateNotif(
+      id_spdoc,
+      status,
+      title,
+      unit
+    ).subscribe(
+      (response) => {
+        this.sendNotif(unit)
+        return response
+      }
+    )
+  }
+
+  public getNotif(status: any, unit: any): void {
+    this.sidebarService.getNotif(
+      status, unit
+    ).subscribe((response) => {
+      return response
+    })
+  }
+
 }

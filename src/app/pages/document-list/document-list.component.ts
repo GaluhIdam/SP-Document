@@ -61,6 +61,7 @@ export class DocumentListComponent {
     receiver_personal_number: new FormControl(),
     receiver_personal_name: new FormControl(),
     receiver_unit: new FormControl(),
+    receiver_unit_user: new FormControl(),
     receiver_date: new FormControl(),
 
     description: new FormControl(),
@@ -323,7 +324,6 @@ export class DocumentListComponent {
       (response) => {
         this.length = response.spdoc_data_aggregate.aggregate.count
         this.data = response.spdoc_data
-        console.log(this.data)
         this.getCountData()
       }
     )
@@ -750,6 +750,7 @@ export class DocumentListComponent {
       .subscribe(
         (response) => {
           this.user = response
+          this.mform.get('receiver_unit_user')?.setValue(response.unit)
         }
       )
   }

@@ -14,6 +14,7 @@ export class SidebarService {
     //Base URL
     base_url: String = baseURL.BASE_URL
     urlReadNotif: any = this.base_url + 'read-notif/'
+    urlNotif: any = this.base_url + 'get-notif';
 
     //Credentials
     headers = new HttpHeaders()
@@ -35,5 +36,22 @@ export class SidebarService {
                     throw error
                 })
             )
+    }
+
+    getNotif(status: any, unit: any,): Observable<any> {
+        const params = new HttpParams()
+            .set('status', status)
+            .set('unit', unit);
+
+        return this.http.get<any>(this.urlNotif, { 'params': params, 'headers': this.headers })
+            .pipe(
+                map((response) => {
+                    return response;
+                }),
+                catchError((error) => {
+                    console.log(error)
+                    throw error
+                })
+            );
     }
 }

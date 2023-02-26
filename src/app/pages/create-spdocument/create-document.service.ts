@@ -20,12 +20,17 @@ export class CreateDocumentService {
     urlLastDocument: any = this.base_url + 'last-sp-document';
     urlCreateDocument: any = this.base_url + 'create-sp-document';
     urlNotif: any = this.base_url + 'insert-notif';
+    urlUpdateNotif: any = this.base_url + 'update-notif/';
+    urlCheckNotif: any = this.base_url + 'check-notif/';
+
+    urlPushNotif: any = 'http://172.16.41.107:8322/v1/api/notification'
 
     //Credentials
     headers = new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('Hasura-Client-Name', 'hasura-console')
-        .set('x-hasura-admin-secret', 'h4sur4forB3tt3r4pi');
+        .set('x-hasura-admin-secret', 'h4sur4forB3tt3r4pi')
+        .set('Access-Control-Allow-Origin', '*')
 
     getLastID(): Observable<any> {
         return this.http.get<any>(this.urlLastDocument, { 'headers': this.headers })
@@ -93,6 +98,61 @@ export class CreateDocumentService {
             .pipe(
                 map((response) => {
                     return response;
+                }),
+                catchError((error) => {
+                    throw error
+                })
+            )
+    }
+
+    //Notification
+    pushNotif(unit: any, status: any): Observable<any> {
+        const params = new HttpParams()
+            .set('channel', 'spdoc')
+        const body = {
+            "unit": unit,
+            "status": status
+        }
+        return this.http.post<any>(this.urlPushNotif, body, { 'params': params })
+            .pipe(
+                map((response) => {
+                    return response;
+                }),
+                catchError((error) => {
+                    throw error
+                })
+            )
+    }
+
+    updateNotif(
+        id_spdoc: any,
+        status: any,
+        title: any,
+        unit: any
+    ): Observable<any> {
+        const body = {
+            "id_spdoc": id_spdoc,
+            "status": status,
+            "title": title,
+            "unit": unit
+        }
+
+        return this.http.put<any>(this.urlUpdateNotif + id_spdoc, body, { 'headers': this.headers })
+            .pipe(
+                map((response) => {
+                    return response
+                }),
+                catchError((error) => {
+                    throw error
+                })
+            )
+    }
+
+    checkNotif(id_spdoc: any): Observable<any> {
+        return this.http.get<any>(this.urlCheckNotif + id_spdoc, { 'headers': this.headers })
+            .pipe(
+                map((response) => {
+                    return response
                 }),
                 catchError((error) => {
                     throw error

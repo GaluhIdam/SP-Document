@@ -127,7 +127,7 @@
                 style="height: 38px;"><fa-icon [icon]="faRefresh" class="mr-1"></fa-icon></button>
             <div class="flex justify-center">
                 <button
-                    class="dropdown-toggle text-sm text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                    class="dropdown-toggle bg-white text-sm shadow-lg text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
                     type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <fa-icon [icon]="faSliders" class="mr-1"></fa-icon>
                 </button>
@@ -147,7 +147,7 @@
                 </ul>
             </div>
             <button
-                class="dropdown-toggle text-sm text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                class="dropdown-toggle bg-white text-sm text-regal-blue p-2 ml-4 shadow-lg rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
                 type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 <fa-icon [icon]="faFilter" class="mr-1"></fa-icon>
             </button>
@@ -317,11 +317,7 @@
                                 Letter</button>
                         </div>
                         <div class="relative">
-                            <div *ngIf="row.status == 'Delivered'">
-                                <button type="button" disabled
-                                    class="w-full bg-gray-400 p-3 rounded-lg text-white text-center">Receive</button>
-                            </div>
-                            <div *ngIf="row.status == 'Open'">
+                            <div *ngIf="row.status == 'Open' && row.sender_personal_number != personal_number">
                                 <button type="button" (click)="confirmReceive(row.id_sp_data)"
                                     class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
                             </div>
@@ -503,7 +499,7 @@
                         <button type="button" disabled
                             class="w-full bg-gray-400 p-3 rounded-lg text-white text-center">Receive</button>
                     </div>
-                    <div *ngIf="row.status == 'Open'">
+                    <div *ngIf="row.status == 'Open' && row.receiver_unit == mform.get('receiver_unit_p')?.value &&  mform.get('receiver_unit_p')?.value != ''">
                         <button type="button" (click)="confirmReceive(row.id_sp_data)"
                             class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
                     </div>

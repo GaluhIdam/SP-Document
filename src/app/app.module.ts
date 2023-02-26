@@ -12,6 +12,10 @@ import 'tw-elements';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from '../app/core/utility/app.init'; 
 import * as _ from 'lodash';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -27,6 +31,9 @@ import * as _ from 'lodash';
     AppRoutingModule,
     DashboardModule,
     FontAwesomeModule,
+    ServiceWorkerModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot()
   ],
   providers: [
     {

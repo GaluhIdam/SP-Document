@@ -118,6 +118,7 @@ export class MyDocumentComponent {
   ngOnInit() {
     this.initializeUserOptions()
     this.getUserData(this.personal_number)
+    
     this.getByUnit()
     this.obs = this.mform.valueChanges
       .pipe(debounceTime(500)).subscribe(

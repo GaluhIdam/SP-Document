@@ -59,7 +59,7 @@
                 </div>
             </button>
             <!-- batas -->
-            <!-- <button *ngIf="open ==  true" (click)="sortOPEN()"
+        <!-- <button *ngIf="open ==  true" (click)="sortOPEN()"
                 class="flex column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-danger rounded-lg">
                 <fa-icon [icon]="faHourglassStart"
                     class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-danger"></fa-icon>
@@ -78,7 +78,7 @@
                 </div>
             </button>
             <!-- batas -->
-            <!-- <button *ngIf="delivered ==  true" (click)="sortDELIVERED()"
+        <!-- <button *ngIf="delivered ==  true" (click)="sortDELIVERED()"
                 class="flex column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-success rounded-lg">
                 <fa-icon [icon]="faCheck" class="mr-1 text-3xl bg-gray-50 px-3 py-2 rounded-lg text-success"></fa-icon>
                 <div class="grid-rows-2 ml-3">
@@ -128,64 +128,6 @@
                 </ul>
             </div>
         </div>
-        <div class="static">
-            <div class="flex columns-3 mt-2 bg-white rounded rounded-lg mt-5">
-                <button *ngIf="all ==  true" (click)="sortALL()" type="button"
-                    class="static column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-purple rounded-lg">
-                    <fa-icon [icon]="faListSquares"
-                        class="text-3xl bg-medium-purple px-3 py-2 rounded-lg text-purple"></fa-icon>
-                    <div class="grid-rows-2">
-                        <h6 class="text-gray-400 mb-0 text-center mt-3">All</h6>
-                        <h1 class="text-3xl font-bold text-purple hover:text-purple">{{ countAll }}</h1>
-                    </div>
-                </button>
-                <button *ngIf="all == false" (click)="sortALL()" type="button"
-                    class="static column-2 w-1/3 p-2 hover:bg-gray-100 active:bg-gray-100 py-5 px-5 hover:border-b-4 active:border-b-4 hover:border-purple active:border-purple rounded-lg active">
-                    <fa-icon [icon]="faListSquares"
-                        class="text-3xl bg-medium-purple px-3 py-2 rounded-lg text-purple"></fa-icon>
-                    <div class="grid-rows-2">
-                        <h6 class="text-gray-400 mb-0 text-center mt-3">All</h6>
-                        <h1 class="text-3xl font-bold text-purple hover:text-purple">{{ countAll }}</h1>
-                    </div>
-                </button>
-                <!-- batas -->
-                <button *ngIf="open ==  true" (click)="sortOPEN()"
-                    class="static column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-danger rounded-lg">
-                    <fa-icon [icon]="faHourglassStart"
-                        class="text-3xl bg-gray-50 px-3 py-2 rounded-lg text-danger"></fa-icon>
-                    <div class="grid-rows-2">
-                        <h6 class="text-gray-400 mb-0 text-center mt-3">Open</h6>
-                        <h1 class="text-3xl font-bold text-danger">{{ countOpen }}</h1>
-                    </div>
-                </button>
-                <button *ngIf="open ==  false" (click)="sortOPEN()"
-                    class="static column-2 w-1/3 p-2 hover:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-danger rounded-lg">
-                    <fa-icon [icon]="faHourglassStart"
-                        class="text-3xl bg-gray-50 px-3 py-2 rounded-lg text-danger"></fa-icon>
-                    <div class="grid-rows-2">
-                        <h6 class="text-gray-400 mb-0 text-center mt-3">Open</h6>
-                        <h1 class="text-3xl font-bold text-danger">{{ countOpen }}</h1>
-                    </div>
-                </button>
-                <!-- batas -->
-                <button *ngIf="delivered ==  true" (click)="sortDELIVERED()"
-                    class="static column-2 w-1/3 p-2 bg-gray-100 py-5 px-5 border-b-4 border-success rounded-lg">
-                    <fa-icon [icon]="faCheck" class="text-3xl bg-gray-50 px-3 py-2 rounded-lg text-success"></fa-icon>
-                    <div class="grid-rows-2">
-                        <h6 class="text-gray-400 mb-0 text-center mt-3">Delivered</h6>
-                        <h1 class="text-3xl font-bold text-success">{{ countDelivered }}</h1>
-                    </div>
-                </button>
-                <button *ngIf="delivered ==  false" (click)="sortDELIVERED()"
-                    class="static column-2 w-1/3 p-2 hover:bg-gray-100 py-5 px-5 hover:border-b-4 hover:border-success rounded-lg">
-                    <fa-icon [icon]="faCheck" class="text-3xl bg-gray-50 px-3 py-2 rounded-lg text-success"></fa-icon>
-                    <div class="grid-rows-2">
-                        <h6 class="text-gray-400 mb-0 text-center mt-3">Delivered</h6>
-                        <h1 class="text-3xl font-bold text-success">{{ countDelivered }}</h1>
-                    </div>
-                </button>
-            </div>
-        </div>
     </div>
     <!-- Card Desktop -->
     <div class="static max-[600px]:hidden">
@@ -227,8 +169,10 @@
                     </div>
                     <div class="columns-2 w-full flex items-stretch">
                         <div class="grid grid-cols-2 gap-4 w-full">
-                            <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-' : row.sender_unit }}</h1>
-                            <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit == "" ? '-' : row.receiver_unit }}</h1>
+                            <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-'
+                                : row.sender_unit }}</h1>
+                            <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit ==
+                                "" ? '-' : row.receiver_unit }}</h1>
                         </div>
                     </div>
                     <div class="columns-2 w-full flex items-stretch">
@@ -268,23 +212,11 @@
                                 row.receiver_date | date: 'fullDate' }}</h1>
                         </div>
                     </div>
-                    <div class="columns-2 mt-10 mb-0 w-full items-stretch">
-                        <div class="flex">
-                            <button type="button" (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalXl"
-                                class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
-                                Letter</button>
-                        </div>
-                        <div class="relative">
-                            <div *ngIf="row.status == 'Delivered'">
-                                <button type="button" disabled
-                                    class="w-full bg-gray-400 p-3 rounded-lg text-white text-center">Receive</button>
-                            </div>
-                            <div *ngIf="row.status == 'Open'">
-                                <button type="button" (click)="confirmReceive(row.id_sp_data)"
-                                    class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
-                            </div>
-                        </div>
+                    <div class="columns-2 mt-10 mb-0 w-full justify-center">
+                        <button type="button" (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalXl"
+                            class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
+                            Letter</button>
                     </div>
                 </div>
                 <!-- Card -->
@@ -410,8 +342,10 @@
             </div>
             <div class="columns-2 w-full flex items-stretch">
                 <div class="grid grid-cols-2 gap-4 w-full">
-                    <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-' : row.sender_unit }}</h1>
-                    <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit == "" ? '-' : row.receiver_unit }}</h1>
+                    <h1 class="text-base font-bold capitalize text-regal-blue">{{ row.sender_unit == null ? '-' :
+                        row.sender_unit }}</h1>
+                    <h1 class="text-base font-bold capitalize text-success text-right">{{ row.receiver_unit == "" ? '-'
+                        : row.receiver_unit }}</h1>
                 </div>
             </div>
             <div class="columns-2 w-full flex items-stretch">
@@ -449,22 +383,12 @@
                         row.receiver_date | date: 'fullDate' }}</h1>
                 </div>
             </div>
-            <div class="columns-2 mt-10 mb-0 w-full items-stretch">
-                <div class="flex">
+            <div class="columns-2 mt-10 mb-0 w-full justify-center">
+                <div class="flex justify-center">
                     <button type="button" (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
                         data-bs-target="#exampleModalXl"
                         class="w-full border-regal-blue border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">See
                         Letter</button>
-                </div>
-                <div class="relative">
-                    <div *ngIf="row.status == 'Delivered'">
-                        <button type="button" disabled
-                            class="w-full bg-gray-400 p-3 rounded-lg text-white text-center">Receive</button>
-                    </div>
-                    <div *ngIf="row.status == 'Open'">
-                        <button type="button" (click)="confirmReceive(row.id_sp_data)"
-                            class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
-                    </div>
                 </div>
             </div>
         </div>
