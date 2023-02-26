@@ -32,7 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     DashboardModule,
     FontAwesomeModule,
     ServiceWorkerModule,
-    BrowserAnimationsModule, // required animations module
+    BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [
