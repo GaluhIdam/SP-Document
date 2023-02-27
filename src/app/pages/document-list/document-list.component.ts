@@ -559,7 +559,6 @@ export class DocumentListComponent {
     id_sp_data: any,
     id_notif: any
   ): void {
-    console.log(this.user)
     Swal.fire({
       title: 'Receive it?',
       text: 'Do you want to receive it?',
