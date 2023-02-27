@@ -10,6 +10,8 @@ import { KeycloakService } from 'keycloak-angular';
 import { HeaderService } from 'src/app/shared/components/header/header.service';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { MyDocumentService } from './my-document.service';
+import { CreateDocumentService } from '../create-spdocument/create-document.service';
+import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
 
 
 @Component({
@@ -97,6 +99,8 @@ export class MyDocumentComponent {
     private viewdocumentService: ViewDocumentService,
     private keycloakService: KeycloakService,
     private headerService: HeaderService,
+    private createdocumentService: CreateDocumentService,
+    private sidebarService: SidebarService,
   ) { }
 
   mform: FormGroup = new FormGroup({
@@ -416,6 +420,7 @@ export class MyDocumentComponent {
 
   public confirmReceive(
     id_sp_data: any,
+    id_notif: any
   ): void {
     Swal.fire({
       title: 'Receive it?',
@@ -449,6 +454,8 @@ export class MyDocumentComponent {
             timer: 1500
           }).then(
             () => {
+              this.readNotif(id_notif)
+              this.sendNotif(this.mform.get('receiver_unit_p')?.value)
               this.loadData()
             }
           )
@@ -497,6 +504,22 @@ export class MyDocumentComponent {
       this.mform.get('sender_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('sender_personal_number_p')?.value + '%',
       this.mform.get('receiver_personal_number_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_personal_number_p')?.value + '%',
       this.mform.get('receiver_unit_p')?.value == '' ? '%%' : '%' + this.mform.get('receiver_unit_p')?.value + '%',
+    )
+  }
+
+  public readNotif(id_notif: any): void {
+    this.sidebarService.readNotif(id_notif).subscribe(
+      (response) => {
+        return response;
+      }
+    )
+  }
+
+  public sendNotif(unit: any): void {
+    this.createdocumentService.pushNotif(unit, 'true').subscribe(
+      (response) => {
+        return response
+      }
     )
   }
 }

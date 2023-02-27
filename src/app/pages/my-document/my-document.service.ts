@@ -16,7 +16,6 @@ export class MyDocumentService {
     //Base URL
     base_url: String = baseURL.BASE_URL
     urlDashboardPrivateNumber = this.base_url + 'dashboard-private-number';
-    urlDashboardPrivateUnit = this.base_url + 'dashboard-private-unit';
     urlCountNumber = this.base_url + 'count-sp-private-number';
 
     //Credentials

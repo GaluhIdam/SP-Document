@@ -102,7 +102,7 @@
             </div>
         </div>
         <div class="flex justify-center mt-10">
-            <button type="button" *ngIf="status == 'Open' && data.sender_personal_number != personal_number" (click)="receiveSP(id, data.receiver_personal_number, data.receiver_personal_name)"
+            <button type="button" *ngIf="status == 'Open' && data.sender_personal_number != personal_number" (click)="receiveSP(id)"
                 class="text-center max-[600px]:w-screen h-12 text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
                 <fa-icon [icon]="faCircleCheck" class="mr-1"></fa-icon> Receive</button>
         </div>

@@ -217,10 +217,6 @@ export class CreateSpdocumentComponent {
   }
 
   public clearForm(): void {
-    this.mform.controls['sender_personal_number'].reset();
-    this.mform.controls['sender_personal_name'].reset();
-    this.mform.controls['sender_unit'].reset();
-    this.mform.controls['sender_date'].reset();
     this.mform.controls['receiver_unit'].reset();
     this.clearSubDocument()
   }

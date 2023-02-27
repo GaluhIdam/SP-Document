@@ -65,10 +65,13 @@ export class ViewSpdocumentComponent {
 
   mform: FormGroup = new FormGroup({
     receiver_unit_p: new FormControl(''),
+    receiver_name_receive: new FormControl(),
+    receiver_number_receive: new FormControl(),
   })
 
   ngOnInit() {
     this.initializeUserOptions()
+    this.getUserData(this.personal_number)
     this.id = this.route.snapshot.paramMap.get('id_sp_data');
     this.route.queryParams.subscribe(params => {
       this.id_notif = params['id'];
@@ -77,6 +80,7 @@ export class ViewSpdocumentComponent {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
     this.dateNow = formattedDate
+    console.log(formattedDate)
   }
 
   public showDocument(id_sp_data: number): void {
@@ -98,9 +102,6 @@ export class ViewSpdocumentComponent {
 
   public receiveSP(
     id_sp_data: any,
-    receiver_personal_number: any,
-    receiver_personal_name: any,
-    receiver_date: any = this.dateNow
   ): void {
     Swal.fire({
       title: 'Receive',
@@ -112,9 +113,9 @@ export class ViewSpdocumentComponent {
       if (result.isConfirmed) {
         this.dashboardService.receiveDocument(
           id_sp_data,
-          receiver_personal_number,
-          receiver_personal_name,
-          receiver_date,
+          this.mform.get('receiver_number_receive')?.value,
+          this.mform.get('receiver_name_receive')?.value,
+          this.dateNow,
         ).subscribe((response) => {
           Swal.fire({
             icon: 'success',
@@ -128,7 +129,7 @@ export class ViewSpdocumentComponent {
             }
           )
           this.readNotif(this.id_notif)
-          this.getUserData(this.personal_number)
+          this.sendNotif(this.mform.get('receiver_unit_p')?.value)
           return response
         })
       }
@@ -154,8 +155,9 @@ export class ViewSpdocumentComponent {
       .subscribe(
         (response) => {
           this.user = response
+          this.mform.get('receiver_name_receive')?.setValue(response.personalName)
+          this.mform.get('receiver_number_receive')?.setValue(response.personalNumber)
           this.mform.get('receiver_unit_p')?.setValue(response.unit)
-          this.sendNotif(this.mform.get('receiver_unit_p')?.value)
         }
       )
   }

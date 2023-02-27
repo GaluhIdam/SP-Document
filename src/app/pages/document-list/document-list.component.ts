@@ -11,6 +11,8 @@ import { DashboardService } from '../dashboard/dashboard.service';
 import Swal from 'sweetalert2';
 import { KeycloakService } from 'keycloak-angular';
 import { HeaderService } from 'src/app/shared/components/header/header.service';
+import { CreateDocumentService } from '../create-spdocument/create-document.service';
+import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-document-list',
@@ -79,6 +81,10 @@ export class DocumentListComponent {
     receiver_date_order: new FormControl(),
     receiver_unit_order: new FormControl(),
     sender_unit_order: new FormControl(),
+    
+    receiver_name_receive: new FormControl(),
+    receiver_number_receive: new FormControl(),
+
   });
 
   //Data PDF
@@ -103,6 +109,8 @@ export class DocumentListComponent {
     private viewdocumentService: ViewDocumentService,
     private keycloakService: KeycloakService,
     private headerService: HeaderService,
+    private createdocumentService: CreateDocumentService,
+    private sidebarService: SidebarService,
   ) { }
 
 
@@ -549,7 +557,9 @@ export class DocumentListComponent {
 
   public confirmReceive(
     id_sp_data: any,
+    id_notif: any
   ): void {
+    console.log(this.user)
     Swal.fire({
       title: 'Receive it?',
       text: 'Do you want to receive it?',
@@ -570,8 +580,8 @@ export class DocumentListComponent {
         }
         this.receiveSP(
           id_sp_data,
-          this.user.personalNumber,
-          this.user.personalName,
+           this.mform.get('receiver_number_receive')?.value,
+           this.mform.get('receiver_name_receive')?.value,
           longdate,
         ),
           Swal.fire({
@@ -582,6 +592,8 @@ export class DocumentListComponent {
             timer: 1500
           }).then(
             () => {
+              this.readNotif(id_notif)
+              this.sendNotif(this.mform.get('receiver_unit_p')?.value)
               this.loadData()
             }
           )
@@ -750,6 +762,8 @@ export class DocumentListComponent {
       .subscribe(
         (response) => {
           this.user = response
+          this.mform.get('receiver_name_receive')?.setValue(response.personalName)
+          this.mform.get('receiver_number_receive')?.setValue(response.personalNumber)
           this.mform.get('receiver_unit_user')?.setValue(response.unit)
         }
       )
@@ -775,6 +789,22 @@ export class DocumentListComponent {
     this.mform.get('receiver_date_order')?.setValue(receiver_date_order)
     this.mform.get('receiver_unit_order')?.setValue(receiver_unit_order)
     this.mform.get('sender_unit_order')?.setValue(sender_unit_order)
+  }
+
+  public readNotif(id_notif: any): void {
+    this.sidebarService.readNotif(id_notif).subscribe(
+      (response) => {
+        return response;
+      }
+    )
+  }
+
+  public sendNotif(unit: any): void {
+    this.createdocumentService.pushNotif(unit, 'true').subscribe(
+      (response) => {
+        return response
+      }
+    )
   }
 
   ngOnDestroy() {

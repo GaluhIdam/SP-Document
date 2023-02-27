@@ -318,7 +318,7 @@
                         </div>
                         <div class="relative">
                             <div *ngIf="row.status == 'Open' && row.sender_personal_number != personal_number">
-                                <button type="button" (click)="confirmReceive(row.id_sp_data)"
+                                <button type="button" (click)="confirmReceive(row.id_sp_data, row.notif[0].id_notif)"
                                     class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
                             </div>
                         </div>
@@ -500,7 +500,7 @@
                             class="w-full bg-gray-400 p-3 rounded-lg text-white text-center">Receive</button>
                     </div>
                     <div *ngIf="row.status == 'Open' && row.receiver_unit == mform.get('receiver_unit_p')?.value &&  mform.get('receiver_unit_p')?.value != ''">
-                        <button type="button" (click)="confirmReceive(row.id_sp_data)"
+                        <button type="button" (click)="confirmReceive(row.id_sp_data, row.notif[0].id_notif)"
                             class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">Receive</button>
                     </div>
                 </div>
