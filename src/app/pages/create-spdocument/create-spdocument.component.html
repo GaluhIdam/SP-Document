@@ -362,7 +362,7 @@
               <hr />
             </div>
             <div class="w-full">
-              <ngx-dropzone (change)="onSelect($event)">
+              <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
                 <ngx-dropzone-label
                   ><div class="flex flex-col gap-1">
                     <span class="font-bold text-lg">
