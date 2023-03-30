@@ -4645,6 +4645,13 @@ ngx-cookie-service@^15.0.0:
   dependencies:
     tslib "^2.0.0"
 
+ngx-dropzone@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-dropzone/-/ngx-dropzone-3.1.0.tgz#f2045a9ca90903fa96304f1b2aa33a922f14b15a"
+  integrity sha512-5RBaEl07QUcY6sv/BBPyIxN6nbWY/KqTGheEKgbuGS0N1QPFY7NJUo8+X3fYUwQgLS+wjJeqPiR37dd0YNDtWA==
+  dependencies:
+    tslib "^2.0.0"
+
 ngx-pagination@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/ngx-pagination/-/ngx-pagination-6.0.3.tgz#083f77a5c9c3ebf5800fb57a280da71aacc10a18"
