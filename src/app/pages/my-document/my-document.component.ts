@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { faSliders, faBookOpen, faListSquares, faHourglassStart, faCheck, faUser, faArrowRightArrowLeft, faCalendar, faCaretRight, faCaretLeft, faRefresh, faFilePdf, faCircleDown, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faSliders, faBookOpen, faListSquares, faHourglassStart, faCheck, faUser, faArrowRightArrowLeft, faCalendar, faCaretRight, faCaretLeft, faRefresh, faFilePdf, faCircleDown, faFilter, faEye } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime, Subscription } from 'rxjs';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -22,6 +22,7 @@ import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.servic
 export class MyDocumentComponent {
   value: any = 123;
   faSliders = faSliders;
+  faEye = faEye;
   faBookOpen = faBookOpen;
   faListSquares = faListSquares;
   faHourglassStart = faHourglassStart;
@@ -122,7 +123,7 @@ export class MyDocumentComponent {
   ngOnInit() {
     this.initializeUserOptions()
     this.getUserData(this.personal_number)
-    
+
     this.getByUnit()
     this.obs = this.mform.valueChanges
       .pipe(debounceTime(500)).subscribe(

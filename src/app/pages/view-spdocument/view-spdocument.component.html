@@ -109,7 +109,8 @@
             <h1 *ngIf="!data.file_location" class="text-danger">Evidence is empty!</h1>
         </div>
         <div class="flex justify-center mt-10">
-            <button type="button" *ngIf="status == 'Open' && data.sender_personal_number != personal_number"
+            <button type="button"
+                *ngIf="status == 'Open' && data.sender_personal_number != personal_number && data.receiver_unit == mform.get('receiver_unit_p')?.value"
                 (click)="receiveSP(id)"
                 class="text-center max-[600px]:w-screen h-12 text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
                 <fa-icon [icon]="faCircleCheck" class="mr-1"></fa-icon> Receive</button>
