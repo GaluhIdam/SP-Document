@@ -25,7 +25,7 @@ export class CreateSpdocumentComponent {
     private keycloakService: KeycloakService,
     private headerService: HeaderService,
     private router: Router
-  ) {}
+  ) { }
 
   faArrowLeft = faArrowLeft;
   faChevronDown = faChevronDown;
@@ -99,19 +99,16 @@ export class CreateSpdocumentComponent {
   }
 
   onRemove(event: any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 
   onSelect(event: any) {
-    console.log(event);
     this.files = [];
     this.files.push(...event.addedFiles);
 
     const formData = new FormData();
 
     for (var i = 0; i < this.files.length; i++) {
-      console.log(this.files[i]);
       formData.append('file[]', this.files[i]);
     }
   }
@@ -171,54 +168,50 @@ export class CreateSpdocumentComponent {
     data: Array<CreateDocument> = this.data
   ): Promise<void> {
     // Upload file
-    let fileName: string | null | undefined = undefined;
 
     if (this.files.length > 0) {
-      console.log('has file');
       this.createdocumentService.uploadFile(this.files[0]).subscribe((res) => {
-        console.log('OKK!', res);
-        console.log('FileName => ', res['file']['filename']);
-
-        fileName = res['file']['filename'];
+        this.createdocumentService
+          .createDocument(
+            sender_personal_number,
+            sender_personal_name,
+            sender_date,
+            sender_unit,
+            receiver_unit,
+            created_by,
+            status,
+            shipping_no,
+            data,
+            res['file']['filename']
+          )
+          .subscribe((response) => {
+            if (
+              response.insert_spdoc_data.returning[0].receiver_unit != '' ||
+              null
+            ) {
+              this.insertNotif(
+                response.insert_spdoc_data.returning[0].id_sp_data,
+                'false',
+                'New SP Document',
+                response.insert_spdoc_data.returning[0].receiver_unit
+              );
+            }
+            Swal.fire({
+              title: 'Success!',
+              text: 'Document has created!',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(() => {
+              this.router.navigate(['/my-document']);
+            });
+          });
       });
     }
+
+
     // End of Upload file
 
-    this.createdocumentService
-      .createDocument(
-        sender_personal_number,
-        sender_personal_name,
-        sender_date,
-        sender_unit,
-        receiver_unit,
-        created_by,
-        status,
-        shipping_no,
-        data,
-        fileName
-      )
-      .subscribe((response) => {
-        if (
-          response.insert_spdoc_data.returning[0].receiver_unit != '' ||
-          null
-        ) {
-          this.insertNotif(
-            response.insert_spdoc_data.returning[0].id_sp_data,
-            'false',
-            'New SP Document',
-            response.insert_spdoc_data.returning[0].receiver_unit
-          );
-        }
-        Swal.fire({
-          title: 'Success!',
-          text: 'Document has created!',
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 1500,
-        }).then(() => {
-          this.router.navigate(['/my-document']);
-        });
-      });
   }
 
   public editDocument(i: number) {

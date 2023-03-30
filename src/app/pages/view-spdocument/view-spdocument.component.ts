@@ -57,6 +57,7 @@ export class ViewSpdocumentComponent {
   sender_date: any;
   data_pdf: any;
   status: any;
+  file_location: any;
   link_image: String = '/assets/gmf-logo.webp'
 
   dateNow!: String
@@ -95,6 +96,7 @@ export class ViewSpdocumentComponent {
           this.sender_number = response.spdoc_data_by_pk.sender_personal_number
           this.sender_date = response.spdoc_data_by_pk.sender_date
           this.status = response.spdoc_data_by_pk.status
+          this.file_location = response.spdoc_data_by_pk.file_location
         }
       )
   }

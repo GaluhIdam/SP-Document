@@ -32,6 +32,7 @@
                     <span class="label-text text-gray-900">Sender Unit</span>
                 </label>
                 <input type="text" [value]="data.sender_unit == '' || data.sender_unit == null ? '-' : data.sender_unit"
+                    disabled
                     class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
             </div>
             <div class="form-control w-full px-4 py-1">
@@ -80,7 +81,7 @@
         </div>
         <div class="px-4 mt-10">
             <div class="row overflow-x-auto">
-                <table class="mt-10  min-w-full">
+                <table class="mt-10 min-w-full">
                     <thead>
                         <tr class="bg-soft-blue text-gray-900">
                             <th class="py-3 px-5 whitespace-nowrap">No.</th>
@@ -101,8 +102,15 @@
                 </table>
             </div>
         </div>
+        <div class="px-4 mt-5">
+            <h1 class="min-[600px]:text-2xl max-[600px]:text-lg font-semibold">Evidence Receiver</h1>
+            <img class="mt-3" *ngIf="data.file_location"
+                [src]="'http://172.16.41.107:8322/v1/api/media/preview/'+data.file_location" alt="evidence">
+            <h1 *ngIf="!data.file_location" class="text-danger">Evidence is empty!</h1>
+        </div>
         <div class="flex justify-center mt-10">
-            <button type="button" *ngIf="status == 'Open' && data.sender_personal_number != personal_number" (click)="receiveSP(id)"
+            <button type="button" *ngIf="status == 'Open' && data.sender_personal_number != personal_number"
+                (click)="receiveSP(id)"
                 class="text-center max-[600px]:w-screen h-12 text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
                 <fa-icon [icon]="faCircleCheck" class="mr-1"></fa-icon> Receive</button>
         </div>

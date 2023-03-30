@@ -5,6 +5,7 @@ import { EditSpdocumentRoutingModule } from './edit-spdocument-routing.module';
 import { EditSpdocumentComponent } from './edit-spdocument.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -12,11 +13,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EditSpdocumentComponent
   ],
   imports: [
+    NgxDropzoneModule,
     CommonModule,
     EditSpdocumentRoutingModule,
     FontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
   ]
 })
 export class EditSpdocumentModule { }

@@ -65,12 +65,14 @@ export class EditDocumentSerivice {
     updateDocument(
         id_sp_data: number,
         sender_date: Date,
-        receiver_unit: String
+        receiver_unit: String,
+        file_location: any
     ): Observable<any> {
         const body = {
             "id_sp_data": id_sp_data,
             "sender_date": sender_date,
             "receiver_unit": receiver_unit,
+            "file_location": file_location,
         }
 
         return this.http.put<any>(this.urlUpdateDocument, body, { 'headers': this.headers })
@@ -95,7 +97,7 @@ export class EditDocumentSerivice {
             'id_description_remark': id_description_remark,
             'quantity': quantity,
             'description': description,
-            'remark': remark,
+            'remark': remark
         }
 
         return this.http.put<any>(this.urlUpdateDescRemark, body, { 'headers': this.headers })
@@ -133,7 +135,6 @@ export class EditDocumentSerivice {
         description: String,
         remark: String
     ): Observable<any> {
-
         const body = {
             'spdata_id': spdata_id,
             'quantity': quantity,
@@ -151,4 +152,5 @@ export class EditDocumentSerivice {
                 })
             )
     }
+
 }

@@ -53,6 +53,9 @@ export class EditSpdocumentComponent {
     receiver_date: Date,
   };
 
+  file_location: any
+  files: File[] = [];
+
 
   mform: FormGroup = new FormGroup({
     sender_personal_number: new FormControl({ value: '', disabled: true }, [Validators.required]),
@@ -88,6 +91,7 @@ export class EditSpdocumentComponent {
     this.showDescRemark(this.id)
   }
 
+
   public showDocument(id_sp_data: number): void {
     this.editdocumentService.getShowData(id_sp_data)
       .subscribe(
@@ -104,10 +108,26 @@ export class EditSpdocumentComponent {
           this.mform.get('receiver_unit')?.setValue(this.data_show.receiver_unit)
           this.mform.get('receiver_personal_name')?.setValue(this.data_show.receiver_personal_name)
           this.mform.get('receiver_personal_number')?.setValue(this.data_show.receiver_personal_number)
+          this.file_location = response.spdoc_data_by_pk.file_location
         }
       )
   }
 
+  onRemove(event: any) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  onSelect(event: any) {
+    this.files = [];
+    this.files.push(...event.addedFiles);
+    console.log(this.files)
+
+    const formData = new FormData();
+
+    for (var i = 0; i < this.files.length; i++) {
+      formData.append('file[]', this.files[i]);
+    }
+  }
   public showDescRemark(id_sp_data: number): void {
     this.editdocumentService.getDescRemark(id_sp_data)
       .subscribe(
@@ -178,46 +198,49 @@ export class EditSpdocumentComponent {
     receiver_unit: String = this.mform.get('receiver_unit')?.value.toUpperCase(),
   ): void {
     if (this.mform.valid) {
-      this.editdocumentService.updateDocument(
-        id_sp_data,
-        sender_date,
-        receiver_unit,
-      ).subscribe(
-        () => {
-          Swal.fire({
-            title: 'Success!',
-            text: 'Document has edited!',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 1500
-          }).then(() => {
-            this.createdocumentService.checkNotif(id_sp_data)
-              .subscribe(
-                (response) => {
-                  if (response.spdoc_notif.length > 0) {
-                    this.updateNotif(
-                      id_sp_data,
-                      'false',
-                      'New SP Document',
-                      receiver_unit
-                    )
-                    this.router.navigate(['/view-spdocument/' + this.id]);
-                  } else if (receiver_unit != '' || null) {
-                    this.insertNotif(
-                      id_sp_data,
-                      'false',
-                      'New SP Document',
-                      receiver_unit
-                    )
-                    this.router.navigate(['/view-spdocument/' + this.id]);
-                  } else {
-                    this.router.navigate(['/view-spdocument/' + this.id]);
+      this.createdocumentService.uploadFile(this.files[0]).subscribe((res) => {
+        this.editdocumentService.updateDocument(
+          id_sp_data,
+          sender_date,
+          receiver_unit,
+          res['file']['filename']
+        ).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Success!',
+              text: 'Document has edited!',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500
+            }).then(() => {
+              this.createdocumentService.checkNotif(id_sp_data)
+                .subscribe(
+                  (response) => {
+                    if (response.spdoc_notif.length > 0) {
+                      this.updateNotif(
+                        id_sp_data,
+                        'false',
+                        'New SP Document',
+                        receiver_unit
+                      )
+                      this.router.navigate(['/view-spdocument/' + this.id]);
+                    } else if (receiver_unit != '' || null) {
+                      this.insertNotif(
+                        id_sp_data,
+                        'false',
+                        'New SP Document',
+                        receiver_unit
+                      )
+                      this.router.navigate(['/view-spdocument/' + this.id]);
+                    } else {
+                      this.router.navigate(['/view-spdocument/' + this.id]);
+                    }
                   }
-                }
-              )
-          });
-        }
-      )
+                )
+            });
+          }
+        )
+      })
     } else {
       Swal.fire({
         title: 'Failed!',
@@ -393,5 +416,4 @@ export class EditSpdocumentComponent {
       return response
     })
   }
-
 }
