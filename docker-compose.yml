@@ -1,0 +1,17 @@
+version: "3.6"
+services:
+  front:
+    image: innovation/spdoc_web:v1.0.0
+    container_name: spdoc-frontend
+    restart: always
+    networks:
+      - spdocnetwork
+    ports:
+      - "3004:80"
+    environment:
+      APPLICATION_PORT: 3004
+      NODE_ENV: prod
+networks:
+  spdocnetwork:
+    external:
+      name: spdoc-project-network
