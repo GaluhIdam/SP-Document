@@ -114,6 +114,9 @@
                 (click)="receiveSP(id)"
                 class="text-center max-[600px]:w-screen h-12 text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
                 <fa-icon [icon]="faCircleCheck" class="mr-1"></fa-icon> Receive</button>
+            <a [routerLink]="'/edit-spdocument/'+data.id_sp_data"
+                class="text-center max-[600px]:w-screen mb-5 text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                *ngIf="sender_number == personal_number"><fa-icon [icon]="faPencil"></fa-icon> Edit</a>
         </div>
     </div>
 </div>

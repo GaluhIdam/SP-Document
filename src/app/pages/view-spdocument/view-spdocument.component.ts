@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faFilePdf, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faFilePdf, faCircleCheck, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { ViewDocumentService } from './view-document.service';
 import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
 import { DashboardService } from '../dashboard/dashboard.service';
@@ -20,6 +20,7 @@ export class ViewSpdocumentComponent {
   faArrowLeft = faArrowLeft;
   faFilePdf = faFilePdf;
   faCircleCheck = faCircleCheck;
+  faPencil = faPencil;
   personal_number!: string;
   user: any;
 
