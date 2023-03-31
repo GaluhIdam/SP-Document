@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faFilePdf, faCircleCheck, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faFilePdf, faCircleCheck, faPencil, faCircleDown } from '@fortawesome/free-solid-svg-icons';
 import { ViewDocumentService } from './view-document.service';
 import { SidebarService } from 'src/app/shared/components/sidebar/sidebar.service';
 import { DashboardService } from '../dashboard/dashboard.service';
@@ -9,7 +9,8 @@ import { CreateDocumentService } from '../create-spdocument/create-document.serv
 import { KeycloakService } from 'keycloak-angular';
 import { LayoutService } from 'src/app/shared/components/layout/layout.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { text } from '@fortawesome/fontawesome-svg-core';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-view-spdocument',
@@ -21,6 +22,7 @@ export class ViewSpdocumentComponent {
   faFilePdf = faFilePdf;
   faCircleCheck = faCircleCheck;
   faPencil = faPencil;
+  faCircleDown = faCircleDown;
   personal_number!: string;
   user: any;
 
@@ -61,6 +63,10 @@ export class ViewSpdocumentComponent {
   file_location: any;
   link_image: String = '/assets/gmf-logo.webp'
 
+  receive_name: any;
+  receive_number: any;
+  receive_date: any;
+
   dateNow!: String
 
   id_notif: any
@@ -82,24 +88,6 @@ export class ViewSpdocumentComponent {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
     this.dateNow = formattedDate
-  }
-
-  public showDocument(id_sp_data: number): void {
-    this.viewdocumentService.getShowData(id_sp_data)
-      .subscribe(
-        (response) => {
-          this.data = response.spdoc_data_by_pk
-          this.sp_no = response.spdoc_data_by_pk.shipping_no
-          this.data_pdf = response.spdoc_data_by_pk.spdoc_description_remarks
-          this.receiver = response.spdoc_data_by_pk.receiver_unit
-          this.sender = response.spdoc_data_by_pk.sender_unit
-          this.sender_name = response.spdoc_data_by_pk.sender_personal_name
-          this.sender_number = response.spdoc_data_by_pk.sender_personal_number
-          this.sender_date = response.spdoc_data_by_pk.sender_date
-          this.status = response.spdoc_data_by_pk.status
-          this.file_location = response.spdoc_data_by_pk.file_location
-        }
-      )
   }
 
   public receiveSP(
@@ -170,5 +158,63 @@ export class ViewSpdocumentComponent {
         return response
       }
     )
+  }
+
+  public showDocument(id_sp_data: number): void {
+    this.viewdocumentService.getShowData(id_sp_data)
+      .subscribe(
+        (response) => {
+          this.data = response.spdoc_data_by_pk
+          this.sp_no = response.spdoc_data_by_pk.shipping_no
+          this.data_pdf = response.spdoc_data_by_pk.spdoc_description_remarks
+          this.receiver = response.spdoc_data_by_pk.receiver_unit
+          this.sender = response.spdoc_data_by_pk.sender_unit
+          this.sender_name = response.spdoc_data_by_pk.sender_personal_name
+          this.sender_number = response.spdoc_data_by_pk.sender_personal_number
+          this.sender_date = response.spdoc_data_by_pk.sender_date
+          this.status = response.spdoc_data_by_pk.status
+          this.file_location = response.spdoc_data_by_pk.file_location
+        }
+      )
+  }
+
+  public showDocumentPDF(id_sp_data: number) {
+    this.viewdocumentService.getShowData(id_sp_data)
+      .subscribe(
+        (response) => {
+          this.sp_no = response.spdoc_data_by_pk.shipping_no
+          this.data_pdf = response.spdoc_data_by_pk.spdoc_description_remarks
+          this.receiver = response.spdoc_data_by_pk.receiver_unit
+          this.sender = response.spdoc_data_by_pk.sender_unit
+          this.sender_name = response.spdoc_data_by_pk.sender_personal_name
+          this.sender_number = response.spdoc_data_by_pk.sender_personal_number
+          this.sender_date = response.spdoc_data_by_pk.sender_date
+          this.receive_name = response.spdoc_data_by_pk.receiver_personal_name
+          this.receive_number = response.spdoc_data_by_pk.receiver_personal_number
+          this.receive_date = response.spdoc_data_by_pk.receive_date
+        }
+      )
+  }
+
+  public openPDF(id_sp_data: any = this.sp_no): void {
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      const imageData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        compress: true,
+        format: 'b3',
+        unit: 'pt'
+      })
+      const pdfw = pdf.internal.pageSize.getWidth()
+      const pdfh = pdf.internal.pageSize.getHeight();
+
+
+      // const pdfh = (imageProps.height * pdfw) / imageProps.width
+      pdf.setFontSize(12);
+      pdf.addImage(imageData, 'PNG', 0, 0, pdfw, pdfh)
+
+      pdf.save('SP-' + id_sp_data + '.pdf');
+    });
   }
 }
