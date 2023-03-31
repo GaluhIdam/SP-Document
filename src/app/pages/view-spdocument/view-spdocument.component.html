@@ -1,0 +1,122 @@
+<div class="px-5 rounded-lg drop-shadow-md mb-10 text-sm">
+    <div class="static bg-white rounded-lg p-5">
+        <div class="grid grid-cols-3 gap-4 p-4">
+            <div class="flex">
+                <a routerLink="/my-document"
+                    class="text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
+                    <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon> Back</a>
+            </div>
+            <h1 class="text-lg font-semibold text-gray-900 text-center max-[600px]:hidden">View SP Document</h1>
+        </div>
+        <div class="min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-4">
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Sender Nopeg</span>
+                </label>
+                <input type="text"
+                    [value]="data.sender_personal_number == '' || data.sender_personal_number == null ? '-' : data.sender_personal_number"
+                    disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Sender Name</span>
+                </label>
+                <input type="text"
+                    [value]="data.sender_personal_name == '' || data.sender_personal_name == null ? '-' : data.sender_personal_name"
+                    disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Sender Unit</span>
+                </label>
+                <input type="text" [value]="data.sender_unit == '' || data.sender_unit == null ? '-' : data.sender_unit"
+                    disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Sender Date</span>
+                </label>
+                <input type="date"
+                    [value]="data.sender_date == '' || data.sender_date == null ? null : data.sender_date" disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+            <hr class="mt-5 min-[600px]:mb-5">
+            <hr class="min-[600px]:mt-5 mb-5">
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Receiver Nopeg</span>
+                </label>
+                <input type="text"
+                    [value]="data.receiver_personal_number == '' || data.receiver_personal_number == null ? '-' : data.receiver_personal_number"
+                    disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Receiver Name</span>
+                </label>
+                <input type="text"
+                    [value]="data.receiver_personal_name == '' || data.receiver_personal_name == null ? '-' : data.receiver_personal_name"
+                    disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Receiver Unit</span>
+                </label>
+                <input type="text"
+                    [value]="data.receiver_unit == '' || data.receiver_unit == null ? '-' : data.receiver_unit" disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+            <div class="form-control w-full px-4 py-1">
+                <label class="label">
+                    <span class="label-text text-gray-900">Receiver Date</span>
+                </label>
+                <input type="date" [value]="data.receiver_date == null ? null : data.receiver_date" disabled
+                    class="bg-gray-100 rounded-lg text-gray-900 w-full px-4 py-3 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+            </div>
+        </div>
+        <div class="px-4 mt-10">
+            <div class="row overflow-x-auto">
+                <table class="mt-10 min-w-full">
+                    <thead>
+                        <tr class="bg-soft-blue text-gray-900">
+                            <th class="py-3 px-5 whitespace-nowrap">No.</th>
+                            <th class="py-3 px-5 whitespace-nowrap">QTY</th>
+                            <th class="py-3 px-5 whitespace-nowrap">Description</th>
+                            <th class="py-3 px-5 whitespace-nowrap">Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="bg-white text-gray-900"
+                            *ngFor="let row of data.spdoc_description_remarks; let i = index">
+                            <td class="py-2 text-center px-5 whitespace-nowrap">{{ i + 1 }}</td>
+                            <td class="py-2 text-center px-5 whitespace-nowrap">{{ row.quantity }}</td>
+                            <td class="py-2 text-left px-5 whitespace-nowrap">{{ row.description }}</td>
+                            <td class="py-2 text-left px-5 whitespace-nowrap">{{ row.remark }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="px-4 mt-5">
+            <h1 class="min-[600px]:text-2xl max-[600px]:text-lg font-semibold">Evidence Receiver</h1>
+            <img class="mt-3" *ngIf="data.file_location"
+                [src]="'http://172.16.41.107:8322/v1/api/media/preview/'+data.file_location" alt="evidence">
+            <h1 *ngIf="!data.file_location" class="text-danger">Evidence is empty!</h1>
+        </div>
+        <div class="flex justify-center mt-10">
+            <button type="button"
+                *ngIf="status == 'Open' && data.sender_personal_number != personal_number && data.receiver_unit == mform.get('receiver_unit_p')?.value"
+                (click)="receiveSP(id)"
+                class="text-center max-[600px]:w-screen h-12 text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white">
+                <fa-icon [icon]="faCircleCheck" class="mr-1"></fa-icon> Receive</button>
+            <a [routerLink]="'/edit-spdocument/'+data.id_sp_data"
+                class="text-center max-[600px]:w-screen mb-5 text-regal-blue p-2 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
+                *ngIf="sender_number == personal_number"><fa-icon [icon]="faPencil"></fa-icon> Edit</a>
+        </div>
+    </div>
+</div>

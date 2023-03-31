@@ -1,0 +1,749 @@
+<div class="px-5 w-full">
+    <div class="grid grid-rows-auto bg-white rounded-lg drop-shadow-md mb-5">
+        <div class="static grid grid-cols-2 gap-4 p-4 h-fit">
+            <div class="col-start-1">
+                <button type="button"
+                    class="text-sm border border-regal-blue text-regal-blue rounded-lg px-2 py-2 hover:bg-regal-blue hover:text-white"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    <fa-icon [icon]="faEye" class="mr-1"></fa-icon>
+                    Search & Filter
+                </button>
+            </div>
+            <div class="col-end-7 mt-2 max-[600px]:hidden">
+                <a class="p-3 ml-4 text-sm rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue"
+                    routerLink="/create-spdocument">
+                    <fa-icon [icon]="faBookOpen" class="mr-1 text-sm"></fa-icon> Create SP Document
+                </a>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <form [formGroup]="mform">
+                <div class="static">
+                    <div class="px-4 py-1">
+                        <div class="flex flex-col">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full text-center">
+                                    <thead class="border-b bg-soft-blue">
+                                        <tr class="text-gray-900">
+                                            <th scope="col" class="border text-xs font-medium px-6 py-4">
+                                                No.
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Shipping Nopeg
+                                                    </h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('asc', '', '', '', '', '', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white"
+                                                            (click)="sortASCDESC('desc', '', '', '', '', '', '', '', '')"
+                                                            aria-hidden="true" fill="currentColor"
+                                                            viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Sender Nopeg</h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', 'asc', '', '', '', '', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', 'desc', '', '', '', '', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Sender Name</h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', 'asc', '', '', '', '', '','')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', 'desc', '', '', '', '', '','')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Sender Unit</h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', '', '', '', 'asc')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', '', '', '', 'desc')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Sender Date</h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', 'asc', '', '', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', 'desc', '', '', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Receiver Nopeg
+                                                    </h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', 'asc', '', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', 'desc', '', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Receiver Name</h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', 'asc', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', 'desc', '', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Receiver Unit</h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', '', '', 'asc', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', '', '', 'desc', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                <div class="flex items-center justify-center">
+                                                    <h1 class="text-xs font-medium whitespace-nowrap">Receiver Date</h1>
+                                                    <a>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', '', 'asc', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z">
+                                                            </path>
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-3 h-3 p-0 ml-1 hover:bg-white" aria-hidden="true"
+                                                            (click)="sortASCDESC('', '', '', '', '', '', 'desc', '', '')"
+                                                            fill="currentColor" viewBox="0 0 320 512">
+                                                            <path fill="currentColor"
+                                                                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="border text-xs font-medium px-6 py-4">
+                                                Description
+                                            </th>
+                                            <th scope="col" class="border text-xs font-medium px-6 py-4">
+                                                Status
+                                            </th>
+                                            <th scope="col" class="border text-xs font-medium px-6 py-4">
+                                                Action
+                                            </th>
+                                        </tr>
+                                        <tr id="collapseOne" class="accordion-collapse collapse text-gray-900"
+                                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <th scope="col" class="accordion-body text-sm font-medium px-2 py-3 border">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="shipping_no"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="sender_personal_number"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="sender_personal_name"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="sender_unit"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="date" formControlName="sender_date"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="receiver_personal_number"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="receiver_personal_name"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="receiver_unit"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="date" formControlName="receiver_date"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="description"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-1 py-3 border">
+                                                <input type="text" formControlName="status"
+                                                    class="px-2 py-1 rounded-lg w-32 bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+                                                    placeholder="Search...">
+                                            </th>
+                                            <th scope="col" class="accordion-body text-sm font-medium px-2 py-3 border">
+                                            </th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of data; let i = index">
+                                            <td
+                                                class="border px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                                {{
+                                                (mform.get('limit')?.value * (mform.get('page')?.value - 1)) + ( i + 1 )
+                                                }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{row.shipping_no}}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.sender_personal_number == null ? '-' : row.sender_personal_number
+                                                }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.sender_personal_name == null ? '-' : row.sender_personal_name }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.sender_unit == null ? '-' : row.sender_unit }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.sender_date == null ? '-' : row.sender_date | date: 'longDate' }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.receiver_personal_number == "" ? '-' :
+                                                row.receiver_personal_number
+                                                }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.receiver_personal_name == "" ? '-' : row.receiver_personal_name
+                                                }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.receiver_unit == "" ? '-' : row.receiver_unit }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap">
+                                                {{ row.receiver_date == null ? '-' : row.receiver_date | date:
+                                                'fullDate' }}
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap text-left">
+                                                <p
+                                                    *ngFor="let rowdata  of row.spdoc_description_remarks; let i = index">
+                                                    {{i + 1}}. {{rowdata.description}}
+                                                </p>
+                                            </td>
+                                            <td
+                                                class="text-xs text-gray-900 font-medium border px-6 py-4 whitespace-nowrap justify-center">
+                                                <h1 *ngIf="row.status == 'Open'"
+                                                    class="rounded-lg bg-soft-danger border border-danger text-danger text-center min-h-full w-24 py-1">
+                                                    {{row.status}}
+                                                </h1>
+                                                <h1 *ngIf="row.status == 'Delivered'"
+                                                    class="rounded-lg bg-soft-success-ax border border-success text-success text-center w-24 py-1">
+                                                    {{row.status}}
+                                                </h1>
+                                            </td>
+                                            <td
+                                                class="text-sm font-sm border px-6 py-4 whitespace-nowrap justify-center dropstart relative">
+                                                <button
+                                                    class="dropdown-toggle border border-regal-blue rounded-lg text-regal-blue bg-white hover:text-white hover:bg-regal-blue py-1 px-3"
+                                                    type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <fa-icon [icon]="faEllipsisVertical" class="mx-0"></fa-icon>
+                                                </button>
+                                                <ul class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
+                                                    aria-labelledby="dropdownMenuButton4">
+                                                    <li>
+                                                        <button
+                                                            *ngIf="row.receiver_unit == mform.get('receiver_unit_user')?.value || row.sender_unit == mform.get('receiver_unit_user')?.value"
+                                                            (click)="showDocument(row.id_sp_data)"
+                                                            class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-tosca active:bg-gray-200 hover:bg-gray-100"><fa-icon
+                                                                [icon]="faEye" class="mr-1"></fa-icon>
+                                                            View</button>
+                                                        <div class="px-4">
+                                                            <hr>
+                                                        </div>
+                                                        <div
+                                                            *ngIf="row.status ==  'Open' && row.sender_personal_number == personal_number">
+                                                            <button (click)="editDocument(row.id_sp_data)"
+                                                                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-soft-success active:bg-gray-200 hover:bg-gray-100"><fa-icon
+                                                                    [icon]="faPencilSquare" class="mr-1"></fa-icon>
+                                                                Edit</button>
+                                                            <div class="px-4">
+                                                                <hr>
+                                                            </div>
+                                                        </div>
+                                                        <button (click)="showDocumentPDF(row.id_sp_data)"
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModalXl"
+                                                            class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-regal-blue active:bg-gray-200 hover:bg-gray-100"><fa-icon
+                                                                [icon]="faFileInvoice" class="mr-1"></fa-icon>
+                                                            Letter</button>
+                                                        <div
+                                                            *ngIf="row.status == 'Open' && row.receiver_unit == mform.get('receiver_unit_user')?.value && mform.get('receiver_unit_p')?.value != ''">
+                                                            <div class="px-4">
+                                                                <hr>
+                                                            </div>
+                                                            <button type="button"
+                                                                (click)="confirmReceive(row.id_sp_data, row.notif[0].id_notif)"
+                                                                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-success active:bg-gray-200 hover:bg-gray-100"><fa-icon
+                                                                    [icon]="faCircleCheck" class="mr-1"></fa-icon>
+                                                                Received</button>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="length == 0">
+                                            <td colspan="10"
+                                                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                                                <h1 class="text-center mb-5">Data not available!</h1>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="mt-10 mb-10 px-2 min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-4 mb-2">
+                            <div class="col-start-1 flex mb-5">
+                                <div class="columns-1 mr-3">
+                                    <h1 class="text-gray-900">Row per page</h1>
+                                </div>
+                                <div class="columns-1">
+                                    <select formControlName="limit" [ngModel]="limit"
+                                        class="w-full px-2 rounded py-1.5 font-normal text-gray-700">
+                                        <option selected value="10">10</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="1000">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-end-7">
+                                <div class="flex justify-center">
+                                    <div class="columns-1 mr-3">
+                                        <h1 class="text-gray-900">Page</h1>
+                                    </div>
+                                    <div class="columns-1">
+                                        <input type="number" formControlName="page"
+                                            class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-12">
+                                    </div>
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="flex list-style-none">
+                                            <div *ngIf="mform.get('page')?.value <= 1">
+                                                <li class="page-item disabled">
+                                                    <button
+                                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                                        tabindex="-1" aria-disabled="true">
+                                                        <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
+                                                    </button>
+                                                </li>
+                                            </div>
+                                            <div *ngIf="mform.get('page')?.value > 1">
+                                                <li class="page-item">
+                                                    <button (click)="prevPage()" type="button"
+                                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
+                                                        <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
+                                                    </button>
+                                                </li>
+                                            </div>
+                                            <li class="page-item active" *ngFor="let no_page of pagination;">
+                                                <div *ngIf="mform.get('page')?.value == no_page.no">
+                                                    <button disabled
+                                                        class="page-link mr-1 relative block py-1.5 px-3 rounded border-0 bg-regal-blue outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md">{{
+                                                        no_page.no }}</button>
+                                                </div>
+                                                <div *ngIf="mform.get('page')?.value != no_page.no">
+                                                    <button type="button" (click)="noPage(no_page.no)"
+                                                        class="page-link mr-1 relative block py-1.5 px-3 rounded border-1 border-regal-blue transition-all duration-300 text-regal-blue hover:text-white hover:bg-regal-blue shadow-md focus:shadow-md">{{
+                                                        no_page.no }}</button>
+                                                </div>
+                                            </li>
+                                            <div *ngIf="mform.get('page')?.value >= pagination.length">
+                                                <li class="page-item disabled">
+                                                    <button
+                                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                                                        tabindex="-1" aria-disabled="true">
+                                                        <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
+                                                    </button>
+                                                </li>
+                                            </div>
+                                            <div *ngIf="mform.get('page')?.value < pagination.length">
+                                                <li class="page-item">
+                                                    <button (click)="nextPage()" type="button"
+                                                        class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
+                                                        <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
+                                                    </button>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- PDF VIew -->
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+    id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl relative w-auto pointer-events-none">
+        <div
+            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+            <div
+                class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalXlLabel">
+                    <fa-icon [icon]="faFilePdf" class="mr-1" style="color: #006298;"></fa-icon> See Letter
+                </h5>
+                <button type="button"
+                    class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body relative p-4" id="htmlData">
+                <div class="bg-white rounded-lg mt-5 px-5">
+                    <div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- ... -->
+                            <div class="col-start-1">
+                                <img [src]="link_image" class="w-3/4" alt="icon-gmf">
+                            </div>
+                            <!-- ... -->
+                            <div class="col-end-7">
+                                <div class="flex">
+                                    <h1 class=" text-right flex">NO. SP <h1 class="ml-5 font-bold  text-right">{{sp_no}}
+                                        </h1>
+                                    </h1>
+                                </div>
+                                <h1 class="font-bold mt-2 underline underline-offset-8">SURAT PENGIRIMAN</h1>
+                                <h1 class="mt-0 ">Shipping Document</h1>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-10 gap-0 mt-1">
+                            <div>
+                                <div class="flex w-fit">
+                                    <div class="grid flex">
+                                        <h1 class="mt-2  underline underline-offset-8 flex">Kepada</h1>
+                                    </div>
+                                </div>
+                                <h1 class="mt-0 ">To</h1>
+                                <div class="flex">
+                                    <div class="grid flex">
+                                        <h1 class="mt-2  underline underline-offset-8 flex">Dikirim oleh</h1>
+                                    </div>
+                                </div>
+                                <h1 class="mt-0  w-fit">Sent By</h1>
+                            </div>
+                            <div class="w-80">
+                                <div class="flex">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <h1 class="mt-2  font-bold">: {{ receiver }}</h1>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <h1 class="mt-8  font-bold">: {{ sender }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="flex flex-col">
+                                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="overflow-hidden">
+                                            <table class="min-w-full border border-3 border-black text-center">
+                                                <thead class="border border-3 border-black">
+                                                    <tr class="mb-3">
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Tanggal</h1>
+                                                            <h1 class="font-bold  mt-2">Date</h1>
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Banyaknya</h1>
+                                                            <h1 class="font-bold  mt-2">Quantity</h1>
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Macam dari
+                                                                barang
+                                                                barang</h1>
+                                                            <h1 class="font-bold  mt-2">Description of goods
+                                                            </h1>
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2">
+                                                            <h1 class="font-bold  underline underline-offset-8">
+                                                                Keterangan</h1>
+                                                            <h1 class="font-bold  mt-2">Remark</h1>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border border-3 border-black"
+                                                        *ngFor="let row of data_pdf">
+                                                        <td
+                                                            class="font-bold border border-3 border-black px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
+                                                            <h1 class="">{{ row.created_at | date: 'longDate' }}
+                                                            </h1>
+                                                        </td>
+                                                        <td
+                                                            class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r">
+                                                            <h1 class="">{{ row.quantity }}</h1>
+                                                        </td>
+                                                        <td
+                                                            class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r text-justify">
+                                                            <h1 class="">{{ row.description }}</h1>
+                                                        </td>
+                                                        <td
+                                                            class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 text-justify">
+                                                            <h1 class="">{{ row.remark }}</h1>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border border-3 border-black">
+                                                        <td
+                                                            class="border border-3 border-black px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
+                                                        </td>
+                                                        <td
+                                                            class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
+
+                                                        </td>
+                                                        <td
+                                                            class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
+                                                            <div class="grid grid-cols-3">
+                                                                <div class="col-start-1 w-54">
+                                                                    <div class="w-54">
+                                                                        <div class="grid grid-cols-1">
+                                                                            <h1
+                                                                                class="col-start-1 mt-2  underline underline-offset-8 flex font-bold">
+                                                                                Dikirim oleh</h1>
+                                                                            <h1 class="col-end-7 mt-2  flex ml-5">
+                                                                                :</h1>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="w-54">
+                                                                        <div class="grid grid-cols-1">
+                                                                            <h1 class="col-start-1 mt-2  flex">
+                                                                                Packed by</h1>
+                                                                            <h1 class="col-end-7 mt-2  flex ml-11">
+                                                                                :</h1>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <h1 class="mt-2 ml-1 font-bold  w-fit">{{
+                                                                        sender_name }}
+                                                                    </h1>
+                                                                    <h1 class="mt-2 ml-1  mb-3 w-fit">{{
+                                                                        sender_number }}</h1>
+                                                                </div>
+                                                                <div class="flex mt-0">
+                                                                    <ngx-barcode *ngIf="sender_number"
+                                                                        [bc-value]="sender_number" [bc-height]="60"
+                                                                        [bc-display-value]="false"></ngx-barcode>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td
+                                                            class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="grid grid-cols-4 mt-1 w-fit">
+                                                <div class="columns-1">
+                                                    <div class="grid grid-cols-1">
+                                                        <h1
+                                                            class="col-start-1 mt-2  underline underline-offset-8 flex font-bold w-fit">
+                                                            Penerima</h1>
+                                                        <h1 class="col-end-4 mt-2  flex">:</h1>
+                                                    </div>
+                                                    <div class="grid grid-cols-1">
+                                                        <h1 class="col-start-1 mt-2  flex w-fit">
+                                                            Received</h1>
+                                                        <h1 class="col-end-4 mt-2  flex">:</h1>
+                                                    </div>
+                                                </div>
+                                                <div class="columns-1">
+                                                    <ngx-barcode *ngIf="receive_number" [bc-value]="receive_number"
+                                                        [bc-height]="50" [bc-margin]="5"
+                                                        [bc-display-value]="false"></ngx-barcode>
+                                                    <h1 class="mt-2 mb-5 ml-1 ">{{ receive_name == '' ? 'Not Received' :
+                                                        receive_name }} / {{
+                                                        receive_number == '' ? 'Not Received' : receive_number }}</h1>
+                                                </div>
+                                            </div>
+                                            <div class="flex">
+                                                <div class="grid grid-cols-2 gap-4">
+                                                    <h1
+                                                        class="col-start-1 mt-2  underline underline-offset-8 flex font-bold">
+                                                        Tanggal</h1>
+                                                    <h1 class="col-end-5 mt-2  flex font-bold">:</h1>
+                                                </div>
+                                                <h1 class="mt-2 ml-3 ">{{ sender_date | date: 'longDate' }}</h1>
+                                            </div>
+                                            <h1 class="mt-0  mb-10">Date</h1>
+                                            <h1 class="mt-5 mb-5">GMF/A-111</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <hr>
+                <button type="button" (click)="openPDF()"
+                    class="bg-regal-blue text-white rounded p-2 mb-5 mt-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border">
+                    <fa-icon [icon]="faCircleDown" class="mr-1"></fa-icon> Download
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
