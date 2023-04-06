@@ -4,51 +4,33 @@
     <div class="grid grid-cols-2 gap-4 mb-4">
       <div class="col-start-1 flex">
         <form [formGroup]="mform">
-          <input
-            type="text"
-            placeholder="Search here..."
-            formControlName="search_global"
-            class="px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-          />
+          <input type="text" placeholder="Search here..." formControlName="search_global"
+            class="px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
         </form>
-        <button
-          type="button"
-          (click)="resetSearch()"
+        <button type="button" (click)="resetSearch()"
           class="bg-regal-blue text-white rounded-r-lg p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border"
-          style="height: 38px"
-        >
+          style="height: 38px">
           <fa-icon [icon]="faRefresh" class="mr-1"></fa-icon>
         </button>
         <div class="flex justify-center">
           <button
             class="dropdown-toggle text-sm text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
-            type="button"
-            id="dropdownMenuButton1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <fa-icon [icon]="faSliders" class="mr-1"></fa-icon> Sort By
           </button>
           <ul
             class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
-            aria-labelledby="dropdownMenuButton1"
-          >
+            aria-labelledby="dropdownMenuButton1">
             <li>
-              <button
-                (click)="getByCreated()"
-                type="button"
-                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
-              >
+              <button (click)="getByCreated()" type="button"
+                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">
                 Sort By Created Date
               </button>
               <div class="px-4">
                 <hr />
               </div>
-              <button
-                (click)="getByUpdated()"
-                type="button"
-                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
-              >
+              <button (click)="getByUpdated()" type="button"
+                class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">
                 Sort By Updated Date
               </button>
             </li>
@@ -56,10 +38,8 @@
         </div>
       </div>
       <div class="col-end-7 mt-2">
-        <a
-          class="p-3 ml-4 rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue"
-          routerLink="/create-spdocument"
-        >
+        <a class="p-3 ml-4 rounded-lg hover:bg-white hover:text-regal-blue hover:border-regal-blue hover:border text-white bg-regal-blue"
+          routerLink="/create-spdocument">
           <fa-icon [icon]="faBookOpen" class="mr-1"></fa-icon> Create SP
           Document
         </a>
@@ -126,51 +106,33 @@
   <div class="min-[600px]:hidden">
     <div class="flex">
       <form [formGroup]="mform" class="w-full">
-        <input
-          type="text"
-          placeholder="Search here..."
-          formControlName="search_global"
-          class="w-full px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-        />
+        <input type="text" placeholder="Search here..." formControlName="search_global"
+          class="w-full px-3 py-2 bg-gray-50 border border-slate-300 rounded-l-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
       </form>
-      <button
-        type="button"
-        (click)="resetSearch()"
+      <button type="button" (click)="resetSearch()"
         class="bg-regal-blue text-white rounded-r-lg p-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border"
-        style="height: 38px"
-      >
+        style="height: 38px">
         <fa-icon [icon]="faRefresh" class="mr-1"></fa-icon>
       </button>
       <div class="flex justify-center">
         <button
           class="dropdown-toggle text-sm text-regal-blue p-2 ml-4 rounded-lg focus:bg-regal-blue focus:text-white border border-regal-blue hover:bg-regal-blue hover:text-white hover:border-white"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+          type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           <fa-icon [icon]="faSliders" class="mr-1"></fa-icon>
         </button>
         <ul
           class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none"
-          aria-labelledby="dropdownMenuButton1"
-        >
+          aria-labelledby="dropdownMenuButton1">
           <li>
-            <button
-              (click)="getByCreated()"
-              type="button"
-              class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
-            >
+            <button (click)="getByCreated()" type="button"
+              class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">
               Sort By Created Date
             </button>
             <div class="px-4">
               <hr />
             </div>
-            <button
-              (click)="getByUpdated()"
-              type="button"
-              class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100"
-            >
+            <button (click)="getByUpdated()" type="button"
+              class="dropdown-item text-sm py-2 px-4 font-normal block w-full bg-white text-gray-700 hover:bg-gray-100">
               Sort By Updated Date
             </button>
           </li>
@@ -183,10 +145,8 @@
     <div class="px-0 mt-5">
       <div class="grid gap-4 grid-cols-3 static">
         <!-- Card -->
-        <div
-          class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg"
-          *ngFor="let row of data"
-        >
+        <div class="static w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg"
+          *ngFor="let row of data">
           <div class="columns-2 w-full flex items-stretch">
             <div class="w-1/2">
               <h1 class="text-2xl py-2 font-semibold">{{ row.shipping_no }}</h1>
@@ -212,19 +172,13 @@
           </div>
           <div class="columns-2 w-full flex items-stretch">
             <div class="flex w-1/2">
-              <fa-icon
-                [icon]="faUser"
-                class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-              ></fa-icon>
+              <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
               <h1 class="text-sm py-2 text-gray-400">Sending</h1>
             </div>
             <div class="relative w-1/2">
               <div class="absolute flex inset-y-0 py-1 right-0">
                 <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-                <fa-icon
-                  [icon]="faUser"
-                  class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-                ></fa-icon>
+                <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
               </div>
             </div>
           </div>
@@ -233,9 +187,7 @@
               <h1 class="text-base font-bold capitalize text-regal-blue">
                 {{ row.sender_unit == null ? "-" : row.sender_unit }}
               </h1>
-              <h1
-                class="text-base font-bold capitalize text-success text-right"
-              >
+              <h1 class="text-base font-bold capitalize text-success text-right">
                 {{ row.receiver_unit == "" ? "-" : row.receiver_unit }}
               </h1>
             </div>
@@ -244,53 +196,44 @@
             <div class="grid grid-cols-2 gap-4 w-full">
               <h1 class="text-sm font-bold capitalize">
                 {{
-                  row.sender_personal_name == null
-                    ? "-"
-                    : row.sender_personal_name
+                row.sender_personal_name == null
+                ? "-"
+                : row.sender_personal_name
                 }}
                 /
                 {{
-                  row.sender_personal_number == null
-                    ? "-"
-                    : row.sender_personal_number
+                row.sender_personal_number == null
+                ? "-"
+                : row.sender_personal_number
                 }}
               </h1>
               <h1 class="text-sm font-bold capitalize text-right">
                 {{
-                  row.receiver_personal_name == ""
-                    ? "-"
-                    : row.receiver_personal_name
+                row.receiver_personal_name == ""
+                ? "-"
+                : row.receiver_personal_name
                 }}
                 /
                 {{
-                  row.receiver_personal_number == ""
-                    ? "-"
-                    : row.receiver_personal_number
+                row.receiver_personal_number == ""
+                ? "-"
+                : row.receiver_personal_number
                 }}
               </h1>
             </div>
           </div>
           <div class="columns-1 w-full text-center items-stretch mt-3 mb-3">
-            <fa-icon
-              [icon]="faArrowRightArrowLeft"
-              class="py-2 text-2xl rounded-lg text-regal-blue"
-            ></fa-icon>
+            <fa-icon [icon]="faArrowRightArrowLeft" class="py-2 text-2xl rounded-lg text-regal-blue"></fa-icon>
           </div>
           <div class="columns-2 w-full flex items-stretch">
             <div class="flex w-1/2">
-              <fa-icon
-                [icon]="faCalendar"
-                class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-              ></fa-icon>
+              <fa-icon [icon]="faCalendar" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
               <h1 class="text-sm py-2 text-gray-400">Sending Date</h1>
             </div>
             <div class="relative w-1/2">
               <div class="absolute flex inset-y-0 py-1 right-0">
                 <h1 class="text-sm py-2 text-gray-400 mr-1">Receive Date</h1>
-                <fa-icon
-                  [icon]="faCalendar"
-                  class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-                ></fa-icon>
+                <fa-icon [icon]="faCalendar" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
               </div>
             </div>
           </div>
@@ -298,29 +241,25 @@
             <div class="grid grid-cols-2 gap-4 w-full">
               <h1 class="text-sm font-bold">
                 {{
-                  row.sender_date == null
-                    ? "-"
-                    : (row.sender_date | date : "fullDate")
+                row.sender_date == null
+                ? "-"
+                : (row.sender_date | date : "fullDate")
                 }}
               </h1>
 
               <h1 class="text-sm font-bold text-right">
                 {{
-                  row.receiver_date == null
-                    ? "-"
-                    : (row.receiver_date | date : "fullDate")
+                row.receiver_date == null
+                ? "-"
+                : (row.receiver_date | date : "fullDate")
                 }}
               </h1>
             </div>
           </div>
           <div class="columns-2 mt-10 mb-0 w-full justify-center">
-            <button
-              type="button"
-              (click)="showDocumentPDF(row.id_sp_data)"
-              data-bs-toggle="modal"
+            <button type="button" (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
               data-bs-target="#exampleModalXl"
-              class="w-full border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue"
-            >
+              class="w-full max-[600px]:text-xs border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">
               See Letter
             </button>
           </div>
@@ -339,11 +278,8 @@
             <h1 class="text-gray-900">Row per page</h1>
           </div>
           <div class="columns-1">
-            <select
-              formControlName="limit"
-              [ngModel]="limit"
-              class="w-full px-2 rounded py-1.5 font-normal text-gray-700"
-            >
+            <select formControlName="limit" [ngModel]="limit"
+              class="w-full px-2 rounded py-1.5 font-normal text-gray-700">
               <option selected value="10">10</option>
               <option value="50">50</option>
               <option value="100">100</option>
@@ -357,11 +293,7 @@
               <h1 class="text-gray-900">Page</h1>
             </div>
             <div class="columns-1">
-              <input
-                type="number"
-                formControlName="page"
-                class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-12"
-              />
+              <input type="number" formControlName="page" class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-12" />
             </div>
             <nav aria-label="Page navigation example">
               <ul class="flex list-style-none">
@@ -369,39 +301,29 @@
                   <li class="page-item disabled">
                     <button
                       class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                      tabindex="-1"
-                      aria-disabled="true"
-                    >
+                      tabindex="-1" aria-disabled="true">
                       <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
                     </button>
                   </li>
                 </div>
                 <div *ngIf="mform.get('page')?.value > 1">
                   <li class="page-item">
-                    <button
-                      (click)="prevPage()"
-                      type="button"
-                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    >
+                    <button (click)="prevPage()" type="button"
+                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
                       <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
                     </button>
                   </li>
                 </div>
                 <li class="page-item active" *ngFor="let no_page of pagination">
                   <div *ngIf="mform.get('page')?.value == no_page.no">
-                    <button
-                      disabled
-                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-0 bg-regal-blue outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                    >
+                    <button disabled
+                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-0 bg-regal-blue outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md">
                       {{ no_page.no }}
                     </button>
                   </div>
                   <div *ngIf="mform.get('page')?.value != no_page.no">
-                    <button
-                      type="button"
-                      (click)="noPage(no_page.no)"
-                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-1 border-regal-blue transition-all duration-300 text-regal-blue hover:text-white hover:bg-regal-blue shadow-md focus:shadow-md"
-                    >
+                    <button type="button" (click)="noPage(no_page.no)"
+                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-1 border-regal-blue transition-all duration-300 text-regal-blue hover:text-white hover:bg-regal-blue shadow-md focus:shadow-md">
                       {{ no_page.no }}
                     </button>
                   </div>
@@ -410,20 +332,15 @@
                   <li class="page-item disabled">
                     <button
                       class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                      tabindex="-1"
-                      aria-disabled="true"
-                    >
+                      tabindex="-1" aria-disabled="true">
                       <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
                     </button>
                   </li>
                 </div>
                 <div *ngIf="mform.get('page')?.value < pagination.length">
                   <li class="page-item">
-                    <button
-                      (click)="nextPage()"
-                      type="button"
-                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    >
+                    <button (click)="nextPage()" type="button"
+                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
                       <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
                     </button>
                   </li>
@@ -438,10 +355,8 @@
 
   <!-- Card Mobile -->
   <div class="static min-[600px]:hidden">
-    <div
-      class="static mt-5 mb-5 w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg"
-      *ngFor="let row of data"
-    >
+    <div class="static mt-5 mb-5 w-full rounded-lg drop-shadow-md column-2 bg-white my-2 w-full py-5 px-5 rounded-lg"
+      *ngFor="let row of data">
       <div class="columns-2 w-full flex items-stretch">
         <div class="w-1/2">
           <h1 class="text-2xl py-2 font-semibold">{{ row.shipping_no }}</h1>
@@ -467,19 +382,13 @@
       </div>
       <div class="columns-2 w-full flex items-stretch">
         <div class="flex w-1/2">
-          <fa-icon
-            [icon]="faUser"
-            class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-          ></fa-icon>
+          <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
           <h1 class="text-sm py-2 text-gray-400">Sending</h1>
         </div>
         <div class="relative w-1/2">
           <div class="absolute flex inset-y-0 py-1 right-0">
             <h1 class="text-sm py-2 text-gray-400 mr-1">Receiving</h1>
-            <fa-icon
-              [icon]="faUser"
-              class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-            ></fa-icon>
+            <fa-icon [icon]="faUser" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
           </div>
         </div>
       </div>
@@ -497,51 +406,42 @@
         <div class="grid grid-cols-2 gap-4 w-full">
           <h1 class="text-sm font-bold capitalize">
             {{
-              row.sender_personal_name == null ? "-" : row.sender_personal_name
+            row.sender_personal_name == null ? "-" : row.sender_personal_name
             }}
             /
             {{
-              row.sender_personal_number == null
-                ? "-"
-                : row.sender_personal_number
+            row.sender_personal_number == null
+            ? "-"
+            : row.sender_personal_number
             }}
           </h1>
           <h1 class="text-sm font-bold capitalize text-right">
             {{
-              row.receiver_personal_name == ""
-                ? "-"
-                : row.receiver_personal_name
+            row.receiver_personal_name == ""
+            ? "-"
+            : row.receiver_personal_name
             }}
             /
             {{
-              row.receiver_personal_number == ""
-                ? "-"
-                : row.receiver_personal_number
+            row.receiver_personal_number == ""
+            ? "-"
+            : row.receiver_personal_number
             }}
           </h1>
         </div>
       </div>
       <div class="columns-1 w-full text-center items-stretch mt-3 mb-3">
-        <fa-icon
-          [icon]="faArrowRightArrowLeft"
-          class="py-2 text-2xl rounded-lg text-regal-blue"
-        ></fa-icon>
+        <fa-icon [icon]="faArrowRightArrowLeft" class="py-2 text-2xl rounded-lg text-regal-blue"></fa-icon>
       </div>
       <div class="columns-2 w-full flex items-stretch">
         <div class="flex w-1/2">
-          <fa-icon
-            [icon]="faCalendar"
-            class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-          ></fa-icon>
+          <fa-icon [icon]="faCalendar" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
           <h1 class="text-sm py-2 text-gray-400">Sending Date</h1>
         </div>
         <div class="relative w-1/2">
           <div class="absolute flex inset-y-0 py-1 right-0">
             <h1 class="text-sm py-2 text-gray-400 mr-1">Receive Date</h1>
-            <fa-icon
-              [icon]="faCalendar"
-              class="mr-1 text-sm py-2 rounded-lg text-gray-400"
-            ></fa-icon>
+            <fa-icon [icon]="faCalendar" class="mr-1 text-sm py-2 rounded-lg text-gray-400"></fa-icon>
           </div>
         </div>
       </div>
@@ -549,30 +449,26 @@
         <div class="grid grid-cols-2 gap-4 w-full">
           <h1 class="text-sm font-bold">
             {{
-              row.sender_date == null
-                ? "-"
-                : (row.sender_date | date : "fullDate")
+            row.sender_date == null
+            ? "-"
+            : (row.sender_date | date : "fullDate")
             }}
           </h1>
 
           <h1 class="text-sm font-bold text-right">
             {{
-              row.receiver_date == null
-                ? "-"
-                : (row.receiver_date | date : "fullDate")
+            row.receiver_date == null
+            ? "-"
+            : (row.receiver_date | date : "fullDate")
             }}
           </h1>
         </div>
       </div>
       <div class="columns-2 mt-10 mb-0 w-full justify-center">
         <div class="flex justify-center">
-          <button
-            type="button"
-            (click)="showDocumentPDF(row.id_sp_data)"
-            data-bs-toggle="modal"
+          <button type="button" (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
             data-bs-target="#exampleModalXl"
-            class="w-full border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue"
-          >
+            class="w-full max-[600px]:text-xs border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">
             See Letter
           </button>
         </div>
@@ -583,19 +479,14 @@
     </h1>
     <!-- Pagination -->
     <form [formGroup]="mform">
-      <div
-        class="mt-10 mb-10 px-2 min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-4 mb-2"
-      >
+      <div class="mt-10 mb-10 px-2 min-[600px]:grid min-[600px]:grid-cols-2 min-[600px]:gap-4 mb-2">
         <div class="col-start-1 flex mb-5">
           <div class="columns-1 mr-3">
             <h1 class="text-gray-900">Row per page</h1>
           </div>
           <div class="columns-1">
-            <select
-              formControlName="limit"
-              [ngModel]="limit"
-              class="w-full px-2 rounded py-1.5 font-normal text-gray-700"
-            >
+            <select formControlName="limit" [ngModel]="limit"
+              class="w-full px-2 rounded py-1.5 font-normal text-gray-700">
               <option selected value="10">10</option>
               <option value="50">50</option>
               <option value="100">100</option>
@@ -609,11 +500,7 @@
               <h1 class="text-gray-900">Page</h1>
             </div>
             <div class="columns-1">
-              <input
-                type="number"
-                formControlName="page"
-                class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-12"
-              />
+              <input type="number" formControlName="page" class="bg-gray-100 text-gray-900 rounded-md px-1 py-1 w-12" />
             </div>
             <nav aria-label="Page navigation example">
               <ul class="flex list-style-none">
@@ -621,39 +508,29 @@
                   <li class="page-item disabled">
                     <button
                       class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                      tabindex="-1"
-                      aria-disabled="true"
-                    >
+                      tabindex="-1" aria-disabled="true">
                       <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
                     </button>
                   </li>
                 </div>
                 <div *ngIf="mform.get('page')?.value > 1">
                   <li class="page-item">
-                    <button
-                      (click)="prevPage()"
-                      type="button"
-                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    >
+                    <button (click)="prevPage()" type="button"
+                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
                       <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
                     </button>
                   </li>
                 </div>
                 <li class="page-item active" *ngFor="let no_page of pagination">
                   <div *ngIf="mform.get('page')?.value == no_page.no">
-                    <button
-                      disabled
-                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-0 bg-regal-blue outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                    >
+                    <button disabled
+                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-0 bg-regal-blue outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md">
                       {{ no_page.no }}
                     </button>
                   </div>
                   <div *ngIf="mform.get('page')?.value != no_page.no">
-                    <button
-                      type="button"
-                      (click)="noPage(no_page.no)"
-                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-1 border-regal-blue transition-all duration-300 text-regal-blue hover:text-white hover:bg-regal-blue shadow-md focus:shadow-md"
-                    >
+                    <button type="button" (click)="noPage(no_page.no)"
+                      class="page-link mr-1 relative block py-1.5 px-3 rounded border-1 border-regal-blue transition-all duration-300 text-regal-blue hover:text-white hover:bg-regal-blue shadow-md focus:shadow-md">
                       {{ no_page.no }}
                     </button>
                   </div>
@@ -662,20 +539,15 @@
                   <li class="page-item disabled">
                     <button
                       class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                      tabindex="-1"
-                      aria-disabled="true"
-                    >
+                      tabindex="-1" aria-disabled="true">
                       <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
                     </button>
                   </li>
                 </div>
                 <div *ngIf="mform.get('page')?.value < pagination.length">
                   <li class="page-item">
-                    <button
-                      (click)="nextPage()"
-                      type="button"
-                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    >
+                    <button (click)="nextPage()" type="button"
+                      class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
                       <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
                     </button>
                   </li>
@@ -690,38 +562,20 @@
 </div>
 
 <!-- PDF Desktop VIew -->
-<div
-  class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-  id="exampleModalXl"
-  tabindex="-1"
-  aria-labelledby="exampleModalXlLabel"
-  aria-modal="true"
-  role="dialog"
->
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+  id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" aria-modal="true" role="dialog">
   <div class="modal-dialog modal-xl relative w-auto pointer-events-none">
     <div
-      class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current"
-    >
+      class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
       <div
-        class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md"
-      >
-        <h5
-          class="text-xl font-medium leading-normal text-gray-800"
-          id="exampleModalXlLabel"
-        >
-          <fa-icon
-            [icon]="faFilePdf"
-            class="mr-1"
-            style="color: #006298"
-          ></fa-icon>
+        class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalXlLabel">
+          <fa-icon [icon]="faFilePdf" class="mr-1" style="color: #006298"></fa-icon>
           See Letter
         </h5>
-        <button
-          type="button"
+        <button type="button"
           class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+          data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body relative p-4" id="htmlData">
         <div class="bg-white rounded-lg mt-5 px-5">
@@ -782,53 +636,35 @@
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden">
-                      <table
-                        class="min-w-full border border-3 border-black text-center"
-                      >
+                      <table class="min-w-full border border-3 border-black text-center">
                         <thead class="border border-3 border-black">
                           <tr class="mb-3">
-                            <th
-                              scope="col"
-                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r"
-                            >
-                              <h1
-                                class="font-bold underline underline-offset-8"
-                              >
+                            <th scope="col"
+                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r">
+                              <h1 class="font-bold underline underline-offset-8">
                                 Tanggal
                               </h1>
                               <h1 class="font-bold mt-2">Date</h1>
                             </th>
-                            <th
-                              scope="col"
-                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r"
-                            >
-                              <h1
-                                class="font-bold underline underline-offset-8"
-                              >
+                            <th scope="col"
+                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r">
+                              <h1 class="font-bold underline underline-offset-8">
                                 Banyaknya
                               </h1>
                               <h1 class="font-bold mt-2">Quantity</h1>
                             </th>
-                            <th
-                              scope="col"
-                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r"
-                            >
-                              <h1
-                                class="font-bold underline underline-offset-8"
-                              >
+                            <th scope="col"
+                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2 border-r">
+                              <h1 class="font-bold underline underline-offset-8">
                                 Macam dari barang barang
                               </h1>
                               <h1 class="font-bold mt-2">
                                 Description of goods
                               </h1>
                             </th>
-                            <th
-                              scope="col"
-                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2"
-                            >
-                              <h1
-                                class="font-bold underline underline-offset-8"
-                              >
+                            <th scope="col"
+                              class="border border-3 border-black text-sm font-medium text-gray-900 px-6 py-2">
+                              <h1 class="font-bold underline underline-offset-8">
                                 Keterangan
                               </h1>
                               <h1 class="font-bold mt-2">Remark</h1>
@@ -836,50 +672,40 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr
-                            class="border border-3 border-black"
-                            *ngFor="let row of data_pdf"
-                          >
+                          <tr class="border border-3 border-black" *ngFor="let row of data_pdf">
                             <td
-                              class="font-bold border border-3 border-black px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
-                            >
+                              class="font-bold border border-3 border-black px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
                               <h1 class="">
                                 {{ row.created_at | date : "longDate" }}
                               </h1>
                             </td>
                             <td
-                              class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r"
-                            >
+                              class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r">
                               <h1 class="">{{ row.quantity }}</h1>
                             </td>
                             <td
-                              class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r text-justify"
-                            >
+                              class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r text-justify">
                               <h1 class="">{{ row.description }}</h1>
                             </td>
                             <td
-                              class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 text-justify"
-                            >
+                              class="font-bold border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 text-justify">
                               <h1 class="">{{ row.remark }}</h1>
                             </td>
                           </tr>
                           <tr class="border border-3 border-black">
                             <td
-                              class="border border-3 border-black px-6 py-2 text-sm font-medium text-gray-900 border-r"
-                            ></td>
+                              class="border border-3 border-black px-6 py-2 text-sm font-medium text-gray-900 border-r">
+                            </td>
                             <td
-                              class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r"
-                            ></td>
+                              class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r">
+                            </td>
                             <td
-                              class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r"
-                            >
+                              class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-2 border-r">
                               <div class="grid grid-cols-3">
                                 <div class="col-start-1 w-54">
                                   <div class="w-54">
                                     <div class="grid grid-cols-1">
-                                      <h1
-                                        class="col-start-1 mt-2 underline underline-offset-8 flex font-bold"
-                                      >
+                                      <h1 class="col-start-1 mt-2 underline underline-offset-8 flex font-bold">
                                         Dikirim oleh
                                       </h1>
                                       <h1 class="col-end-7 mt-2 flex ml-5">
@@ -907,27 +733,21 @@
                                   </h1>
                                 </div>
                                 <div class="flex mt-0">
-                                  <ngx-barcode
-                                    *ngIf="sender_number"
-                                    [bc-value]="sender_number"
-                                    [bc-height]="60"
-                                    [bc-display-value]="false"
-                                  ></ngx-barcode>
+                                  <ngx-barcode *ngIf="sender_number" [bc-value]="sender_number" [bc-height]="60"
+                                    [bc-display-value]="false"></ngx-barcode>
                                 </div>
                               </div>
                             </td>
                             <td
-                              class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                            ></td>
+                              class="border border-3 border-black text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            </td>
                           </tr>
                         </tbody>
                       </table>
                       <div class="grid grid-cols-4 mt-1 w-fit">
                         <div class="columns-1">
                           <div class="grid grid-cols-1">
-                            <h1
-                              class="col-start-1 mt-2 underline underline-offset-8 flex font-bold w-fit"
-                            >
+                            <h1 class="col-start-1 mt-2 underline underline-offset-8 flex font-bold w-fit">
                               Penerima
                             </h1>
                             <h1 class="col-end-4 mt-2 flex">:</h1>
@@ -940,31 +760,24 @@
                           </div>
                         </div>
                         <div class="columns-1">
-                          <ngx-barcode
-                            *ngIf="receive_number"
-                            [bc-value]="receive_number"
-                            [bc-height]="50"
-                            [bc-margin]="5"
-                            [bc-display-value]="false"
-                          ></ngx-barcode>
+                          <ngx-barcode *ngIf="receive_number" [bc-value]="receive_number" [bc-height]="50"
+                            [bc-margin]="5" [bc-display-value]="false"></ngx-barcode>
                           <h1 class="mt-2 mb-5 ml-1">
                             {{
-                              receive_name == "" ? "Not Received" : receive_name
+                            receive_name == "" ? "Not Received" : receive_name
                             }}
                             /
                             {{
-                              receive_number == ""
-                                ? "Not Received"
-                                : receive_number
+                            receive_number == ""
+                            ? "Not Received"
+                            : receive_number
                             }}
                           </h1>
                         </div>
                       </div>
                       <div class="flex">
                         <div class="grid grid-cols-2 gap-4">
-                          <h1
-                            class="col-start-1 mt-2 underline underline-offset-8 flex font-bold"
-                          >
+                          <h1 class="col-start-1 mt-2 underline underline-offset-8 flex font-bold">
                             Tanggal
                           </h1>
                           <h1 class="col-end-5 mt-2 flex font-bold">:</h1>
@@ -985,11 +798,8 @@
       </div>
       <div class="modal-footer text-center">
         <hr />
-        <button
-          type="button"
-          (click)="openPDF()"
-          class="bg-regal-blue text-white rounded p-2 mb-5 mt-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border"
-        >
+        <button type="button" (click)="openPDF()"
+          class="bg-regal-blue text-white rounded p-2 mb-5 mt-2 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue border">
           <fa-icon [icon]="faCircleDown" class="mr-1"></fa-icon> Download
         </button>
       </div>
