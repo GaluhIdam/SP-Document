@@ -596,20 +596,21 @@
       <div class="columns-3 mt-10 mb-0 w-full items-stretch">
         <div class="flex">
           <a [routerLink]="'/view-spdocument/'+row.id_sp_data"
-            class="text-center w-full border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">
+            class="text-center max-[600px]:text-xs w-full border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">
             View
           </a>
         </div>
         <div class="flex">
           <button type="button" (click)="showDocumentPDF(row.id_sp_data)" data-bs-toggle="modal"
             data-bs-target="#exampleModalXl"
-            class="w-full border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue">
+            class="w-full border-regal-blue border p-3 rounded-lg text-regal-blue hover:text-white hover:bg-regal-blue max-[600px]:text-xs">
             See Letter
           </button>
         </div>
         <div class="relative">
           <div *ngIf="row.status == 'Delivered'">
-            <button type="button" disabled class="w-full bg-gray-400 p-3 rounded-lg text-white text-center">
+            <button type="button" disabled
+              class="w-full bg-gray-400 p-3 rounded-lg text-white text-center max-[600px]:text-xs">
               Receive
             </button>
           </div>
@@ -619,7 +620,7 @@
               mform.get('receiver_unit_p')?.value != ''
             ">
             <button type="button" (click)="confirmReceive(row.id_sp_data, row.notif[0].id_notif)"
-              class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center">
+              class="w-full bg-regal-blue p-3 hover:bg-white hover:text-regal-blue hover:border hover:border-regal-blue rounded-lg text-white text-center max-[600px]:text-xs">
               Receive
             </button>
           </div>
