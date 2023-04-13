@@ -35,6 +35,7 @@ export class DocumentListService {
         receiver_personal_number: any,
         receiver_personal_name: any,
         receiver_unit: any,
+        remark: any,
         description: any,
         status: any,
         limit: any,
@@ -57,6 +58,7 @@ export class DocumentListService {
             .set('receiver_personal_number', receiver_personal_number)
             .set('receiver_personal_name', receiver_personal_name)
             .set('receiver_unit', receiver_unit)
+            .set('remark', remark)
             .set('description', description)
             .set('status', status)
             .set('limit', limit)
@@ -92,6 +94,7 @@ export class DocumentListService {
         receiver_personal_number: any,
         receiver_personal_name: any,
         receiver_unit: any,
+        remark: any,
         description: any,
         status: any,
         limit: any,
@@ -115,6 +118,7 @@ export class DocumentListService {
             .set('receiver_personal_number', receiver_personal_number)
             .set('receiver_personal_name', receiver_personal_name)
             .set('receiver_unit', receiver_unit)
+            .set('remark', remark)
             .set('description', description)
             .set('status', status)
             .set('limit', limit)
@@ -151,6 +155,7 @@ export class DocumentListService {
         receiver_personal_number: any,
         receiver_personal_name: any,
         receiver_unit: any,
+        remark: any,
         description: any,
         status: any,
         limit: any,
@@ -174,6 +179,7 @@ export class DocumentListService {
             .set('receiver_personal_number', receiver_personal_number)
             .set('receiver_personal_name', receiver_personal_name)
             .set('receiver_unit', receiver_unit)
+            .set('remark', remark)
             .set('description', description)
             .set('status', status)
             .set('limit', limit)
@@ -210,6 +216,7 @@ export class DocumentListService {
         receiver_personal_number: any,
         receiver_personal_name: any,
         receiver_unit: any,
+        remark: any,
         description: any,
         status: any,
         limit: any,
@@ -238,6 +245,7 @@ export class DocumentListService {
             .set('receiver_date', receiver_date)
             .set('sender_date', sender_date)
 
+            .set('remark', remark)
             .set('description', description)
             .set('status', status)
             .set('limit', limit)
