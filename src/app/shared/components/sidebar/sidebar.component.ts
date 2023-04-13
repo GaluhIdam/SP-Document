@@ -146,7 +146,8 @@ export class SidebarComponent {
   }
 
   private getRealtimeNotif() {
-    this.socket = io('http://172.16.41.107:8380');
+    this.socket = io('https://utils.gmf-aeroasia.co.id');
+    // this.socket = io('http://172.16.41.107:8380');
     this.socket.on('connect', () => {
       console.log('Connected');
     });
