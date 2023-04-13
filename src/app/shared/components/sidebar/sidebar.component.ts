@@ -122,8 +122,8 @@ export class SidebarComponent {
     this.layoutService.getUserData(personal_number)
       .subscribe(
         (response) => {
-          this.user = response
-          this.mform.get('receiver_unit_p')?.setValue(response.unit)
+          this.user = response.body
+          this.mform.get('receiver_unit_p')?.setValue(response.body.personalUnit)
           this.getNotif('false', this.mform.get('receiver_unit_p')?.value)
         }
       )

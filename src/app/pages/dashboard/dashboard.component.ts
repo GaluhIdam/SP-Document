@@ -342,7 +342,7 @@ export class DashboardComponent {
     this.headerService.getUserData(personal_number)
       .subscribe(
         (response) => {
-          this.user = response
+          this.user = response.body
         }
       )
   }

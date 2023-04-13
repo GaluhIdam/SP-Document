@@ -29,7 +29,7 @@ export class HeaderComponent {
   title: any;
 
   personal_number: any;
-  user: any  = {
+  user: any = {
     personalName: String,
     unit: String,
   };
@@ -42,15 +42,15 @@ export class HeaderComponent {
     private titleService: Title,
     private keycloakService: KeycloakService,
     private headerService: HeaderService,
-    ) {
+  ) {
   }
 
   ngOnInit() {
     this.initializeUserOptions()
     this.getUserData(this.personal_number)
-    this.photo = 'https://talentlead.gmf-aeroasia.co.id/images/avatar/'+this.personal_number+'.jpg';
+    this.photo = 'https://talentlead.gmf-aeroasia.co.id/images/avatar/' + this.personal_number + '.jpg';
     this.activatedRoute.data.subscribe(data => {
-      this.title=data;
+      this.title = data;
     })
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -73,7 +73,7 @@ export class HeaderComponent {
       return activatedRoute;
     }
   }
-  
+
   //GET Personal Number from Keycloak
   private initializeUserOptions(): void {
     this.personal_number = this.keycloakService.getUsername();
@@ -82,11 +82,11 @@ export class HeaderComponent {
   //Get Personal Info from SOE
   private getUserData(personal_number: any): void {
     this.headerService.getUserData(personal_number)
-    .subscribe(
-      (response) => {
-        this.user = response
-      }
-    )
+      .subscribe(
+        (response) => {
+          this.user = response.body
+        }
+      )
   }
 
   public logout(): void {

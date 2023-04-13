@@ -411,7 +411,7 @@ export class MyDocumentComponent {
       .subscribe(
         (response) => {
           this.user = response
-          this.mform.get('receiver_unit_p')?.setValue(response.unit)
+          this.mform.get('receiver_unit_p')?.setValue(response.body.personalUnit)
           this.getCountAllTotal();
           this.getCountOpenTotal();
           this.getCountDeliveredTotal();

@@ -16,7 +16,7 @@ export class HeaderService {
     getUserData(personal_number: any): Observable<any> {
         const params = new HttpParams()
             .set('personal_number', personal_number);
-        return this.http.get('http://172.16.41.125:8321/v3/api/user/soe/info', { 'params': params })
+        return this.http.get('https://api.gmf-aeroasia.co.id/th/soe/v1/employee/' + personal_number)
             .pipe(
                 map((response) => {
                     return response;

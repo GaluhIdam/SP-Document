@@ -779,10 +779,10 @@ export class DocumentListComponent {
     this.headerService.getUserData(personal_number)
       .subscribe(
         (response) => {
-          this.user = response
-          this.mform.get('receiver_name_receive')?.setValue(response.personalName)
-          this.mform.get('receiver_number_receive')?.setValue(response.personalNumber)
-          this.mform.get('receiver_unit_user')?.setValue(response.unit)
+          this.user = response.body
+          this.mform.get('receiver_name_receive')?.setValue(response.body.personalName)
+          this.mform.get('receiver_number_receive')?.setValue(response.body.personalNumber)
+          this.mform.get('receiver_unit_user')?.setValue(response.body.personalUnit)
         }
       )
   }
