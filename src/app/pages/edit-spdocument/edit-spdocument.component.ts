@@ -341,8 +341,8 @@ export class EditSpdocumentComponent {
     this.headerService.getUserData(personal_number)
       .subscribe(
         (response) => {
-          this.mform.get('receiver_personal_name')?.setValue(response.personalName)
-          this.mform.get('receiver_unit')?.setValue(response.unit)
+          this.mform.get('receiver_personal_name')?.setValue(response.body.personalName)
+          this.mform.get('receiver_unit')?.setValue(response.body.personalUnit)
         }
       )
   }
@@ -357,7 +357,7 @@ export class EditSpdocumentComponent {
     this.headerService.getUserData(personal_number)
       .subscribe(
         (response) => {
-          this.personal_number = response.personalNumber
+          this.personal_number = response.body.personalNumber
         }
       )
   }

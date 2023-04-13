@@ -26,7 +26,7 @@ export class LayoutComponent {
   title: any;
 
   personal_number: any;
-  user: any  = {
+  user: any = {
     personalName: String,
     unit: String,
   };
@@ -82,7 +82,7 @@ export class LayoutComponent {
     this.layoutService.getUserData(personal_number)
       .subscribe(
         (response) => {
-          this.user = response
+          this.user = response.body
         }
       )
   }
@@ -92,7 +92,7 @@ export class LayoutComponent {
   }
 
   public showHide() {
-    if(this.navbar == false) {
+    if (this.navbar == false) {
       this.navbar = true;
     } else {
       this.navbar = false;

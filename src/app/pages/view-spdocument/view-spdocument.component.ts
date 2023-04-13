@@ -145,9 +145,9 @@ export class ViewSpdocumentComponent {
       .subscribe(
         (response) => {
           this.user = response
-          this.mform.get('receiver_name_receive')?.setValue(response.personalName)
-          this.mform.get('receiver_number_receive')?.setValue(response.personalNumber)
-          this.mform.get('receiver_unit_p')?.setValue(response.unit)
+          this.mform.get('receiver_name_receive')?.setValue(response.body.personalName)
+          this.mform.get('receiver_number_receive')?.setValue(response.body.personalNumber)
+          this.mform.get('receiver_unit_p')?.setValue(response.body.personalUnit)
         }
       )
   }

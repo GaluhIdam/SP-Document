@@ -281,15 +281,15 @@ export class CreateSpdocumentComponent {
   //Get Personal Info from SOE
   private getUserData(personal_number: any): void {
     this.headerService.getUserData(personal_number).subscribe((response) => {
-      this.personalName = response.personalName;
-      this.unit = response.unit;
+      this.personalName = response.body.personalName;
+      this.unit = response.body.personalUnit;
     });
   }
 
   public getUserReceiver(personal_number: any) {
     this.headerService.getUserData(personal_number).subscribe((response) => {
-      this.mform.get('receiver_personal_name')?.setValue(response.personalName);
-      this.mform.get('receiver_unit')?.setValue(response.unit);
+      this.mform.get('receiver_personal_name')?.setValue(response.body.personalName);
+      this.mform.get('receiver_unit')?.setValue(response.body.personalUnit);
     });
   }
 }
