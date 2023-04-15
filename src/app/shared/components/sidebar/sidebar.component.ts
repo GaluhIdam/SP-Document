@@ -95,6 +95,7 @@ export class SidebarComponent {
         })
       })
   }
+
   private checkphoto(personal_number: any) {
     const imageUrl = `https://talentlead.gmf-aeroasia.co.id/images/avatar/${personal_number}.jpg`;
 
