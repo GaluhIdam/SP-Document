@@ -77,8 +77,8 @@ export class SidebarComponent {
   ngOnInit() {
     this.initializeUserOptions()
     this.getUserData(this.personal_number)
+    this.checkphoto(this.personal_number)
     this.getRealtimeNotif()
-    this.photo = 'https://talentlead.gmf-aeroasia.co.id/images/avatar/' + this.personal_number + '.jpg';
     this.activatedRoute.data.subscribe(data => {
       this.title = data;
     })
@@ -95,6 +95,23 @@ export class SidebarComponent {
         })
       })
   }
+  private checkphoto(personal_number: any) {
+    const imageUrl = `https://talentlead.gmf-aeroasia.co.id/images/avatar/${personal_number}.jpg`;
+
+    const img = new Image();
+    img.onload = () => {
+      console.log(`Image exists at ${imageUrl}`);
+      this.photo = imageUrl;
+    };
+    img.onerror = () => {
+      console.log(`Image doesn't exist at ${imageUrl}`);
+      const defaultImageUrl = 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg';
+      this.photo = defaultImageUrl;
+    };
+    img.src = imageUrl;
+  }
+
+
 
   public getNotif(status: any, unit: any): void {
     this.sidebarService.getNotif(
