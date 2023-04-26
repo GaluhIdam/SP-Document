@@ -21,7 +21,7 @@ export class CreateDocumentService {
   urlCheckNotif: any = this.base_url + 'check-notif/';
 
   // urlPushNotif: any = 'http://172.16.41.107:8322/v1/api/notification';
-  urlPushNotif: any = 'https://utils.gmf-aeroasia.co.id/v1/api/notification';
+  urlPushNotif: any = 'https://api-utils.gmf-aeroasia.co.id/v1/api/notification';
 
   //Credentials
   headers = new HttpHeaders()
