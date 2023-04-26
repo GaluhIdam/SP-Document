@@ -256,7 +256,8 @@
         </div>
         <div class="mt-5">
           <h1 class="min-[600px]:text-2xl max-[600px]:text-lg font-semibold">Evidence Receiver</h1>
-          <img class="mt-5" [src]="'http://172.16.41.107:8322/v1/api/media/preview/'+file_location" alt="evidence">
+          <img class="mt-5" [src]="'https://api-utils.gmf-aeroasia.co.id/v1/api/media/preview/'+file_location"
+            alt="evidence">
           <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
             <ngx-dropzone-label>
               <div class="flex flex-col gap-1">
