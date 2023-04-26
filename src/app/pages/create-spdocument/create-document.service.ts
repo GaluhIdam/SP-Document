@@ -9,7 +9,7 @@ import { baseURL } from 'src/app/core/services/baseURL';
   providedIn: 'root',
 })
 export class CreateDocumentService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //Base URL
   base_url: String = baseURL.BASE_URL;
@@ -20,7 +20,8 @@ export class CreateDocumentService {
   urlUpdateNotif: any = this.base_url + 'update-notif/';
   urlCheckNotif: any = this.base_url + 'check-notif/';
 
-  urlPushNotif: any = 'http://172.16.41.107:8322/v1/api/notification';
+  // urlPushNotif: any = 'http://172.16.41.107:8322/v1/api/notification';
+  urlPushNotif: any = 'http://utils.gmf-aeroasia.co.id/v1/api/notification';
 
   //Credentials
   headers = new HttpHeaders()
