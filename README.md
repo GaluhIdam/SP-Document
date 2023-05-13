@@ -18,3 +18,14 @@ _Below is an example of how you can instruct your audience on installing and set
 4. Run web server `ng serve --open`
 8. After running the web server, open this address in your browser:
    `http://localhost:3000`
+9. After Install Hasura, you should
+   
+   
+## Contact
+
+Sigit Prayoga - sigit.prayoga@opencloud.id \
+Fatur Ridlwan - fatur.ridlwan@opencloud.id\
+Rizky Ibrahim - rizky.ibrahim@opencloud.id \
+Alnuria Vanadia Equila - vanadia.equila@opencloud.id\
+Galuh Idam Danutirto - galuh.danutirto@opencloud.id\
+I Putu Sedana Wijaya - putu.wijaya@opencloud.id
