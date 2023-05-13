@@ -1,0 +1,544 @@
+{
+  "resource_version": 338,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "SPDOC",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "spdoc_data",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "notif",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "id_sp_data": "id_spdoc"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "spdoc_notif",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "spdoc_description_remarks",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "spdata_id",
+                    "table": {
+                      "name": "spdoc_description_remark",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "spdoc_description_remark",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "spdoc_datum",
+                "using": {
+                  "foreign_key_constraint_on": "spdata_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "spdoc_notif",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "notif_spdoc",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "id_spdoc": "id_sp_data"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "spdoc_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": "postgresql://spdocdevelopment:spd0cd3v3l0pm3nt@172.16.41.107:15432/spdoc",
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        }
+      }
+    ],
+    "query_collections": [
+      {
+        "name": "allowed-queries",
+        "definition": {
+          "queries": [
+            {
+              "name": "Get Last ID Shipping Number",
+              "query": "query MyQuery {\n  spdoc_data(limit: 1, order_by: {shipping_no: desc}) {\n    shipping_no\n  }\n}"
+            },
+            {
+              "name": "Create SP Document",
+              "query": "mutation create_spdoc_data($sender_personal_number: String, $sender_personal_name: String, $sender_date: date, $sender_unit: String, $receiver_unit: String, $created_by: String, $shipping_no: String, $status: String, $data: [spdoc_description_remark_insert_input!]!) {\r\n  insert_spdoc_data(\r\n    objects: [\r\n      {\r\n      \tsender_personal_number: $sender_personal_number, \r\n      \tsender_personal_name: $sender_personal_name, \r\n      \tsender_date: $sender_date, \r\n      \tsender_unit: $sender_unit, \r\n      \treceiver_unit: $receiver_unit,\r\n        receiver_personal_name: \"\",\r\n        receiver_personal_number: \"\",\r\n        created_by: $created_by,\r\n        shipping_no: $shipping_no,\r\n        status: $status,\r\n        spdoc_description_remarks: {\r\n          data: $data\r\n        }\r\n    \t}\r\n    ]\r\n  ) {\r\n    returning {\r\n      shipping_no\r\n      id_sp_data\r\n      sender_personal_number\r\n      sender_personal_name\r\n      sender_date\r\n      receiver_unit\r\n      created_by\r\n      spdoc_description_remarks {\r\n        id_description_remark\r\n        spdata_id\r\n        quantity\r\n        remark\r\n        description\r\n      }\r\n    }\r\n    affected_rows\r\n  }\r\n}"
+            },
+            {
+              "name": "Update Data SP Document",
+              "query": "mutation update_data($id_sp_data: bigint!, $receiver_unit: String, $sender_date: date) {\r\n  update_spdoc_data_by_pk(pk_columns: {id_sp_data: $id_sp_data}, _set: {receiver_unit: $receiver_unit, sender_date: $sender_date}) {\r\n    id_sp_data\r\n    receiver_unit\r\n    sender_date\r\n  }\r\n}"
+            },
+            {
+              "name": "Update Description & Remark",
+              "query": "mutation update_desc_remark($id_description_remark: bigint!, $quantity: Int, $remark: String, $description: String) {\r\n  update_spdoc_description_remark_by_pk(pk_columns: {id_description_remark: $id_description_remark}, _set: {quantity: $quantity, remark: $remark, description: $description}) {\r\n    id_description_remark,\r\n    remark,\r\n    description,\r\n    quantity\r\n  }\r\n}"
+            },
+            {
+              "name": "Delete Desc & Remark",
+              "query": "mutation delete_desc_remark($id_description_remark: bigint!) {\n  delete_spdoc_description_remark_by_pk(id_description_remark: $id_description_remark) {\n    id_description_remark\n    quantity\n    remark\n    description\n  }\n}"
+            },
+            {
+              "name": "Add Desc & Remark",
+              "query": "mutation add_desc_remark($quantity: Int, $remark: String, $spdata_id: bigint, $description: String) {\n  insert_spdoc_description_remark(objects: {quantity: $quantity, remark: $remark, spdata_id: $spdata_id, description: $description}) {\n    returning {\n      spdata_id,\n      quantity,\n      description,\n      remark\n    }\n  }\n}"
+            },
+            {
+              "name": "Receive SP Document",
+              "query": "query get_spdoc_data_filter($limit: Int, $offset: Int, $shipping_no: String, $sender_personal_number: String, $sender_personal_name: String, $receiver_personal_number: String, $receiver_personal_name: String, $status: String, $receiver_date: date) {\r\n  spdoc_data(limit: $limit, offset: $offset, where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {receiver_date: {_eq: $receiver_date}}}}}}}}) {\r\n    id_sp_data\r\n    shipping_no\r\n    sender_unit\r\n    sender_personal_number\r\n    sender_personal_name\r\n    sender_date\r\n    receiver_unit\r\n    receiver_personal_number\r\n    receiver_personal_name\r\n    receiver_date\r\n    status\r\n    created_by\r\n    created_at\r\n    spdoc_description_remarks {\r\n      quantity\r\n      remark\r\n      description\r\n    }\r\n  }\r\n  spdoc_data_aggregate {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Get Sort Sp Document",
+              "query": "query get_spdoc_data_filter($limit: Int, $offset: Int, $status: String, $shipping_no: order_by, $created_at: order_by, $sender_date: order_by, $receiver_date: order_by, $status_order: order_by) {\r\n  spdoc_data(limit: $limit, offset: $offset, where: {status: {_ilike: $status}}, order_by: {shipping_no: $shipping_no, created_at: $created_at, sender_date: $sender_date, receiver_date: $receiver_date, status: $status_order}) {\r\n    id_sp_data\r\n    shipping_no\r\n    sender_unit\r\n    sender_personal_number\r\n    sender_personal_name\r\n    sender_date\r\n    receiver_unit\r\n    receiver_personal_number\r\n    receiver_personal_name\r\n    receiver_date\r\n    status\r\n    created_by\r\n    created_at\r\n    spdoc_description_remarks {\r\n      quantity\r\n      remark\r\n      description\r\n    }\r\n  }\r\n  spdoc_data_aggregate(where: {status: {_ilike: $status}}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Get Desc & Remark",
+              "query": "query get_remark($spdata_id: bigint) {\n  spdoc_description_remark(where: {spdata_id: {_eq: $spdata_id}}) {\n    remark\n    quantity\n    id_description_remark\n    spdata_id\n    description\n  }\n}"
+            },
+            {
+              "name": "Search & FIlter Dashboard Page",
+              "query": "query get_card_dashboard($sender_unit: String, $receiver_unit: String, $sender_personal_name: String, $sender_personal_number: String, $shipping_no: String, $receiver_personal_name: String, $receiver_personal_number: String, $status: String, $created_at: order_by, $status_order: order_by, $shipping_no_order: order_by, $sender_date_order: order_by, $receiver_date_order: order_by, $limit: Int, $offset: Int, $updated_at: order_by) {\r\n  spdoc_data(where: {_or: [{sender_unit: {_ilike: $sender_unit}}, {receiver_unit: {_ilike: $receiver_unit}}, {sender_personal_name: {_ilike: $sender_personal_name}}, {sender_personal_number: {_ilike: $sender_personal_number}}, {shipping_no: {_ilike: $shipping_no}}, {receiver_personal_name: {_ilike: $receiver_personal_name}}, {receiver_personal_number: {_ilike: $receiver_personal_number}}], _and: {status: {_ilike: $status}}}, order_by: {created_at: $created_at, status: $status_order, shipping_no: $shipping_no_order, sender_date: $sender_date_order, receiver_date: $receiver_date_order, updated_at: $updated_at}, limit: $limit, offset: $offset) {\r\n    id_sp_data\r\n    shipping_no\r\n    status\r\n    sender_personal_name\r\n    sender_personal_number\r\n    sender_unit\r\n    sender_date\r\n    receiver_personal_name\r\n    receiver_personal_number\r\n    receiver_unit\r\n    receiver_date\r\n    created_at\r\n  }\r\n  spdoc_data_aggregate(where: {_or: [{sender_unit: {_ilike: $sender_unit}}, {receiver_unit: {_ilike: $receiver_unit}},{sender_personal_name: {_ilike: $sender_personal_name}}, {sender_personal_number: {_ilike: $sender_personal_number}}, {shipping_no: {_ilike: $shipping_no}}, {receiver_personal_name: {_ilike: $receiver_personal_name}}, {receiver_personal_number: {_ilike: $receiver_personal_number}}], _and: {status: {_ilike: $status}}}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Count Document Private Number",
+              "query": "query countByStatus($cat_status: String, $sender_personal_number_p: String, $receiver_personal_number_p: String, $receiver_unit_p: String) {\r\n  spdoc_data_aggregate(where: {status: {_ilike: $cat_status}, _and: {_or: [\r\n    {sender_personal_number: {_ilike: $sender_personal_number_p}},\r\n    {receiver_personal_number: {_ilike: $receiver_personal_number_p}}\r\n  ], receiver_unit: {_ilike: $receiver_unit_p}\r\n  }}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Count By Status",
+              "query": "query countByStatus($cat_status: String) {\r\n  spdoc_data_aggregate(where: {status: {_ilike: $cat_status},\r\n  }) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Insert Notif",
+              "query": "mutation insert_notif($id_spdoc: bigint, $status: String, $title: String, $unit: String) {\r\n  insert_spdoc_notif(objects: {status: $status, id_spdoc: $id_spdoc, title: $title, unit: $unit}) {\r\n    returning {\r\n      title\r\n      id_notif\r\n      id_spdoc\r\n      status\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Get Notif",
+              "query": "query get_notif($status: String, $unit: String) {\r\n  spdoc_notif(where: {status: {_ilike: $status}, _and: {unit: {_ilike: $unit}}}) {\r\n    updated_at\r\n    unit\r\n    title\r\n    status\r\n    id_spdoc\r\n    id_notif\r\n    created_at\r\n    notif_spdoc {\r\n      shipping_no\r\n      sender_unit\r\n      sender_personal_number\r\n      sender_personal_name\r\n      sender_date\r\n      receiver_unit\r\n      receiver_personal_number\r\n      receiver_personal_name\r\n      receiver_date\r\n      id_sp_data\r\n      created_by\r\n      created_at\r\n      status\r\n      updated_at\r\n      updated_by\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Receive SP Document To Be Delivered",
+              "query": "mutation receive_sp($id_sp_data: bigint, $receiver_personal_number: String, $receiver_personal_name: String, $receiver_date: date, $status: String) {\r\n  update_spdoc_data(where: {id_sp_data: {_eq: $id_sp_data}}, _set: {receiver_personal_number: $receiver_personal_number, receiver_personal_name: $receiver_personal_name, receiver_date: $receiver_date, status: $status}) {\r\n    returning {\r\n      id_sp_data\r\n      shipping_no\r\n      receiver_unit\r\n      receiver_personal_number\r\n      receiver_personal_name\r\n      receiver_date\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Read Notif",
+              "query": "mutation read_notif($id_notif: bigint, $status: String = \"true\") {\n  update_spdoc_notif(where: {id_notif: {_eq: $id_notif}}, _set: {status: $status}) {\n    returning {\n      status\n      title\n      unit\n      updated_at\n      id_spdoc\n      id_notif\n      created_at\n    }\n  }\n}"
+            },
+            {
+              "name": "Show SP Document By ID",
+              "query": "query show_spdoc($id_sp_data: bigint!) {\r\n  spdoc_data_by_pk(id_sp_data: $id_sp_data) {\r\n    created_at\r\n    created_by\r\n    id_sp_data\r\n    shipping_no\r\n    receiver_personal_name\r\n    receiver_personal_number\r\n    sender_unit\r\n    sender_personal_number\r\n    sender_personal_name\r\n    sender_date\r\n    receiver_unit\r\n    receiver_date\r\n    status\r\n    spdoc_description_remarks {\r\n      created_at\r\n      created_by\r\n      description\r\n      id_description_remark\r\n      quantity\r\n      remark\r\n      spdata_id\r\n      updated_at\r\n      updated_by\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Update Notif",
+              "query": "mutation update_notif($id_spdoc: bigint, $title: String, $status: String, $unit: String) {\n  update_spdoc_notif(where: {id_spdoc: {_eq: $id_spdoc}}, _set: {status: $status, title: $title, unit: $unit}) {\n    returning {\n      status\n      title\n      unit\n      id_spdoc\n      id_notif\n    }\n  }\n}"
+            },
+            {
+              "name": "Check Notif",
+              "query": "query get_notif($id_spdoc: bigint) {\n  spdoc_notif(where: {id_spdoc: {_eq: $id_spdoc}}) {\n    id_notif\n    id_spdoc\n    created_at\n    status\n    title\n    unit\n  }\n}"
+            },
+            {
+              "name": "Search & Filter Table",
+              "query": "query get_spdoc_data_filter($limit: Int, $offset: Int, $shipping_no: String, $sender_personal_number: String, $sender_personal_name: String, $receiver_personal_number: String, $receiver_personal_name: String, $status: String, $shipping_no_order: order_by, $sender_personal_number_order: order_by, $sender_personal_name_order: order_by, $sender_date_order: order_by, $receiver_personal_number_order: order_by, $receiver_personal_name_order: order_by, $receiver_date_order: order_by, $sender_unit: String, $receiver_unit: String, $description: String, $sender_unit_order: order_by, $receiver_unit_order: order_by) {\r\n  spdoc_data(limit: $limit, offset: $offset, where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {sender_unit: {_ilike: $sender_unit}, _or: {receiver_unit: {_ilike: $receiver_unit}, _or: {spdoc_description_remarks: {description: {_ilike: $description}}}}}}}}}}}, order_by: {shipping_no: $shipping_no_order, sender_personal_number: $sender_personal_number_order, sender_personal_name: $sender_personal_name_order, sender_date: $sender_date_order, receiver_personal_number: $receiver_personal_number_order, receiver_personal_name: $receiver_personal_name_order, receiver_date: $receiver_date_order, sender_unit: $sender_unit_order, receiver_unit: $receiver_unit_order}) {\r\n    id_sp_data\r\n    shipping_no\r\n    sender_unit\r\n    sender_personal_number\r\n    sender_personal_name\r\n    sender_date\r\n    receiver_unit\r\n    receiver_personal_number\r\n    receiver_personal_name\r\n    receiver_date\r\n    status\r\n    created_by\r\n    created_at\r\n    spdoc_description_remarks {\r\n      quantity\r\n      remark\r\n      description\r\n    }\r\n    notif {\r\n      id_notif\r\n      id_spdoc\r\n      created_at\r\n      status\r\n      title\r\n      unit\r\n      updated_at\r\n    }\r\n  }\r\n  spdoc_data_aggregate(where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}}}}}}}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Get by Sender date",
+              "query": "query get_spdoc_data_filter($limit: Int, $offset: Int, $shipping_no: String, $sender_personal_number: String, $sender_personal_name: String, $receiver_personal_number: String, $receiver_personal_name: String, $status: String, $sender_date: date, $shipping_no_order: order_by, $sender_personal_name_order: order_by, $sender_personal_number_order: order_by, $sender_date_order: order_by, $receiver_personal_number_order: order_by, $receiver_personal_name_order: order_by, $receiver_date_order: order_by, $receiver_unit: String, $sender_unit: String, $description: String, $receiver_unit_order: order_by, $sender_unit_order: order_by) {\r\n  spdoc_data(limit: $limit, offset: $offset, where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {sender_date: {_eq: $sender_date}, _or: {receiver_unit: {_ilike: $receiver_unit}, _or: {sender_unit: {_ilike: $sender_unit}, _or: {spdoc_description_remarks: {description: {_ilike: $description}}}}}}}}}}}}, order_by: {shipping_no: $shipping_no_order, sender_personal_name: $sender_personal_name_order, sender_personal_number: $sender_personal_number_order, sender_date: $sender_date_order, receiver_personal_number: $receiver_personal_number_order, receiver_personal_name: $receiver_personal_name_order, receiver_date: $receiver_date_order, receiver_unit: $receiver_unit_order, sender_unit: $sender_unit_order}) {\r\n    id_sp_data\r\n    shipping_no\r\n    sender_unit\r\n    sender_personal_number\r\n    sender_personal_name\r\n    sender_date\r\n    receiver_unit\r\n    receiver_personal_number\r\n    receiver_personal_name\r\n    receiver_date\r\n    status\r\n    created_by\r\n    created_at\r\n    spdoc_description_remarks {\r\n      quantity\r\n      remark\r\n      description\r\n    }\r\n    notif{\r\n      id_notif\r\n      id_spdoc\r\n      title\r\n      created_at\r\n      updated_at\r\n      status\r\n    }\r\n  }\r\n  spdoc_data_aggregate(where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {sender_date: {_eq: $sender_date}}}}}}}}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Get By Receiver Date",
+              "query": "query get_spdoc_data_filter($limit: Int, $offset: Int, $shipping_no: String, $sender_personal_number: String, $sender_personal_name: String, $receiver_personal_number: String, $receiver_personal_name: String, $status: String, $receiver_date: date, $shipping_no_order: order_by, $sender_personal_number_order: order_by, $sender_personal_name_order: order_by, $sender_date_order: order_by, $receiver_personal_number_order: order_by, $receiver_personal_name_order: order_by, $receiver_date_order: order_by, $sender_unit: String, $receiver_unit: String, $description: String, $receiver_unit_order: order_by, $sender_unit_order: order_by) {\r\n  spdoc_data(limit: $limit, offset: $offset, where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {receiver_date: {_eq: $receiver_date}, _or: {sender_unit: {_ilike: $sender_unit}, _or: {receiver_unit: {_ilike: $receiver_unit}, _or: {spdoc_description_remarks: {description: {_ilike: $description}}}}}}}}}}}}, order_by: {shipping_no: $shipping_no_order, sender_personal_number: $sender_personal_number_order, sender_personal_name: $sender_personal_name_order, sender_date: $sender_date_order, receiver_personal_number: $receiver_personal_number_order, receiver_personal_name: $receiver_personal_name_order, receiver_date: $receiver_date_order, receiver_unit: $receiver_unit_order, sender_unit: $sender_unit_order}) {\r\n    id_sp_data\r\n    shipping_no\r\n    sender_unit\r\n    sender_personal_number\r\n    sender_personal_name\r\n    sender_date\r\n    receiver_unit\r\n    receiver_personal_number\r\n    receiver_personal_name\r\n    receiver_date\r\n    status\r\n    created_by\r\n    created_at\r\n    spdoc_description_remarks {\r\n      quantity\r\n      remark\r\n      description\r\n    }\r\n    notif{\r\n      id_notif\r\n      id_spdoc\r\n      status\r\n      title\r\n      created_at\r\n      updated_at\r\n      unit\r\n    }\r\n  }\r\n  spdoc_data_aggregate(where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {receiver_date: {_eq: $receiver_date}}}}}}}}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Get Data By Sender & Receiver Date",
+              "query": "query get_spdoc_data_filter($limit: Int, $offset: Int, $shipping_no: String, $sender_personal_number: String, $sender_personal_name: String, $receiver_personal_number: String, $receiver_personal_name: String, $status: String, $receiver_date: date, $sender_date: date, $shipping_no_order: order_by, $sender_personal_number_order: order_by, $sender_personal_name_order: order_by, $sender_date_order: order_by, $receiver_personal_number_order: order_by, $receiver_personal_name_order: order_by, $receiver_date_order: order_by, $sender_unit: String, $receiver_unit: String, $description: String, $receiver_unit_order: order_by, $sender_unit_order: order_by) {\r\n  spdoc_data(limit: $limit, offset: $offset, where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {receiver_date: {_eq: $receiver_date}, _and: {sender_date: {_eq: $sender_date}, _or: {sender_unit: {_ilike: $sender_unit}, _or: {receiver_unit: {_ilike: $receiver_unit}, _or: {spdoc_description_remarks: {description: {_ilike: $description}}}}}}}}}}}}}, order_by: {shipping_no: $shipping_no_order, sender_personal_number: $sender_personal_number_order, sender_personal_name: $sender_personal_name_order, sender_date: $sender_date_order, receiver_personal_number: $receiver_personal_number_order, receiver_personal_name: $receiver_personal_name_order, receiver_date: $receiver_date_order, receiver_unit: $receiver_unit_order, sender_unit: $sender_unit_order}) {\r\n    id_sp_data\r\n    shipping_no\r\n    sender_unit\r\n    sender_personal_number\r\n    sender_personal_name\r\n    sender_date\r\n    receiver_unit\r\n    receiver_personal_number\r\n    receiver_personal_name\r\n    receiver_date\r\n    status\r\n    created_by\r\n    created_at\r\n    spdoc_description_remarks {\r\n      quantity\r\n      remark\r\n      description\r\n    }\r\n    notif{\r\n      id_notif\r\n      id_spdoc\r\n      title\r\n      status\r\n      unit\r\n      created_at\r\n      updated_at\r\n    }\r\n  }\r\n  spdoc_data_aggregate(where: {shipping_no: {_ilike: $shipping_no}, _or: {sender_personal_number: {_ilike: $sender_personal_number}, _or: {sender_personal_name: {_ilike: $sender_personal_name}, _or: {receiver_personal_number: {_ilike: $receiver_personal_number}, _or: {receiver_personal_name: {_ilike: $receiver_personal_name}, _or: {status: {_ilike: $status}, _or: {receiver_date: {_eq: $receiver_date}, _and: {sender_date: {_eq: $sender_date}}}}}}}}}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            },
+            {
+              "name": "Dashboard Private Personal Number",
+              "query": "query get_card_dashboard($sender_unit: String, $receiver_unit: String, $sender_personal_name: String, $sender_personal_number: String, $shipping_no: String, $receiver_personal_name: String, $receiver_personal_number: String, $status: String, $created_at: order_by, $status_order: order_by, $shipping_no_order: order_by, $sender_date_order: order_by, $receiver_date_order: order_by, $limit: Int, $offset: Int, $updated_at: order_by, $sender_personal_number_p: String, $receiver_personal_number_p: String, $receiver_unit_p: String) {\r\n  spdoc_data(where: {status: {_ilike: $status}, _and: {_or: [{sender_personal_number: {_ilike: $sender_personal_number_p}}, {receiver_personal_number: {_ilike: $receiver_personal_number_p}}], receiver_unit: {_ilike: $receiver_unit_p}}, _or: [{sender_unit: {_ilike: $sender_unit}}, {receiver_unit: {_ilike: $receiver_unit}}, {sender_personal_name: {_ilike: $sender_personal_name}}, {sender_personal_number: {_ilike: $sender_personal_number}}, {shipping_no: {_ilike: $shipping_no}}, {receiver_personal_name: {_ilike: $receiver_personal_name}}, {receiver_personal_number: {_ilike: $receiver_personal_number}}]}, order_by: {created_at: $created_at, status: $status_order, shipping_no: $shipping_no_order, sender_date: $sender_date_order, receiver_date: $receiver_date_order, updated_at: $updated_at}, limit: $limit, offset: $offset) {\r\n    id_sp_data\r\n    shipping_no\r\n    status\r\n    sender_personal_name\r\n    sender_personal_number\r\n    sender_unit\r\n    sender_date\r\n    receiver_personal_name\r\n    receiver_personal_number\r\n    receiver_unit\r\n    receiver_date\r\n    created_at\r\n    notif{\r\n    id_notif\r\n    id_spdoc\r\n    title\r\n    unit\r\n    created_at\r\n    updated_at\r\n    }\r\n  }\r\n  spdoc_data_aggregate(where: {_or: [{sender_unit: {_ilike: $sender_unit}}, {receiver_unit: {_ilike: $receiver_unit}}, {sender_personal_name: {_ilike: $sender_personal_name}}, {sender_personal_number: {_ilike: $sender_personal_number}}, {shipping_no: {_ilike: $shipping_no}}, {receiver_personal_name: {_ilike: $receiver_personal_name}}, {receiver_personal_number: {_ilike: $receiver_personal_number}}], _and: {status: {_ilike: $status}}}) {\r\n    aggregate {\r\n      count(columns: status)\r\n    }\r\n  }\r\n}"
+            }
+          ]
+        }
+      }
+    ],
+    "allowlist": [
+      {
+        "collection": "allowed-queries",
+        "scope": {
+          "global": true
+        }
+      }
+    ],
+    "rest_endpoints": [
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Add Desc & Remark"
+          }
+        },
+        "methods": [
+          "POST"
+        ],
+        "name": "Add Desc & Remark",
+        "url": "add-desc-remark"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Check Notif"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Check Notif",
+        "url": "check-notif/:id_spdoc"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Count By Status"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Count By Status",
+        "url": "count-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Count Document Private Number"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Count Document Private Number",
+        "url": "count-sp-private-number"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Create SP Document"
+          }
+        },
+        "methods": [
+          "POST"
+        ],
+        "name": "Create SP Document",
+        "url": "create-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Dashboard Private Personal Number"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Dashboard Private Personal Number",
+        "url": "dashboard-private-number"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Delete Desc & Remark"
+          }
+        },
+        "methods": [
+          "DELETE"
+        ],
+        "name": "Delete Desc & Remark",
+        "url": "delete-desc-remark"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Search & Filter Table"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Search & Filter Table",
+        "url": "filter-1-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Get Desc & Remark"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Get Desc & Remark",
+        "url": "get-desc-remark/:spdata_id"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Get Notif"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Get Notif",
+        "url": "get-notif"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Insert Notif"
+          }
+        },
+        "methods": [
+          "POST"
+        ],
+        "name": "Insert Notif",
+        "url": "insert-notif"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Get Last ID Shipping Number"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Get Last ID Shipping Number",
+        "url": "last-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Read Notif"
+          }
+        },
+        "methods": [
+          "PUT"
+        ],
+        "name": "Read Notif",
+        "url": "read-notif/:id_notif"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Receive SP Document"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Receive SP Document",
+        "url": "receive-sp-dcoument"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Receive SP Document To Be Delivered"
+          }
+        },
+        "methods": [
+          "PUT"
+        ],
+        "name": "Receive SP Document To Be Delivered",
+        "url": "receive/:id_sp_data"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Get By Receiver Date"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Get By Receiver Date",
+        "url": "receiver-date-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Search & FIlter Dashboard Page"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Search & FIlter Dashboard Page",
+        "url": "search-filter-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Get by Sender date"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Get by Sender date",
+        "url": "sender-date-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Get Data By Sender & Receiver Date"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Get Data By Sender & Receiver Date",
+        "url": "sender-receiver-spdoc"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Show SP Document By ID"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Show SP Document By ID",
+        "url": "show-sp-document/:id_sp_data"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Get Sort Sp Document"
+          }
+        },
+        "methods": [
+          "GET"
+        ],
+        "name": "Get Sort Sp Document",
+        "url": "sort-sp-document"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Update Description & Remark"
+          }
+        },
+        "methods": [
+          "PUT"
+        ],
+        "name": "Update Description & Remark",
+        "url": "update-desc-remark"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Update Notif"
+          }
+        },
+        "methods": [
+          "PUT"
+        ],
+        "name": "Update Notif",
+        "url": "update-notif/:id_spdoc"
+      },
+      {
+        "comment": "",
+        "definition": {
+          "query": {
+            "collection_name": "allowed-queries",
+            "query_name": "Update Data SP Document"
+          }
+        },
+        "methods": [
+          "PUT"
+        ],
+        "name": "Update Data SP Document",
+        "url": "update-sp-document"
+      }
+    ]
+  }
+}
