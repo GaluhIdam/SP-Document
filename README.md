@@ -18,7 +18,7 @@ _Below is an example of how you can instruct your audience on installing and set
 4. Run web server `ng serve --open`
 8. After running the web server, open this address in your browser:
    `http://localhost:3000`
-9. After Install Hasura, you should
+9. After Install Hasura, you should import hasura metadata
    
    
 ## Contact
