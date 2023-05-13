@@ -1,1 +1,2 @@
 # SP-Document
+Dalam setiap pengiriman part/dokumen antar dinas menggunakan surat pengiriman (SP), untuk menjadi bukti bahwa part/dokumen tersebut terkirim ke unit yang dituju. Namun terkadang sering terjadi human error dalam pemeliharan kertas dan arsip SP, seperti SP lupa dimasukkan kedalam map, atau berceceran. Sehingga bukti SP tersebut hilang. Oleh karena itu saya mempunyai ide untuk membangun sebuah aplikasi SP online untuk menyimpan semua database bukti pengiriman secara Online.
