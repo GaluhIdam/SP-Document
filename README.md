@@ -12,7 +12,7 @@ Dalam setiap pengiriman part/dokumen antar dinas menggunakan surat pengiriman (S
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 
-1. Clone Repository `git clone -b production https://bitbucket.gmf-aeroasia.co.id/scm/gdo/new-plb.git`
+1. Clone Repository `git clone https://github.com/GaluhIdam/SP-Document.git`
 2. go to project folder. `cd sp-document`
 3. Installation `npm i`
 4. Run web server `ng serve --open`
