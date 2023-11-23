@@ -7,9 +7,9 @@ services:
     networks:
       - spdocnetwork
     ports:
-      - "3004:80"
+      - "3002:80"
     environment:
-      APPLICATION_PORT: 3004
+      APPLICATION_PORT: 3002
       NODE_ENV: prod
 networks:
   spdocnetwork:
